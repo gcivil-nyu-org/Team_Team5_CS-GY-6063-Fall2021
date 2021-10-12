@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
-
-    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +68,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'food_redistribution.wsgi.application'
 
@@ -128,3 +127,5 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
