@@ -1,5 +1,5 @@
 """
-WSGI config for crm1 project.
+WSGI config for food_redistribution project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
