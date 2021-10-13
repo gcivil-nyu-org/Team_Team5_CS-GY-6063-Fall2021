@@ -116,7 +116,6 @@
 					</form>
 				</div>
 
-				{{form.errors}}
 				
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
@@ -126,14 +125,15 @@
 			</div>
 		</div>
 	</div>
+	{{form.errors}}
 	<script>
 
 		//Query All input fields
 		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Food redistributor..';
-		form_fields[2].placeholder='Email..';
-		form_fields[3].placeholder='Enter username...';
-		form_fields[4].placeholder='Enter password...';
+		form_fields[1].placeholder='Name Of Food Redistributor...';
+		form_fields[2].placeholder='Email...';
+		form_fields[3].placeholder='Enter Username...';
+		form_fields[4].placeholder='Enter Password...';
 		form_fields[5].placeholder='Reenter Password...';
 
 
