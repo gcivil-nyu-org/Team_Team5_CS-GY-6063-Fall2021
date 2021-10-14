@@ -52,7 +52,7 @@ def register_foodredistributor(request):
                 messages.success(
                     request, f'Success! Account created for {name}')
                 user_profile.save()
-                return redirect('login')
+                return redirect('login2')
 
         context = {'form': form}
         return render(request, 'accounts/food_redistributor_register.html', context)
@@ -75,7 +75,7 @@ def register_foodredistributor(request):
 # 		context = {'form':form}
 # 		return render(request, 'accounts/register.html', context)
 
-def loginPage(request):
+def login_restuarant(request):
     if request.user.is_authenticated:
         return redirect('home')
     else:
@@ -95,14 +95,44 @@ def loginPage(request):
                 messages.info(request, 'Username OR Password is incorrect')
 
         context = {}
-        return render(request, 'accounts/login.html', context)
+        return render(request, 'accounts/restuarantlogin.html', context)
+
+def login_foodredistributor(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, username)
+                messages.info(request, password)
+
+                messages.info(request, 'Username OR Password is incorrect')
+
+        context = {}
+        return render(request, 'accounts/foodredislogin.html', context)
 
 
-def logoutUser(request):
+def logout_restuarant(request):
     logout(request)
     return redirect('login')
 
+def logout_foodredistributor(request):
+    logout(request)
+    return redirect('login2')
+
 
 @login_required(login_url='login')
+def home(request):
+    return render(request, 'accounts/dashboard.html')
+
+@login_required(login_url='login2')
 def home(request):
     return render(request, 'accounts/dashboard.html')
