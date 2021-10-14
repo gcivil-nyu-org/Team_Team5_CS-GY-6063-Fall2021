@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from django.conf.urls import url
 
 urlpatterns = [
     path('restaurant/', views.register_restaurant, name='register'),
@@ -11,4 +11,6 @@ urlpatterns = [
     path('foodredislogout/', views.logout_foodredistributor, name="logout2"),
 
     path('', views.home, name="home"),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$',
+        views.activate, name='activate'),
 ]
