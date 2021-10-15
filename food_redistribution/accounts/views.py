@@ -80,16 +80,28 @@ def register_foodredistributor(request):
         form = FoodRedistributorUserForm(request.POST)
         if request.method == 'POST':
             if form.is_valid():
-                user = form.save()
-                #user = form.save(commit=False)
-                #user.is_active = False
-                # user.save()
+                # user = form.save()
+                user = form.save(commit=False)
+                user.is_active = False
+                user.save()
                 user_profile = FoodRedistributor(user=user)
                 name = form.cleaned_data.get('username')
-                messages.success(
-                    request, f'Success! Account created for {name}')
-                user_profile.save()
-                return redirect('login2')
+                current_site = get_current_site(request)
+                mail_subject = 'Activate your account.'
+                message = render_to_string('accounts/acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':account_activation_token.make_token(user),
+                })
+                to_email = form.cleaned_data.get('email')
+                email = EmailMessage(mail_subject, message, to=[to_email])
+                email.send()
+                return HttpResponse('Please confirm your email address to complete the registration')
+                # messages.success(
+                #     request, f'Success! Account created for {name}')
+                # user_profile.save()
+                # return redirect('login2')
 
         context = {'form': form}
         return render(request, 'accounts/food_redistributor_register.html', context)
