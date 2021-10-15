@@ -39,12 +39,17 @@ def register_restaurant(request):
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your account.'
                 message = render_to_string('accounts/acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
                 })
                 to_email = form.cleaned_data.get('email')
+                user_profile.email = to_email
+                nameofres = form.cleaned_data.get('name_of_restaurant')
+                user_profile.name = name
+                user_profile.name_of_restaurant = nameofres
+                user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
                 return HttpResponse('Please confirm your email address to complete the registration')
@@ -89,12 +94,17 @@ def register_foodredistributor(request):
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your account.'
                 message = render_to_string('accounts/acc_active_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
                 })
                 to_email = form.cleaned_data.get('email')
+                user_profile.email = to_email
+                nameofredis = form.cleaned_data.get('name_of_food_redis')
+                user_profile.name = name
+                user_profile.name_of_food_redis = nameofredis
+                user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
                 return HttpResponse('Please confirm your email address to complete the registration')
@@ -143,6 +153,7 @@ def login_restuarant(request):
         context = {}
         return render(request, 'accounts/restuarantlogin.html', context)
 
+
 def login_foodredistributor(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -167,6 +178,7 @@ def logout_restuarant(request):
     logout(request)
     return redirect('login')
 
+
 def logout_foodredistributor(request):
     logout(request)
     return redirect('login2')
@@ -175,6 +187,7 @@ def logout_foodredistributor(request):
 @login_required(login_url='login')
 def home(request):
     return render(request, 'accounts/dashboard.html')
+
 
 @login_required(login_url='login2')
 def home(request):

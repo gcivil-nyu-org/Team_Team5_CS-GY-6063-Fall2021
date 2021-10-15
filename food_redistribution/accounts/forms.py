@@ -39,3 +39,26 @@ class FoodRedistributorUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
     field_order = ["name_of_food_redis", "email",
                    "username", "password1", "password2"]
+
+# class RestaurantUpdateForm(forms.ModelForm):
+#     # Keep configuration in one place
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.helper = FormHelper(self)
+#         self.helper.form_show_labels = False
+
+#     class Meta:
+#         model = Restaurant
+#         fields = ["name_of_restaurant", "email"]
+
+
+# class FoodRedisUpdateForm(forms.ModelForm):
+#     # Keep configuration in one place
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.helper = FormHelper(self)
+#         self.helper.form_show_labels = False
+
+#     class Meta:
+#         model = FoodRedistributor
+#         fields = ["name_of_food_redis", "email"]
