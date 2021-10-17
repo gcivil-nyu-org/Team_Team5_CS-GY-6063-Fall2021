@@ -192,3 +192,7 @@ def home(request):
 @login_required(login_url='login2')
 def home(request):
     return render(request, 'accounts/dashboard.html')
+
+@login_required(login_url='profile')
+def profile(request):
+    return render(request, 'accounts/profile-card.html')
