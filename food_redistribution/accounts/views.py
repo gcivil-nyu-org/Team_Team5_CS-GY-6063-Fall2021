@@ -45,10 +45,15 @@ def register_restaurant(request):
                     'token': account_activation_token.make_token(user),
                 })
                 to_email = form.cleaned_data.get('email')
+                # form.clean_email()
                 user_profile.email = to_email
                 nameofres = form.cleaned_data.get('name_of_restaurant')
                 user_profile.name = name
                 user_profile.name_of_restaurant = nameofres
+                phone_r = form.cleaned_data.get('phone')
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get('address')
+                user_profile.address = address_r
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -104,6 +109,10 @@ def register_foodredistributor(request):
                 nameofredis = form.cleaned_data.get('name_of_food_redis')
                 user_profile.name = name
                 user_profile.name_of_food_redis = nameofredis
+                phone_r = form.cleaned_data.get('phone')
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get('address')
+                user_profile.address = address_r
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -192,6 +201,7 @@ def home(request):
 @login_required(login_url='login2')
 def home(request):
     return render(request, 'accounts/dashboard.html')
+
 
 @login_required(login_url='profile')
 def profile(request):
