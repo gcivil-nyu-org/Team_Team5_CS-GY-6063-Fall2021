@@ -4,7 +4,8 @@ h3 {text-align: center;}
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #232323 !important;
+    /* background: #232323 !important; */
+    background: white !important;
     overflow-x: hidden
   }
   .user_card {
