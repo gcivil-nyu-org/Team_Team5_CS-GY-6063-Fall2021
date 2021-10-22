@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import PostView,DetailedblogView,AddPostView
+from .views import PostView, DetailedblogView, AddPostView, UpdatePostView
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
@@ -36,8 +36,9 @@ urlpatterns = [
     path('', views.home, name="home"),
 
     path('blogposts/',PostView.as_view(), name = "posts"),
-    path('blogposts/<int:pk>',DetailedblogView.as_view(), name="blog-details"),
-    path('addpost/',AddPostView.as_view(),name = "add-post"),
+    path('blogposts/<int:pk>', DetailedblogView.as_view(), name = "blog-details"),
+    path('addpost/', AddPostView.as_view(), name = "add-post"),
+    path('blogposts/edit/<int:pk>', UpdatePostView.as_view(), name = 'update_post'),
 
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$',
         views.activate, name='activate'),

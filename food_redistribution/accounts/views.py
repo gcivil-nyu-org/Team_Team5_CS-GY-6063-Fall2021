@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
@@ -141,6 +141,11 @@ class AddPostView(CreateView):
     model = Post
     template_name = 'accounts/blogposts/addpost.html'
     fields = '__all__'
+
+class UpdatePostView(UpdateView):
+    model = Post
+    template_name = 'accounts/blogposts/update_post.html'
+    fields = ['title', 'body']
 
 
 # def registerPage(request):
