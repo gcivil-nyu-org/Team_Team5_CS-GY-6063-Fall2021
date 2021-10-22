@@ -1,8 +1,9 @@
+from django.db.models import fields
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-
+from django.views.generic import ListView,DetailView,CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
@@ -124,6 +125,23 @@ def register_foodredistributor(request):
 
         context = {'form': form}
         return render(request, 'accounts/food_redistributor_register.html', context)
+
+
+class PostView(ListView):
+    model = Post
+    template_name = 'accounts/blogposts/blogposts.html'
+
+
+class DetailedblogView(DetailView):
+    model = Post
+    template_name = 'accounts/blogposts/detailedblog.html'
+
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'accounts/blogposts/addpost.html'
+    fields = '__all__'
+
 
 # def registerPage(request):
 # 	if request.user.is_authenticated:
