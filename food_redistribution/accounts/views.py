@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 from django.contrib import messages
 
@@ -130,6 +131,7 @@ def register_foodredistributor(request):
 class PostView(ListView):
     model = Post
     template_name = 'accounts/blogposts/blogposts.html'
+    ordering = ['-id']
 
 
 class DetailedblogView(DetailView):
@@ -146,6 +148,11 @@ class UpdatePostView(UpdateView):
     model = Post
     template_name = 'accounts/blogposts/update_post.html'
     fields = ['title', 'body']
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'accounts/blogposts/delete_post.html'
+    success_url = reverse_lazy('posts')
 
 
 # def registerPage(request):
