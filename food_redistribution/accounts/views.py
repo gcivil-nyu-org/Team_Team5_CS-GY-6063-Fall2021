@@ -224,3 +224,7 @@ def home(request):
 @login_required(login_url='profile')
 def profile(request):
     return render(request, 'accounts/profile-card.html')
+
+@login_required(login_url='calendar')
+def calendar(request):
+    return render(request, 'calendar/calendar.html')

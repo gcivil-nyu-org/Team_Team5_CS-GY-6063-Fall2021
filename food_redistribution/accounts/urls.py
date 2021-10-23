@@ -38,6 +38,7 @@ urlpatterns = [
     path('blogposts/',PostView.as_view(), name = "posts"),
     path('blogposts/<int:pk>',DetailedblogView.as_view(), name="blog-details"),
     path('addpost/',AddPostView.as_view(),name = "add-post"),
+    path('calendar/', views.calendar, name="calendar"),
 
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$',
         views.activate, name='activate'),
