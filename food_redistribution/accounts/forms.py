@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from django.core.exceptions import ValidationError
 
 
 class RestuarantUserForm(UserCreationForm):
@@ -14,13 +15,25 @@ class RestuarantUserForm(UserCreationForm):
                                 max_length=40, widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label="Confirm Password", min_length=8,
                                 max_length=40, widget=forms.PasswordInput, required=True)
+    phone = forms.CharField(
+        label="Phone", max_length=10, required=True)
+    address = forms.CharField(
+        label="Address", min_length=2, max_length=50, required=True)
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].lower()
+        holder = User.objects.filter(email=email)
+        print(email, "going")
+        if holder.count():
+            print(email, "going into if")
+            raise ValidationError("Email already exists")
+        return email
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
     field_order = ["name_of_restaurant", "email",
-                   "username", "password1", "password2"]
-    # two models function
+                   "username", "phone", "address", "password1", "password2"]
 
 
 class FoodRedistributorUserForm(UserCreationForm):
@@ -33,6 +46,10 @@ class FoodRedistributorUserForm(UserCreationForm):
                                 max_length=40, widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(label="Confirm Password", min_length=8,
                                 max_length=40, widget=forms.PasswordInput, required=True)
+    phone = forms.CharField(
+        label="Phone", max_length=10, required=True)
+    address = forms.CharField(
+        label="Address", min_length=2, max_length=50, required=True)
 
     class Meta:
         model = User

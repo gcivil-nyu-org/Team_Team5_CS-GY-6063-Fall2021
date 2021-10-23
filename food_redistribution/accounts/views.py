@@ -1,8 +1,9 @@
+from django.db.models import fields
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
-
+from django.views.generic import ListView,DetailView,CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
@@ -45,10 +46,15 @@ def register_restaurant(request):
                     'token': account_activation_token.make_token(user),
                 })
                 to_email = form.cleaned_data.get('email')
+                # form.clean_email()
                 user_profile.email = to_email
                 nameofres = form.cleaned_data.get('name_of_restaurant')
                 user_profile.name = name
                 user_profile.name_of_restaurant = nameofres
+                phone_r = form.cleaned_data.get('phone')
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get('address')
+                user_profile.address = address_r
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -104,6 +110,10 @@ def register_foodredistributor(request):
                 nameofredis = form.cleaned_data.get('name_of_food_redis')
                 user_profile.name = name
                 user_profile.name_of_food_redis = nameofredis
+                phone_r = form.cleaned_data.get('phone')
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get('address')
+                user_profile.address = address_r
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -115,6 +125,23 @@ def register_foodredistributor(request):
 
         context = {'form': form}
         return render(request, 'accounts/food_redistributor_register.html', context)
+
+
+class PostView(ListView):
+    model = Post
+    template_name = 'accounts/blogposts/blogposts.html'
+
+
+class DetailedblogView(DetailView):
+    model = Post
+    template_name = 'accounts/blogposts/detailedblog.html'
+
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'accounts/blogposts/addpost.html'
+    fields = '__all__'
+
 
 # def registerPage(request):
 # 	if request.user.is_authenticated:
@@ -192,6 +219,7 @@ def home(request):
 @login_required(login_url='login2')
 def home(request):
     return render(request, 'accounts/dashboard.html')
+
 
 @login_required(login_url='profile')
 def profile(request):
