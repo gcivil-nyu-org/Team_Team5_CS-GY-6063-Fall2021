@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import PostView, DetailedblogView, AddPostView, UpdatePostView, DeletePostView
 from django.conf.urls import url
@@ -40,7 +40,9 @@ urlpatterns = [
     path('addpost/', AddPostView.as_view(), name = "add-post"),
     path('blogposts/edit/<int:pk>', UpdatePostView.as_view(), name = 'update_post'),
     path('blogposts/<int:pk>/remove', DeletePostView.as_view(), name = 'delete_post'),
-    path('calendar/', views.calendar, name="calendar"),
+    #path('calendar/', views.calendar, name="calendar"),
+    #path('', include('calendarapp.urls', namespace='calendarapp')),
+    path('', include('calendarapp.urls')),
 
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$',
         views.activate, name='activate'),
