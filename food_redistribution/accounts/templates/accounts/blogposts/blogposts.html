@@ -1,4 +1,4 @@
-
+{% if user.is_authenticated %}
 <h1>Blog Posts</h1>
 
 <ul>
@@ -14,5 +14,8 @@
     {% endfor %} 
 
 </ul>
+{% else %}
 
+    Please login to access this page!
+{% endif %}
 

@@ -1,4 +1,7 @@
 {% block content %}
+
+{% if user.is_authenticated %}
+
 <h1> Delete Post...</h1>
 <h3>Delete: {{post.title}}</h3>
 
@@ -10,5 +13,8 @@
 
 
 </form>
+{% else %}
 
+    Please login to access this page!
+{% endif %}
 {% endblock %}
