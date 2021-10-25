@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import PostView, DetailedblogView, AddPostView, UpdatePostView, DeletePostView
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
+# from cal import views as cal_views
 
 urlpatterns = [
     path('restaurant/', views.register_restaurant, name='register'),
@@ -34,6 +35,7 @@ urlpatterns = [
         name="password_reset_complete"),
 
     path('', views.home, name="home"),
+    path('calendar/', include(('cal.urls', 'cal'), namespace='calendar')),
 
     path('blogposts/',PostView.as_view(), name = "posts"),
     path('blogposts/<int:pk>', DetailedblogView.as_view(), name = "blog-details"),
