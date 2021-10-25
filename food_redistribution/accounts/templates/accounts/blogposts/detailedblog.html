@@ -2,8 +2,10 @@
 
 <h1>{{ post.title }}</h1>
 <small> By:{{post.author}}
+    {% if user.id == post.author.id %}
 -   <a href = "{% url 'update_post' post.pk %}">(Edit)</a>
     <a href = "{% url 'delete_post' post.pk %}">(Delete)</a>
+    {% endif %}
 </small><br/>
 <hr>
 <br/>
@@ -15,4 +17,3 @@
 
     Please login to access this page!
 {% endif %}
-{% endblock %}
