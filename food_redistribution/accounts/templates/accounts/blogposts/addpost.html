@@ -1,4 +1,6 @@
 {% block content %}
+
+{% if user.is_authenticated %}
 <h1> Add a post here...</h1>
 
 <form method = "POST">
@@ -8,5 +10,9 @@
 
 
 </form>
+{% else %}
+
+    Please login to access this page!
+{% endif %}
 
 {% endblock %}
