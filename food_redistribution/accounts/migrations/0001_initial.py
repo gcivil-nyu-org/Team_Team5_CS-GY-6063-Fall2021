@@ -15,29 +15,57 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Restaurant',
+            name="Restaurant",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='', max_length=200)),
-                ('name_of_restaurant', models.CharField(max_length=200)),
-                ('email', models.CharField(max_length=200, unique=True)),
-                ('phone', models.CharField(max_length=200)),
-                ('address', models.CharField(max_length=200)),
-                ('verified', models.BooleanField(default=False)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(default="", max_length=200)),
+                ("name_of_restaurant", models.CharField(max_length=200)),
+                ("email", models.CharField(max_length=200, unique=True)),
+                ("phone", models.CharField(max_length=200)),
+                ("address", models.CharField(max_length=200)),
+                ("verified", models.BooleanField(default=False)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='FoodRedistributor',
+            name="FoodRedistributor",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='', max_length=200)),
-                ('name_of_food_redis', models.CharField(max_length=200)),
-                ('email', models.CharField(max_length=200, unique=True)),
-                ('phone', models.CharField(max_length=200)),
-                ('address', models.CharField(max_length=200)),
-                ('verified', models.BooleanField(default=False)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(default="", max_length=200)),
+                ("name_of_food_redis", models.CharField(max_length=200)),
+                ("email", models.CharField(max_length=200, unique=True)),
+                ("phone", models.CharField(max_length=200)),
+                ("address", models.CharField(max_length=200)),
+                ("verified", models.BooleanField(default=False)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

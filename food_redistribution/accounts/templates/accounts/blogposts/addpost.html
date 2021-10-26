@@ -1,0 +1,18 @@
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1> Add a post here...</h1>
+
+<form method = "POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button> Post!</button>
+
+
+</form>
+{% else %}
+
+    Please login to access this page!
+{% endif %}
+
+{% endblock %}
