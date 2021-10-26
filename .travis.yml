@@ -1,0 +1,13 @@
+language: python
+script: python manage.py migrate
+before-install:
+  - pip install -r requirements.txt
+  - pip install flake8
+  - pip install black
+script:
+  - flake8 --max-line-length=100 --ignore=F405,F403,F541,W503
+  - black --check .
+  - coverage run --source=accounts,cal ./food_redistribution/manage.py test
+
+after_success:
+  - coveralls
