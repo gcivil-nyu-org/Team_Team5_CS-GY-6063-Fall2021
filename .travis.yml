@@ -7,7 +7,7 @@ before-install:
 script:
   - flake8 --max-line-length=92
   - black --check .
-  - coverage run --source=accounts,cal manage.py test
+  - coverage run --source=accounts,cal ./food_redistribution/manage.py test
 
 after_success:
   - coveralls
