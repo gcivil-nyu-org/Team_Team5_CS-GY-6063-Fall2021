@@ -3,20 +3,6 @@ from cal.models import Event
 
 
 class EventForm(ModelForm):
-<<<<<<< HEAD
-    class Meta:
-        model = Event
-        # datetime-local is a HTML5 input type, format to make date time show on fields
-        widgets = {
-            "start_time": DateInput(
-                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
-            ),
-            "end_time": DateInput(
-                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
-            ),
-        }
-        fields = "__all__"
-=======
   class Meta:
     model = Event
     # datetime-local is a HTML5 input type, format to make date time show on fields
@@ -27,7 +13,6 @@ class EventForm(ModelForm):
       'description': TextInput(attrs={'placeholder': 'Description'}),
     }
     fields = '__all__'
->>>>>>> develop
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
