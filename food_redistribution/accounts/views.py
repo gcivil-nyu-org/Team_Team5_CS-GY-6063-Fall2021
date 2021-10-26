@@ -217,7 +217,7 @@ def login_restuarant(request):
 
 def login_foodredistributor(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("home2")
     else:
         if request.method == "POST":
             username = request.POST.get("username")
@@ -227,7 +227,7 @@ def login_foodredistributor(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                return redirect("home2")
             else:
                 messages.info(request, "Username OR Password is incorrect")
 
@@ -251,7 +251,7 @@ def home(request):
 
 
 @login_required(login_url="login2")
-def home(request):
+def home2(request):
     return render(request, "accounts/dashboard.html")
 
 
