@@ -1,4 +1,4 @@
-from django.forms import ModelForm, DateInput
+from django.forms import ModelForm, DateInput, TextInput
 from cal.models import Event
 
 class EventForm(ModelForm):
@@ -8,6 +8,8 @@ class EventForm(ModelForm):
     widgets = {
       'start_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
       'end_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+      'title': TextInput(attrs={'placeholder': 'Title'}),
+      'description': TextInput(attrs={'placeholder': 'Description'}),
     }
     fields = '__all__'
 
