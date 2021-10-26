@@ -24,7 +24,86 @@ body {
 }
 
 .form {
-  margin: auto;
+  width: auto;
+  height: auto;
+}
+
+#id_description {
+  height: 100px;
+  width: 50vw;
+}
+
+#id_title {
+  width: 50vw;
+}
+
+#id_start_time {
+  width: 16vw;
+}
+
+.timelabel {
+  font-family:Optima;
+  font-size:18px;
+  padding-right: 10px;
+}
+.spacer {
+  padding-left: 4.2em;
+  padding-right: 4.2em;
+}
+
+#id_end_time {
+  width: 16vw;
+}
+
+#form-title{
+  color: #17202a;
+  font-family:Optima;
+  font-size:35px;
+
+}
+
+.start_and_end_time {
+  display: inline-block;
+  justify-content: center;
+}
+
+.buttons {
+  display: inline-block;
+  font-family:Optima;
+  width: 100px;
+}
+
+.cancel-button {
+  background-color: #e6e6e6;
+}
+
+.add-button {
+  background-color: #96bbff;
+}
+
+
+.user_card {
+  width: 70vw;
+  height: 70vh;
+  margin-top: 3em;
+  margin-bottom: auto;
+  background: #fdfefe;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+
+}
+
+.add_event_button {
+  font-family:Optima;
+  font-size:20px;
+  height: 70px;
 }
 
 .form input, .form select, .form textarea {
@@ -43,7 +122,9 @@ body {
 }
 
 .calendar {
-  width: 98%;
+  /*width: 98%;*/
+  width: 80vw;
+  height: 80vh;
   margin: auto;
   font-size: 13px;
 }
@@ -59,7 +140,7 @@ body {
 }
 
 .calendar td {
-  width: 200px;
+  width: 150px;
   height: 150px;
   padding: 20px 0px 0px 5px;
 }
@@ -69,7 +150,7 @@ body {
 }
 
 .date {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 ul {

@@ -1,12 +1,21 @@
 {% block content %}
-<h1> Edit a post here...</h1>
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+        <h1> Edit a post here...</h1>
 
-<form method = "POST">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <button> Update!</button>
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <button> Update!</button>
 
 
-</form>
+        </form>
+        {% else %}
+            Only the author can edit this post!
+        {% endif %}
+{% else %}
+
+    Please login to access this page!
+{% endif %}
 
 {% endblock %}

@@ -16,8 +16,9 @@
 </head>
 <body>
 
-  <h1 class="title">{% block title %}{% endblock %}</h1>
-  <hr>
+  <!--<h1 class="title">{% block title %}{% endblock %}</h1>
+  <hr>-->
+  {%  include 'cal/calnav.html' %}
 
   {% block content %}
   {% endblock %}
