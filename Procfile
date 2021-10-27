@@ -1,1 +1,1 @@
-web: gunicorn food_redistribution.wsgi
+web: gunicorn --chdir food_redistribution food_redistribution.wsgi
