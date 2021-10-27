@@ -6,8 +6,9 @@ before-install:
   - pip install black
 script:
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231
-  - black .
+  - black . 
   - black --check .
+  - cd food_redistribution
   - coverage run --source=. manage.py test
 
 after_success:
