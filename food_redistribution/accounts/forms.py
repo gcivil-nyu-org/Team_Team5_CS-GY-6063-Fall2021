@@ -35,7 +35,7 @@ class RestuarantUserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data["email"].lower()
         holder = User.objects.filter(email=email)
-        print(email, "going")
+        #print(email, "going")
         if holder.count():
             print(email, "going into if")
             raise ValidationError("Email already exists")
@@ -87,7 +87,8 @@ class FoodRedistributorUserForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
-    field_order = ["name_of_food_redis", "email", "username", "password1", "password2"]
+    field_order = ["name_of_food_redis", "email",
+                   "username", "password1", "password2"]
 
 
 # class RestaurantUpdateForm(forms.ModelForm):
