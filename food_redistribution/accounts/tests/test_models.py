@@ -40,9 +40,8 @@ class test_Post(TestCase):
         user = User.objects.create_user(
             username="john", email="jlennon@beatles.com", password="glass onion"
         )
-        author = user
         self.post1 = Post.objects.create(
             title="Test title", author=user, body="Test body"
         )
         self.assertEqual(self.post1.get_absolute_url(),
-                         "/blogposts/"+str(self.post1.id))
+                         "/blogposts/" + str(self.post1.id))
