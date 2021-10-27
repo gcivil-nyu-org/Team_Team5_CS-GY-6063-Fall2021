@@ -4,7 +4,6 @@ from accounts.models import Post, Restaurant, FoodRedistributor
 
 
 class test_FoodRedis(TestCase):
-
     def test_setUp(self):
         self.redis1 = FoodRedistributor.objects.create(
             name="Test username",
@@ -12,11 +11,11 @@ class test_FoodRedis(TestCase):
             email="testemail@gmaili.com",
             phone=5849721452,
             address="Test address",
-            verified=True)
+            verified=True,
+        )
 
 
 class test_Restaurant(TestCase):
-
     def test_setUp(self):
         self.rest1 = Restaurant.objects.create(
             name="Test username",
@@ -24,29 +23,26 @@ class test_Restaurant(TestCase):
             email="testemail@gmaili.com",
             phone=5849721452,
             address="Test address",
-            verified=True)
+            verified=True,
+        )
 
 
 class test_Post(TestCase):
-
     def test_setUp(self):
-        user = User.objects.create_user(username='john',
-                                        email='jlennon@beatles.com',
-                                        password='glass onion')
+        user = User.objects.create_user(
+            username="john", email="jlennon@beatles.com", password="glass onion"
+        )
         self.post1 = Post.objects.create(
-            title="Test title",
-            author=user,
-            body="Test body"
+            title="Test title", author=user, body="Test body"
         )
 
     def test_str(self):
-        user = User.objects.create_user(username='john',
-                                        email='jlennon@beatles.com',
-                                        password='glass onion')
-        self.post1 = Post.objects.create(
-            title="Test title",
-            author=user,
-            body="Test body"
+        user = User.objects.create_user(
+            username="john", email="jlennon@beatles.com", password="glass onion"
         )
-        self.assertEquals(self.post1.title + "|" + str(self.post1.author),
-                          "Test title|john")
+        self.post1 = Post.objects.create(
+            title="Test title", author=user, body="Test body"
+        )
+        self.assertEquals(
+            self.post1.title + "|" + str(self.post1.author), "Test title|john"
+        )
