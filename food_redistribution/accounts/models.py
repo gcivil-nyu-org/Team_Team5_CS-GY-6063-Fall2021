@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class FoodRedistributor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, default="")
     name_of_food_redis = models.CharField(max_length=200)
     email = models.CharField(max_length=200, unique=True)
@@ -19,7 +19,7 @@ class FoodRedistributor(models.Model):
 
 
 class Restaurant(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, default="")
     name_of_restaurant = models.CharField(max_length=200)
     email = models.CharField(max_length=200, unique=True)
