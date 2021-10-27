@@ -101,7 +101,7 @@ def activate(request, uidb64, token):
 
 def register_foodredistributor(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("home2")
     else:
         form = FoodRedistributorUserForm(request.POST)
         if request.method == "POST":
