@@ -35,7 +35,6 @@ class RestuarantUserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data["email"].lower()
         holder = User.objects.filter(email=email)
-        #print(email, "going")
         if holder.count():
             print(email, "going into if")
             raise ValidationError("Email already exists")
