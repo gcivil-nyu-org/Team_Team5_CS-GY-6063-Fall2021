@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.test import TestCase
 from accounts.forms import RestuarantUserForm, FoodRedistributorUserForm
 
@@ -42,3 +43,6 @@ class TestForms(TestCase):
         self.assertEquals(len(form.errors),7)
 
     
+=======
+# from django.test import TestCase
+>>>>>>> f328df33abe87725ee8e7fa0322e1fffe173185d

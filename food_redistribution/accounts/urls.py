@@ -49,6 +49,7 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("", views.home, name="home"),
+    path("", views.home2, name="home2"),
     path("calendar/", include(("cal.urls", "cal"), namespace="calendar")),
     path("blogposts/", PostView.as_view(), name="posts"),
     path("blogposts/<int:pk>", DetailedblogView.as_view(), name="blog-details"),
