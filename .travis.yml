@@ -8,7 +8,7 @@ script:
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231
   - black .
   - black --check .
-  - coverage run --source=accounts,cal ./food_redistribution/manage.py test
+  - coverage run --source=. manage.py test
 
 after_success:
   - coveralls
