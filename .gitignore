@@ -9,7 +9,7 @@ __pycache__/
 *.so
 
 #pyc files
-*.pyc 
+*.pyc
 
 # Database
 *.sqlite3
