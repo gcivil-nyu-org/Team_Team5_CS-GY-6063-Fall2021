@@ -1,7 +1,8 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.contrib.auth.models import User
-from .models import Restaurant
+
+# from django.contrib.auth.models import User
+# from .models import Restaurant
 import os
 
 api_key = str(os.getenv("YELP_API"))
