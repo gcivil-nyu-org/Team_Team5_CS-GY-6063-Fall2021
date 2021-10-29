@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cal",
     "accounts",
+    "yelp_search",
 ]
 
 MIDDLEWARE = [

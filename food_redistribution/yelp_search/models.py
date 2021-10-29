@@ -4,8 +4,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Added fiels Description, Last_Modified, Images fiels
 
 
-class Restroom(models.Model):
-    """Temporary class to hold fetched restroom/restaurant
+class Restaurant(models.Model):
+    """Temporary class to hold fetched restaurant
     entries for their business id and rating."""
 
     # Set yelp_id max length to 100 based on this:
@@ -16,6 +16,6 @@ class Restroom(models.Model):
     )
     Description = models.TextField(blank=False, null=False)
     Last_Modified = models.DateTimeField(auto_now_add=True)
-    Accessible = models.BooleanField(default=False)
-    FamilyFriendly = models.BooleanField(default=False)
-    TransactionRequired = models.BooleanField(default=True)
+    #Accessible = models.BooleanField(default=False)
+    #FamilyFriendly = models.BooleanField(default=False)
+    #TransactionRequired = models.BooleanField(default=True)

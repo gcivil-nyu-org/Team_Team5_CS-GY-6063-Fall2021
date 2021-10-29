@@ -1,7 +1,7 @@
-{% extends 'templates/base.html' %}
+{% extends 'yelp_search/base.html' %}
 
 {% block home %}
-<a class="navbar-brand" href="/naturescall">Search</a>
+<a class="navbar-brand" href="#">Search</a>
 {% endblock %}
 
 {% block form %}
@@ -13,7 +13,9 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="container-fluid">
+
       {% if data %}
         {% for d in data%}
         <div class="card" style="width: 30rem;">
@@ -22,12 +24,12 @@
             <h5 class="card-title">{{d.name}}</h5>
             <p class="card-text">{{d.addr}}</p>
             <p class="card-text" style="color:DodgerBlue;">{{d.distance}} meters away</p>
-            {% if d.db_id %}
-              <!--<p class="card-text">our rating: {{d.our_rating}}</p>-->
-              <a href="{% url 'naturescall:restroom_detail' d.db_id %}" class="btn btn-success">Show Details</a>
+            <!--{% if d.db_id %}
+              <p class="card-text">our rating: {{d.our_rating}}</p>
+              <a href="{% url 'yelp_search:restroom_detail' d.db_id %}" class="btn btn-success">Show Details</a>
             {% else %}
-              <a href="{% url 'naturescall:add_restroom' d.id %}" class="btn btn-info">Add Restroom</a>
-            {% endif %}
+
+            {% endif %}-->
           </div>
         </div>
         {% endfor %}

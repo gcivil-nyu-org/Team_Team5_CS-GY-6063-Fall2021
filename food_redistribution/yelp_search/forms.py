@@ -1,5 +1,5 @@
 from django import forms
-from .models import Restroom
+from .models import Restaurant
 
 
 class LocationForm(forms.Form):

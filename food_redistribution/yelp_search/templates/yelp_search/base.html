@@ -1,5 +1,5 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,13 +12,21 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'cal/css/styles.css' %}">
-  <title>Calendar</title>
+  <title>Yelp Search</title>
 </head>
 <body>
 
   <!--<h1 class="title">{% block title %}{% endblock %}</h1>
   <hr>-->
   {%  include 'yelp_search/searchnav.html' %}
+
+  {% block form %}
+  <form class="form-inline my-2 my-lg-0" method="POST" action= "search_restaurants/">
+  	{% csrf_token %}
+  <input class="form-control mr-sm-2" type="search" placeholder="Search Location" name = "searched" required="required">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  {% endblock %}
 
   {% block content %}
   {% endblock %}

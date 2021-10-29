@@ -18,3 +18,4 @@ staticfiles/*
 
 
 .env
+food_redistribution/.env

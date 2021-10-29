@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Restroom
+from yelp_search.models import Restaurant
 
-admin.site.register(Restroom)
+admin.site.register(Restaurant)
