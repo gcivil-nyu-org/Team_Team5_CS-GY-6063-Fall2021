@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from yelp_search.models import Restaurant
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, Http404
+from django.http import Http404
 from .forms import LocationForm
 
 import requests
-from django.contrib.auth.decorators import login_required
+
+# from django.contrib.auth.decorators import login_required
 
 from urllib.parse import quote
 
 import os
-from django.urls import reverse
+
+# from django.urls import reverse
 
 api_key = str(os.getenv("YELP_API"))
 
@@ -26,6 +27,7 @@ def base(request):
     context["form"] = form
     return render(request, "yelp_search/base.html", context)
 
+
 def search_restaurants(request):
     context = {}
     form = LocationForm(request.POST or None)
@@ -40,9 +42,9 @@ def search_restaurants(request):
         data.sort(key=getDistance)
 
     # Load rating data from our database
-    #for restroom in data:
+    # for restroom in data:
     #    restroom["distance"] = int(restroom["distance"])
-        # print(restroom["distance"])
+    # print(restroom["distance"])
     #    r_id = restroom["id"]
     #    querySet = Restroom.objects.filter(yelp_id=r_id)
     #    if not querySet:
@@ -51,7 +53,7 @@ def search_restaurants(request):
     #    else:
     #        restroom["our_rating"] = querySet.values()[0]["rating"]
     #        restroom["db_id"] = querySet.values()[0]["id"]
-            # print(restroom["db_id"])
+    # print(restroom["db_id"])
     #    addr = str(restroom["location"]["display_address"])
     #    restroom["addr"] = addr.translate(str.maketrans("", "", "[]'"))
 
@@ -59,7 +61,7 @@ def search_restaurants(request):
     context["location"] = location
     context["data"] = data
 
-    print("THE LOCATION WAS: ",context["location"])
+    print("THE LOCATION WAS: ", context["location"])
 
     return render(request, "yelp_search/search.html", context)
 

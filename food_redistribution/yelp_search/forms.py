@@ -1,5 +1,6 @@
 from django import forms
-from .models import Restaurant
+
+# from .models import Restaurant
 
 
 class LocationForm(forms.Form):

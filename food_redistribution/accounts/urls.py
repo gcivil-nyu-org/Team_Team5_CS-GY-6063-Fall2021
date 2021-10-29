@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+
 # from . import
 from .views import (
     PostView,
@@ -52,15 +53,17 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("", views.home2, name="home2"),
     path("calendar/", include(("cal.urls", "cal"), namespace="calendar")),
-    path("base/", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
+    path(
+        "base/", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")
+    ),
     path("blogposts/", PostView.as_view(), name="posts"),
     path("blogposts/<int:pk>", DetailedblogView.as_view(), name="blog-details"),
     path("addpost/", AddPostView.as_view(), name="add-post"),
     path("blogposts/edit/<int:pk>", UpdatePostView.as_view(), name="update_post"),
     path("blogposts/<int:pk>/remove", DeletePostView.as_view(), name="delete_post"),
-    #path("search_restroom/", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
-    #path("restroom_detail/<int:r_id>", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
-    #path("add_restroom/<slug:r_id>", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
+    # path("search_restroom/", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
+    # path("restroom_detail/<int:r_id>", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
+    # path("add_restroom/<slug:r_id>", include(("yelp_search.urls", "yelp_search"), namespace="yelp_search")),
     url(
         r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$",
         views.activate,
