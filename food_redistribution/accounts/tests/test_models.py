@@ -43,5 +43,6 @@ class test_Post(TestCase):
         self.post1 = Post.objects.create(
             title="Test title", author=user, body="Test body"
         )
-        self.assertEqual(self.post1.get_absolute_url(),
-                         "/blogposts/" + str(self.post1.id))
+        self.assertEqual(
+            self.post1.get_absolute_url(), "/blogposts/" + str(self.post1.id)
+        )
