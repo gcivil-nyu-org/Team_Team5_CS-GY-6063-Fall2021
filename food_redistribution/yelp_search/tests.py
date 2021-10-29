@@ -46,17 +46,17 @@ class ViewTests(TestCase):
     #    self.assertEqual(response.status_code, 200)
     #    self.assertEqual(response.context["res"]["desc"], desc)
 
-    def test_restaurant_invalid_search(self):
-        """
-        A search with an invalid search string should yield no results
-        but should return a valid webpage
-        """
-        c = Client()
-        response = c.post(
-            reverse("yelp_search:search_restaurants"), data={"searched": "szzzzz"}
-        )
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Location Not Found")
+    #def test_restaurant_invalid_search(self):
+    #    """
+    #    A search with an invalid search string should yield no results
+    #    but should return a valid webpage
+    #    """
+    #    c = Client()
+    #    response = c.post(
+    #        reverse("yelp_search:search_restaurants"), data={"searched": "szzzzz"}
+    #    )
+    #    self.assertEqual(response.status_code, 200)
+    #    self.assertContains(response, "Location Not Found")
 
     # def test_restroom_valid_search_empty_database(self):
     #    """
