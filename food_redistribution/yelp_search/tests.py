@@ -11,7 +11,7 @@ SEARCH_PATH = "/v3/businesses/search"
 BUSINESS_PATH = "/v3/businesses/"
 
 
-#def create_restaurant(yelp_id, desc):
+# def create_restaurant(yelp_id, desc):
 #    """
 #    Create a restroom with the given parameters. Other parameters are
 #    left at their default values
@@ -23,9 +23,9 @@ class ViewTests(TestCase):
     def test_base(self):
         response = self.client.get(reverse("yelp_search:base"))
         self.assertEqual(response.status_code, 200)
-        #self.assertContains(response, "Welcome to Nature's call")
+        # self.assertContains(response, "Welcome to Nature's call")
 
-    #def test_missing_restroom(self):
+    # def test_missing_restroom(self):
     #    """
     #    If the selected restroom is not present in the database,
     #    the response should be a 404 Error
@@ -33,7 +33,7 @@ class ViewTests(TestCase):
     #    response = self.client.get(reverse("naturescall:restroom_detail", args=(1,)))
     #    self.assertEqual(response.status_code, 404)
 
-    #def test_one_restroom_via_create(self):
+    # def test_one_restroom_via_create(self):
     #    """
     #    Once a restroom is added using create, it should be
     #    reachable via the restroom_detail link
@@ -57,7 +57,7 @@ class ViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Location Not Found")
 
-    #def test_restroom_valid_search_empty_database(self):
+    # def test_restroom_valid_search_empty_database(self):
     #    """
     #    A search with a valid search string with an empty database
     #    should return a valid webpage with 20 "Add Restroom" results
@@ -69,7 +69,7 @@ class ViewTests(TestCase):
     #    self.assertEqual(response.status_code, 200)
     #    self.assertEqual(str(response.content).count("Add Restroom"), 20)
 
-    #def test_restroom_valid_search_one_element_database(self):
+    # def test_restroom_valid_search_one_element_database(self):
     #    """
     #    A search with a valid search string with a database with one element
     #    should return a valid webpage with 19 "Add Restroom" results
@@ -84,7 +84,7 @@ class ViewTests(TestCase):
     #    self.assertEqual(response.status_code, 200)
     #    self.assertEqual(str(response.content).count("Add Restroom"), 19)
 
-    #def test_access_signup(self):
+    # def test_access_signup(self):
     #    """
     #    A get request to the signup page should yield a valid response
     #    """
@@ -92,7 +92,7 @@ class ViewTests(TestCase):
     #    response = c.get(reverse("accounts:signup"))
     #    self.assertEqual(response.status_code, 200)
 
-    #def test_get_request_add_restroom_not_logged_in(self):
+    # def test_get_request_add_restroom_not_logged_in(self):
     #    """
     #    A get request to the add_restroom page should yield a
     #    redirect if the user is not logged in
@@ -102,7 +102,7 @@ class ViewTests(TestCase):
     #    response = c.get(reverse("naturescall:add_restroom", args=(yelp_id,)))
     #    self.assertEqual(response.status_code, 302)
 
-    #def test_get_request_add_restroom_logged_in(self):
+    # def test_get_request_add_restroom_logged_in(self):
     #    """
     #    A get request to the add_restroom page should yield a
     #    valid response if the user is logged in
