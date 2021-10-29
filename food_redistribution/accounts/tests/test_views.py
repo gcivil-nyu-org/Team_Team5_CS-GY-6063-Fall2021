@@ -43,6 +43,7 @@ class DetailedblogViewTest(TestCase):
         # self.assertContains(response, "No polls are available.")
 """
 
+
 class ViewTests(TestCase):
     def test_restaurant_register(self):
         """
