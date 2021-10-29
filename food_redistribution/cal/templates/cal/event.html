@@ -1,0 +1,62 @@
+{% extends 'cal/base.html' %}
+
+{% block title %}
+Event
+{% endblock %}
+
+{% block content %}
+
+
+<!--<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
+</div>-->
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center">
+        <h3 id="form-title">Add Event</h3>
+      </div>
+      <div class="d-flex justify-content-center form_container">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            {{ form.title }}
+          </div>
+
+          <div class="mb-3 description">
+            {{ form.description }}
+          </div>
+          <div class="start_and_end_time">
+            <span class="timelabel">Start</span>
+            {{ form.start_time }}
+            <span class="spacer"></span>
+            <span class="timelabel">End</span>
+            {{ form.end_time }}
+          </div>
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <a class="btn cancel-button buttons login_btn" href="{% url 'cal:calendar' %}" value="Cancel" style="font-family:Optima;">Cancel</a>
+            <span class="spacer"></span>
+            <input class="btn buttons add-button login_btn" type="submit" value="Add Event" style="font-family:Optima;">
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

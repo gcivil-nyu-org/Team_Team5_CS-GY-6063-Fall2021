@@ -1,0 +1,28 @@
+{%  include './navbar.html' %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+{% if user.is_authenticated %}
+
+<h1>Blog Posts</h1>
+
+<ul>
+    {% for post in object_list %}
+
+    <li> <a href="{% url 'blog-details' post.pk %}"> {{post.title}}</a> 
+    - {{post.author}} 
+        {% if user.id == post.author.id %}
+            - <small>   <a href = "{% url 'update_post' post.pk %}">(Edit)</a>
+                        <a href = "{% url 'delete_post' post.pk %}">(Delete)</a>
+            </small> <br/> 
+        {% endif %}
+
+    </li>
+    {% endfor %} 
+
+</ul>
+{% else %}
+
+    Please login to access this page!
+{% endif %}
+
