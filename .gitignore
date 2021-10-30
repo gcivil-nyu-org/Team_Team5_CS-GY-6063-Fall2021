@@ -15,3 +15,5 @@ __pycache__/
 *.sqlite3
 staticfiles/*
 */migrations/*.py
+
+.env
