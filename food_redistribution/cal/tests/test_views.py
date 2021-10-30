@@ -1,7 +1,6 @@
-from django.http import response
+
 from django.test import TestCase, Client
 from django.urls import reverse
-from cal.models import Event
 
 
 class TestViews(TestCase):
