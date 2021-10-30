@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from yelp_search.models import Restaurant
-from django.http import Http404
+
+# from yelp_search.models import Restaurant
+# from django.http import Http404
 from .forms import LocationForm
 
 import requests
@@ -41,53 +42,34 @@ def search_restaurants(request):
         # Sort by distance
         data.sort(key=getDistance)
 
-    # Load rating data from our database
-    # for restroom in data:
-    #    restroom["distance"] = int(restroom["distance"])
-    # print(restroom["distance"])
-    #    r_id = restroom["id"]
-    #    querySet = Restroom.objects.filter(yelp_id=r_id)
-    #    if not querySet:
-    #        restroom["our_rating"] = "no rating"
-    #        restroom["db_id"] = ""
-    #    else:
-    #        restroom["our_rating"] = querySet.values()[0]["rating"]
-    #        restroom["db_id"] = querySet.values()[0]["id"]
-    # print(restroom["db_id"])
-    #    addr = str(restroom["location"]["display_address"])
-    #    restroom["addr"] = addr.translate(str.maketrans("", "", "[]'"))
-
     context["form"] = form
     context["location"] = location
     context["data"] = data
 
-    print("THE LOCATION WAS: ", context["location"])
+    # print("THE LOCATION WAS: ", context["location"])
 
     return render(request, "yelp_search/search.html", context)
 
 
-def restaurant_detail(request, r_id):
-    # show a single restaurant
-    querySet = Restaurant.objects.filter(id=r_id)
-    res = {}
-    if querySet:
-        yelp_id = querySet.values()[0]["yelp_id"]
-        yelp_data = get_business(api_key, yelp_id)
-        yelp_data["db_id"] = r_id
-        yelp_data["rating"] = querySet.values()[0]["rating"]
-        yelp_data["Accessible"] = querySet.values()[0]["Accessible"]
-        yelp_data["FamilyFriendly"] = querySet.values()[0]["FamilyFriendly"]
-        yelp_data["TransactionRequired"] = querySet.values()[0]["TransactionRequired"]
-
-        res["yelp_data"] = yelp_data
-        addr = str(yelp_data["location"]["display_address"])
-        res["addr"] = addr.translate(str.maketrans("", "", "[]'"))
-        res["desc"] = querySet.values()[0]["Description"]
-    else:
-        raise Http404("Restaurant does not exist")
-
-    context = {"res": res}
-    return render(request, "yelp_search/detail.html", context)
+# def restaurant_detail(request, r_id):
+# show a single restaurant
+#    querySet = Restaurant.objects.filter(id=r_id)
+#    res = {}
+#    if querySet:
+#        yelp_id = querySet.values()[0]["yelp_id"]
+#        yelp_data = get_business(api_key, yelp_id)
+#        yelp_data["db_id"] = r_id
+#        yelp_data["rating"] = querySet.values()[0]["rating"]
+#
+#        res["yelp_data"] = yelp_data
+#        addr = str(yelp_data["location"]["display_address"])
+#        res["addr"] = addr.translate(str.maketrans("", "", "[]'"))
+#        res["desc"] = querySet.values()[0]["Description"]
+#    else:
+#        raise Http404("Restaurant does not exist")
+#
+#    context = {"res": res}
+#    return render(request, "yelp_search/detail.html", context)
 
 
 # Helper function: make an API request

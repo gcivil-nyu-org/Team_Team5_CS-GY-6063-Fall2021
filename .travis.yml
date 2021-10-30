@@ -11,6 +11,7 @@ script:
   - cd food_redistribution
   - coverage run --source="." manage.py test accounts
   - coverage run --source="." manage.py test cal
+  - coverage run --source="." manage.py test yelp_search.tests.test_views
 
 after_success:
   - coveralls

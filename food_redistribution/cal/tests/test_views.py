@@ -3,7 +3,6 @@ from django.urls import reverse
 
 
 class TestViews(TestCase):
-
     def test_index(self):
         client = Client()
         response = client.get(reverse("cal:index"))
