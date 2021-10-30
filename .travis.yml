@@ -9,8 +9,7 @@ script:
   - black .
   - black --check .
   - cd food_redistribution
-  - coverage run --source="." manage.py test accounts
-  - coverage run --source="." manage.py test cal
+  - - coverage run --source=cal,accounts,yelp_search manage.py test
 
 after_success:
   - coveralls
