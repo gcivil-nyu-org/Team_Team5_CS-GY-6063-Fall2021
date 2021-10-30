@@ -24,15 +24,6 @@
       <div class="card-body">
         <h2 class="card-title">
           {{res.yelp_data.name}}
-          {% if res.yelp_data.Accessible %}
-          <span class="badge badge-secondary bg-success text-white">Accessible</span>
-          {% endif %}
-          {% if res.yelp_data.FamilyFriendly  %}
-          <span class="badge badge-secondary bg-primary text-white" >Family Friendly</span>
-          {% endif %}
-          {% if res.yelp_data.TransactionRequired  %}
-          <span class="badge badge-secondary bg-warning text-dark">Transaction Required</span>
-          {% endif %}
         </h2>
         <h4 class="card-text"> Address: {{res.addr}}</h4>
         <h4 class="card-text">Rating: {{res.yelp_data.rating}} </h4>
