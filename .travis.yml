@@ -2,11 +2,9 @@ language: python
 before-install:
   - pip install -r requirements.txt
   - pip install flake8
-  - pip install black
-before_script:
-  - python manage.py makemigrations
-  - python manage.py migrate
+  - pip install black  
 script:
+  - python manage.py migrate
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231
   - black .
   - black --check .
