@@ -10,6 +10,7 @@ script:
   - black --check .
   - cd food_redistribution
   - coverage run --source="." manage.py test accounts
+  - coverage run --source="." manage.py test cal
 
 after_success:
   - coveralls
