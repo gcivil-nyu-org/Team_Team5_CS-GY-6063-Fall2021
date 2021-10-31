@@ -9,7 +9,14 @@
 </small><br/>
 <hr>
 <br/>
-{{post.body}}
+<p>
+    {{post.body}}
+</p>
+<p>
+    {% if post.pic %}
+        <img src="{{ post.pic.url }}" style="width:400px;height:300px;" >
+    {% endif %}
+</p>
 
 <br/><br/>
 <a href="{% url 'posts' %}">Go Back</a>

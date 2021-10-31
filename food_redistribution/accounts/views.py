@@ -29,7 +29,7 @@ from django.core.mail import EmailMessage
 
 # Create your views here.
 from .models import *
-from .forms import RestuarantUserForm, FoodRedistributorUserForm
+from .forms import RestuarantUserForm, FoodRedistributorUserForm,PostForm
 
 
 def register_restaurant(request):
@@ -160,8 +160,12 @@ class DetailedblogView(DetailView):
 
 class AddPostView(CreateView):
     model = Post
+    form_class = PostForm
     template_name = "accounts/blogposts/addpost.html"
-    fields = "__all__"
+    # fields = "__all__"
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class UpdatePostView(UpdateView):
