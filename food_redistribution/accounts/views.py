@@ -163,6 +163,7 @@ class AddPostView(CreateView):
     form_class = PostForm
     template_name = "accounts/blogposts/addpost.html"
     # fields = "__all__"
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
