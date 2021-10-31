@@ -33,13 +33,12 @@ class BaseTest(TestCase):
         }
         return super().setUp()
 
+
 class AddPostTest(TestCase):
     def test_form_validity(self):
         c = Client()
         response = c.get(reverse("posts"))
         self.assertEqual(response.status_code, 200)
-
-
 
 
 class PostViewTest(TestCase):

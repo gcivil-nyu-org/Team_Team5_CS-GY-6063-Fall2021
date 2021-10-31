@@ -29,7 +29,7 @@ from django.core.mail import EmailMessage
 
 # Create your views here.
 from .models import *
-from .forms import RestuarantUserForm, FoodRedistributorUserForm,PostForm
+from .forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm
 
 
 def register_restaurant(request):
