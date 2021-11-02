@@ -25,9 +25,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
-from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
-from django.http import Http404
+
 
 # Create your views here.
 from .models import *
@@ -104,7 +103,7 @@ def activate(request, uidb64, token):
 
 
 def register_foodredistributor(request):
-    if request.user.is_authenticated and request.user.is_:
+    if request.user.is_authenticated and request.user.is_active:
         return redirect("home2")
     else:
         form = FoodRedistributorUserForm(request.POST)
