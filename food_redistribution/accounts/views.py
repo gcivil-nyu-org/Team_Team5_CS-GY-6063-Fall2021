@@ -34,8 +34,6 @@ from .models import *
 from .forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm
 
 
-
-
 # @user_passes_test(res_check)
 def register_restaurant(request):
     if request.user.is_authenticated:
@@ -187,6 +185,7 @@ class DeletePostView(DeleteView):
     template_name = "accounts/blogposts/delete_post.html"
     success_url = reverse_lazy("posts")
 
+
 def res_check(user):
     try:
         get_object_or_404(Restaurant, user=user)
@@ -195,6 +194,7 @@ def res_check(user):
     else:
         return True
 
+
 def login_restuarant(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -202,17 +202,13 @@ def login_restuarant(request):
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
-            user = authenticate(
-                request, 
-                username=username, 
-                password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None and res_check(user) is True:
                 login(request, user)
                 return redirect("home")
             else:
                 messages.info(request, "Username OR Password is incorrect")
-
 
         context = {}
         return render(request, "accounts/restuarantlogin.html", context)
@@ -226,10 +222,7 @@ def login_foodredistributor(request):
             username = request.POST.get("username")
             password = request.POST.get("password")
 
-            user = authenticate(
-                request, 
-                username=username, 
-                password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None and res_check(user) is False:
                 login(request, user)
