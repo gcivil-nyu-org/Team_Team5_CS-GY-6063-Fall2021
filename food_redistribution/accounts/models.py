@@ -33,6 +33,7 @@ class Restaurant(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
+    pic = models.ImageField(null=True, blank=True, upload_to="images/")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
 
