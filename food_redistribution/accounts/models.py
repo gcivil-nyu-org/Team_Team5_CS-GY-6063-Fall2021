@@ -13,6 +13,7 @@ class FoodRedistributor(models.Model):
     phone = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
+    is_food_redis = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -26,6 +27,7 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
+    is_res = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -33,6 +35,7 @@ class Restaurant(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
+    pic = models.ImageField(null=True, blank=True, upload_to="images/")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
 

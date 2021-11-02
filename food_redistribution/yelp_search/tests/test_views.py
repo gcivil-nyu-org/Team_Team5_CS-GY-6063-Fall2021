@@ -61,3 +61,13 @@ class ViewTests(TestCase):
         mock = Mock()
         mock.get_business()
         mock.get_business.assert_called()
+
+    @patch("yelp_search.views.getDistance")
+    def test_get_distance(self, getDistance):
+        """
+        def getDistance(restaurant_dic):
+            return restaurant_dic["distance"]
+        """
+        mock = Mock()
+        mock.getDistance()
+        mock.getDistance.assert_called()
