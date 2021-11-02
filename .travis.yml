@@ -6,10 +6,12 @@ before-install:
   - pip install black
 script:
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231
-  - black . 
+  - black .
   - black --check .
   - cd food_redistribution
-  - coverage run --source=. manage.py test
+  - coverage run -a --source="." manage.py test accounts
+  - coverage run -a --source="." manage.py test cal
+  - coverage run -a --source="." manage.py test yelp_search.tests.test_views
 
 after_success:
   - coveralls

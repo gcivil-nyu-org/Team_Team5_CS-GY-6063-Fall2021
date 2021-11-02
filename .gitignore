@@ -16,6 +16,4 @@ __pycache__/
 staticfiles/*
 */migrations/*.py
 
-
 .env
-food_redistribution/.env
