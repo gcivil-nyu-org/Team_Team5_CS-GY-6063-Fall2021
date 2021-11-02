@@ -43,8 +43,8 @@ def register_restaurant(request):
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
-                # user_profile = Restaurant(user=user)
-                # name = form.cleaned_data.get("username")
+                user_profile = Restaurant(user=user)
+                name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -57,16 +57,16 @@ def register_restaurant(request):
                     },
                 )
                 to_email = form.cleaned_data.get("email")
-                # form.clean_email()
-                # user_profile.email = to_email
-                # nameofres = form.cleaned_data.get("name_of_restaurant")
-                # user_profile.name = name
-                # user_profile.name_of_restaurant = nameofres
-                # phone_r = form.cleaned_data.get("phone")
-                # user_profile.phone = phone_r
-                # address_r = form.cleaned_data.get("address")
-                # user_profile.address = address_r
-                # user_profile.save()
+                form.clean_email()
+                user_profile.email = to_email
+                nameofres = form.cleaned_data.get("name_of_restaurant")
+                user_profile.name = name
+                user_profile.name_of_restaurant = nameofres
+                phone_r = form.cleaned_data.get("phone")
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get("address")
+                user_profile.address = address_r
+                user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
                 return HttpResponse(
@@ -107,8 +107,8 @@ def register_foodredistributor(request):
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
-                # user_profile = FoodRedistributor(user=user)
-                # name = form.cleaned_data.get("username")
+                user_profile = FoodRedistributor(user=user)
+                name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -121,15 +121,15 @@ def register_foodredistributor(request):
                     },
                 )
                 to_email = form.cleaned_data.get("email")
-                # user_profile.email = to_email
-                # nameofredis = form.cleaned_data.get("name_of_food_redis")
-                # user_profile.name = name
-                # user_profile.name_of_food_redis = nameofredis
-                # phone_r = form.cleaned_data.get("phone")
-                # user_profile.phone = phone_r
-                # address_r = form.cleaned_data.get("address")
-                # user_profile.address = address_r
-                # user_profile.save()
+                user_profile.email = to_email
+                nameofredis = form.cleaned_data.get("name_of_food_redis")
+                user_profile.name = name
+                user_profile.name_of_food_redis = nameofredis
+                phone_r = form.cleaned_data.get("phone")
+                user_profile.phone = phone_r
+                address_r = form.cleaned_data.get("address")
+                user_profile.address = address_r
+                user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
                 return HttpResponse(
