@@ -25,13 +25,18 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
-
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 # Create your views here.
 from .models import *
 from .forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm
 
 
+
+
+# @user_passes_test(res_check)
 def register_restaurant(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -66,6 +71,7 @@ def register_restaurant(request):
                 user_profile.phone = phone_r
                 address_r = form.cleaned_data.get("address")
                 user_profile.address = address_r
+                user_profile.is_res = True
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -100,7 +106,7 @@ def activate(request, uidb64, token):
 
 
 def register_foodredistributor(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_:
         return redirect("home2")
     else:
         form = FoodRedistributorUserForm(request.POST)
@@ -132,6 +138,7 @@ def register_foodredistributor(request):
                 user_profile.phone = phone_r
                 address_r = form.cleaned_data.get("address")
                 user_profile.address = address_r
+                user_profile.is_food_redis = True
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
                 email.send()
@@ -180,25 +187,13 @@ class DeletePostView(DeleteView):
     template_name = "accounts/blogposts/delete_post.html"
     success_url = reverse_lazy("posts")
 
-
-# def registerPage(request):
-# 	if request.user.is_authenticated:
-# 		return redirect('home')
-# 	else:
-# 		form = CreateUserForm()
-# 		if request.method == 'POST':
-# 			form = CreateUserForm(request.POST)
-# 			if form.is_valid():
-# 				form.save()
-# 				user = form.cleaned_data.get('username')
-# 				messages.success(request, 'Account was created for ' + user)
-
-# 				return redirect('login')
-
-
-# 		context = {'form':form}
-# 		return render(request, 'accounts/register.html', context)
-
+def res_check(user):
+    try:
+        get_object_or_404(Restaurant, user=user)
+    except:
+        return False
+    else:
+        return True
 
 def login_restuarant(request):
     if request.user.is_authenticated:
@@ -207,14 +202,17 @@ def login_restuarant(request):
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
+            user = authenticate(
+                request, 
+                username=username, 
+                password=password)
 
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
+            if user is not None and res_check(user) is True:
                 login(request, user)
                 return redirect("home")
             else:
                 messages.info(request, "Username OR Password is incorrect")
+
 
         context = {}
         return render(request, "accounts/restuarantlogin.html", context)
@@ -228,9 +226,12 @@ def login_foodredistributor(request):
             username = request.POST.get("username")
             password = request.POST.get("password")
 
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(
+                request, 
+                username=username, 
+                password=password)
 
-            if user is not None:
+            if user is not None and res_check(user) is False:
                 login(request, user)
                 return redirect("home2")
             else:
