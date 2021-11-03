@@ -39,10 +39,11 @@ Event
           </div>
           <div class="d-flex justify-content-center mt-3 login_container">
             <a class="btn cancel-button buttons login_btn" href="{% url 'cal:calendar' %}" value="Cancel" style="font-family:Optima;">Cancel</a>
+            <a href = "{% url 'cal:event_delete' event.instance.id %}">Delete</a>
             <span class="spacer"></span>
           </div>
-
       </div>
+      
     </div>
   </div>
 </div>
