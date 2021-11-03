@@ -5,6 +5,12 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from accounts.tokens import account_activation_token
 
+# from django.http import HttpResponse
+from unittest.mock import Mock, patch
+
+# from django.contrib.auth import logout
+from accounts.forms import *
+
 # from accounts.models import *
 
 
@@ -145,6 +151,41 @@ class ViewTests(BaseTest):
             fetch_redirect_response=True,
         )
 
+    def test_food_red_login(self):
+        """
+        Logging into the restaurant should direct them to home
+        """
+        c = Client()
+        user = User.objects.create_user("Annika", "annika@email.com")
+        c.force_login(user=user)
+        response = c.get(reverse("login2"))
+        self.assertRedirects(
+            response,
+            "/",
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
+
+    """
+    def test_food_red_login_post(self):
+
+        #if request.method == "POST":
+        #    username = request.POST.get("username")
+        #    password = request.POST.get("password")
+
+        c = Client()
+        #user = User.objects.create_user({"username": "annika", "password": "1234567890"})
+        response = c.post(self.user)
+        self.assertRedirects(
+            response,
+            "/",
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
+    """
+
     def test_restaurant_login_already_authenticated(self):
         """
         Restaurant user that is already logged in should be redirected to home
@@ -177,39 +218,42 @@ class ViewTests(BaseTest):
             fetch_redirect_response=True,
         )
 
-    """
-
-    def test_restaurant_register_first_time(self):
-        #user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-        #name = models.CharField(max_length=200, default="")
-        #name_of_restaurant = models.CharField(max_length=200)
-        #email = models.CharField(max_length=200, unique=True)
-        #phone = models.CharField(max_length=200)
-        #address = models.CharField(max_length=200)
-        #verified = models.BooleanField(default=False)
-        c = Client()
-        response = c.post(
-            'restaurant/', {
-                'user': 'annika',
-                'name': 'smith',
-                'name_of_restaurant': 'annika restaurant',
-                'email': 'annika@email.com',
-                'phone': '123-456-7890',
-                'address': '123 street south',
-                'verified': False,
-            }
-        )
-        self.assertContains(response, "Please confirm your email address to complete the registration")
-
-        #self.assertRedirects(
-        #    response,
-        #    "/",
-        #    status_code=302,
-        #    target_status_code=200,
-        #    fetch_redirect_response=True,
-        #)
-
+    def test_restaurant_logout_redirect(self):
         """
+        def logout_restuarant(request):
+            logout(request)
+            return redirect("login")
+
+            # Log out
+        self.client.logout()
+
+        path("restuarantlogout/", views.logout_restuarant, name="logout"),
+        path("foodredislogout/", views.logout_foodredistributor, name="logout2"),
+        """
+        c = Client()
+        user = User.objects.create_user("Annika", "annika@email.com")
+        c.force_login(user=user)
+        response = c.get(reverse("logout"))
+        self.assertRedirects(
+            response,
+            "/restuarantlogin/",
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
+
+    def test_food_red_logout_redirect(self):
+        c = Client()
+        user = User.objects.create_user("Annika", "annika@email.com")
+        c.force_login(user=user)
+        response = c.get(reverse("logout2"))
+        self.assertRedirects(
+            response,
+            "/foodredislogin/",
+            status_code=302,
+            target_status_code=200,
+            fetch_redirect_response=True,
+        )
 
 
 class UserActivationTest(TestCase):
@@ -235,3 +279,48 @@ class UserActivationTest(TestCase):
             )
             self.assertEqual(response.status_code, 200)
             user = User.objects.get(username="testuser3")
+
+
+class ViewTestsAgain(TestCase):
+    @patch("accounts.views.register_restaurant")
+    def test_restaurant_register_first_time(self, register_restaurant):
+        # user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+        # name = models.CharField(max_length=200, default="")
+        # name_of_restaurant = models.CharField(max_length=200)
+        # email = models.CharField(max_length=200, unique=True)
+        # phone = models.CharField(max_length=200)
+        # address = models.CharField(max_length=200)
+        # verified = models.BooleanField(default=False)
+
+        mock = Mock()
+        mock.register_restaurant()
+        mock.register_restaurant.assert_called()
+
+        # c = Client()
+        data = {
+            "name_of_restaurant": "fivefries",
+            "email": "fivefries@somemail.com",
+            "username": "five_fries",
+            "phone": "1234567890",
+            "address": "123 Fries Way",
+            "password1": "qaz2wsedc4rf",
+            "password2": "qaz2wsedc4rf",
+        }
+        form = RestuarantUserForm(data)
+        # response = c.post(data)
+        self.assertTrue(form.is_valid())
+        # response2 = HttpResponse(content_type='text/plain')
+        # self.assertEqual(response.status_code, 200)
+
+        # self.assertRedirects(
+
+    #        response,
+    #        HttpResponse,
+    #        status_code=302,
+    #        target_status_code=200,
+    #        fetch_redirect_response=True,
+    #    )
+
+    # Check 'Log in' in response
+
+    # self.assertInHTML('Please confirm your email address to complete the registration', response.content.decode())
