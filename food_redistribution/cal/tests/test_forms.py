@@ -12,5 +12,4 @@ class TestForms(TestCase):
                 "description": "I wanna check if this thing really works",
             }
         )
-
         self.assertTrue(form.is_valid())

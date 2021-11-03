@@ -39,7 +39,7 @@ def register_restaurant(request):
         form = RestuarantUserForm(request.POST)
         if request.method == "POST":
             if form.is_valid():
-                # user = form.save()
+                # From here
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
@@ -57,7 +57,7 @@ def register_restaurant(request):
                     },
                 )
                 to_email = form.cleaned_data.get("email")
-                # form.clean_email()
+                form.clean_email()
                 user_profile.email = to_email
                 nameofres = form.cleaned_data.get("name_of_restaurant")
                 user_profile.name = name
@@ -72,10 +72,7 @@ def register_restaurant(request):
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
                 )
-                # messages.success(
-                #     request, f'Success! Account created for {name}')
-                # user_profile.save()
-                # return redirect('login')
+                # TO HERE
 
         context = {"form": form}
         return render(request, "accounts/restuarant_register.html", context)
@@ -201,6 +198,7 @@ def login_restuarant(request):
     else:
         if request.method == "POST":
             username = request.POST.get("username")
+            # TEST FROM HERE
             password = request.POST.get("password")
 
             user = authenticate(request, username=username, password=password)
@@ -212,6 +210,7 @@ def login_restuarant(request):
                 messages.info(request, "Username OR Password is incorrect")
 
         context = {}
+        # TO HERE
         return render(request, "accounts/restuarantlogin.html", context)
 
 
@@ -219,6 +218,7 @@ def login_foodredistributor(request):
     if request.user.is_authenticated:
         return redirect("home2")
     else:
+        # TEST FROM HERE
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
@@ -230,7 +230,7 @@ def login_foodredistributor(request):
                 return redirect("home2")
             else:
                 messages.info(request, "Username OR Password is incorrect")
-
+                # TO HERE
         context = {}
         return render(request, "accounts/foodredislogin.html", context)
 
