@@ -57,7 +57,7 @@ def register_restaurant(request):
                     },
                 )
                 to_email = form.cleaned_data.get("email")
-                form.clean_email()
+                # form.clean_email()
                 user_profile.email = to_email
                 nameofres = form.cleaned_data.get("name_of_restaurant")
                 user_profile.name = name
