@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cal",
     "accounts",
+    "yelp_search",
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,8 @@ MEDIA_URL = "/images/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 load_dotenv()
@@ -137,4 +140,6 @@ EMAIL_HOST_USER = "foodredis.5@gmail.com"
 EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_CREDS"))
 EMAIL_PORT = 587
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), test_runner=False)
+
+# django_heroku.settings(locals())

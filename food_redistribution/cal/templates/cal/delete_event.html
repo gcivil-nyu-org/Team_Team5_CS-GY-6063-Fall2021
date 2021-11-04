@@ -1,0 +1,22 @@
+{% extends 'cal/base.html' %}
+
+{% block title %}
+Event
+{% endblock %}
+
+{% block content %}
+<body>
+    <h1>Delete Event...</h1>
+
+        <h3>Delete: {{event.title}}</h3>
+
+        <br/>
+        <form method = "POST">
+            {% csrf_token %}
+            <strong>Are you sure you want to remove this post?</strong><br/><br/>
+            <button> Delete Post!</button>
+        </form>
+        
+</body>
+{% endblock %}
+</html>

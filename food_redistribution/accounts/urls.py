@@ -1,5 +1,7 @@
 from django.urls import path, include
 from . import views
+
+# from . import
 from .views import (
     PostView,
     DetailedblogView,
@@ -51,6 +53,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("", views.home2, name="home2"),
     path("calendar/", include(("cal.urls", "cal"), namespace="calendar")),
+    path("base/", include(("yelp_search.urls", "yelp_search"), namespace="yelpsearch")),
     path("blogposts/", PostView.as_view(), name="posts"),
     path("blogposts/<int:pk>", DetailedblogView.as_view(), name="blog-details"),
     path("addpost/", AddPostView.as_view(), name="add-post"),

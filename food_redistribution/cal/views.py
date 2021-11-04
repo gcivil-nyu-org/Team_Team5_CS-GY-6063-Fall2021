@@ -64,3 +64,29 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse("cal:calendar"))
     return render(request, "cal/event.html", {"form": form})
+
+
+def event_create(request):
+    instance = Event()
+    form = EventForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse("cal:calendar"))
+    return render(request, "cal/create_event.html", {"event": form})
+
+
+def event_update(request, pk):
+    instance = get_object_or_404(Event, pk=pk)
+    form = EventForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse("cal:calendar"))
+    return render(request, "cal/update_event.html", {"event": form})
+
+
+def event_delete(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == "POST":
+        event.delete()
+        return HttpResponseRedirect(reverse("cal:calendar"))
+    return render(request, "cal/delete_event.html", {"event": event})
