@@ -43,7 +43,7 @@ def register_restaurant(request):
             if form.is_valid():
                 # user = form.save()
                 user = form.save(commit=False)
-                user.is_active = False
+                user.is_active = clean_email
                 user.save()
                 user_profile = Restaurant(user=user)
                 name = form.cleaned_data.get("username")
