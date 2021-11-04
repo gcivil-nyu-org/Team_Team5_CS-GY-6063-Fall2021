@@ -15,6 +15,6 @@ __pycache__/
 *.sqlite3
 staticfiles/*
 */migrations/*.py
-
+*/__pycache__/*
 .env
 .coverage
