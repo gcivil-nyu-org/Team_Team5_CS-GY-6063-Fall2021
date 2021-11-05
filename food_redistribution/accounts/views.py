@@ -41,12 +41,12 @@ def register_restaurant(request):
         form = RestuarantUserForm(request.POST)
         if request.method == "POST":
             if form.is_valid():
-                # From here
+                # WRITE TEST FROM HERE
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
                 user_profile = Restaurant(user=user)
-                name = form.cleaned_data.get("username")
+                # name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -58,16 +58,26 @@ def register_restaurant(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-                to_email = form.cleaned_data.get("email")
+
+                # Just trying to condense some lines here
+
+                # to_email = form.cleaned_data.get("email")
                 # form.clean_email()
-                user_profile.email = to_email
-                nameofres = form.cleaned_data.get("name_of_restaurant")
-                user_profile.name = name
-                user_profile.name_of_restaurant = nameofres
-                phone_r = form.cleaned_data.get("phone")
-                user_profile.phone = phone_r
-                address_r = form.cleaned_data.get("address")
-                user_profile.address = address_r
+                # user_profile.email = to_email
+                user_profile.email = form.cleaned_data.get("email")
+                # nameofres = form.cleaned_data.get("name_of_restaurant")
+                # user_profile.name = name
+                user_profile.name = form.cleaned_data.get("username")
+                # user_profile.name_of_restaurant = nameofres
+                user_profile.name_of_restaurant = form.cleaned_data.get(
+                    "name_of_restaurant"
+                )
+                # phone_r = form.cleaned_data.get("phone")
+                # user_profile.phone = phone_r
+                user_profile.phone = form.cleaned_data.get("phone")
+                # address_r = form.cleaned_data.get("address")
+                # user_profile.address = address_r
+                user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_res = True
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
@@ -111,7 +121,7 @@ def register_foodredistributor(request):
                 user.is_active = False
                 user.save()
                 user_profile = FoodRedistributor(user=user)
-                name = form.cleaned_data.get("username")
+                # name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -123,15 +133,18 @@ def register_foodredistributor(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-                to_email = form.cleaned_data.get("email")
-                user_profile.email = to_email
-                nameofredis = form.cleaned_data.get("name_of_food_redis")
-                user_profile.name = name
-                user_profile.name_of_food_redis = nameofredis
-                phone_r = form.cleaned_data.get("phone")
-                user_profile.phone = phone_r
-                address_r = form.cleaned_data.get("address")
-                user_profile.address = address_r
+                # to_email = form.cleaned_data.get("email")
+                user_profile.email = form.cleaned_data.get("email")
+                # nameofredis = form.cleaned_data.get("name_of_food_redis")
+                # user_profile.name = name
+                user_profile.name = form.cleaned_data.get("username")
+                user_profile.name_of_food_redis = form.cleaned_data.get(
+                    "name_of_food_redis"
+                )
+                # phone_r = form.cleaned_data.get("phone")
+                user_profile.phone = form.cleaned_data.get("phone")
+                # address_r = form.cleaned_data.get("address")
+                user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_food_redis = True
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[to_email])
@@ -256,3 +269,15 @@ def home2(request):
 @login_required(login_url="profile")
 def profile(request):
     return render(request, "accounts/profile-card.html")
+
+
+def landing(request):
+    return render(request, "accounts/landing_page.html")
+
+
+def choose_login(request):
+    return render(request, "accounts/chooselogin.html")
+
+
+def about(request):
+    return render(request, "accounts/about.html")

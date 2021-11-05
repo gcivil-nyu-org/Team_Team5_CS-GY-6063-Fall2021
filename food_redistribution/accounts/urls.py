@@ -18,6 +18,8 @@ urlpatterns = [
     path("restaurant/", views.register_restaurant, name="register"),
     path("profile/", views.profile, name="profile"),
     path("foodredis/", views.register_foodredistributor, name="register2"),
+    path("login/", views.choose_login, name="chooselogin"),
+    path("about/", views.about, name="about"),
     path("restuarantlogin/", views.login_restuarant, name="login"),
     path("foodredislogin/", views.login_foodredistributor, name="login2"),
     path("restuarantlogout/", views.logout_restuarant, name="logout"),
@@ -59,6 +61,7 @@ urlpatterns = [
     path("addpost/", AddPostView.as_view(), name="add-post"),
     path("blogposts/edit/<int:pk>", UpdatePostView.as_view(), name="update_post"),
     path("blogposts/<int:pk>/remove", DeletePostView.as_view(), name="delete_post"),
+    path("landing/", views.landing, name="landing"),
     url(
         r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,6}-[0-9A-Za-z]{1,32})/$",
         views.activate,
