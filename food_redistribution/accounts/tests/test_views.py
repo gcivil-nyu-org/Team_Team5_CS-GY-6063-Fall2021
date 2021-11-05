@@ -113,7 +113,7 @@ class ViewTests(BaseTest):
         response = c.get(reverse("register"))
         self.assertRedirects(
             response,
-            "/",
+            "/profile/",
             status_code=302,
             target_status_code=200,
             fetch_redirect_response=True,
@@ -129,7 +129,7 @@ class ViewTests(BaseTest):
         response = c.get(reverse("register2"))
         self.assertRedirects(
             response,
-            "/",
+            "/profile/",
             status_code=302,
             target_status_code=200,
             fetch_redirect_response=True,
@@ -212,7 +212,7 @@ class ViewTests(BaseTest):
         response = c.get(reverse("login2"))
         self.assertRedirects(
             response,
-            "/",
+            "/profile/",
             status_code=302,
             target_status_code=200,
             fetch_redirect_response=True,
