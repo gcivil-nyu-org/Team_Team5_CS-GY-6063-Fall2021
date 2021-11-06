@@ -255,9 +255,7 @@ class ViewTests(BaseTest):
             fetch_redirect_response=True,
         )
 
-
     # COmmenting out these tests for now bc they are throwing errors that have to do with static files and heroku, idk
-    """
     def test_landing_page_success(self):
         # Going to landing page should return the correct page
         c = Client()
@@ -275,7 +273,7 @@ class ViewTests(BaseTest):
         c = Client()
         response = c.get(reverse("about"))
         self.assertEqual(response.status_code, 200)
-    """
+
 
 class UserActivationTest(TestCase):
     def test_user_activate_success(self):
@@ -348,3 +346,9 @@ class ViewTestsAgain(TestCase):
         mock = Mock()
         mock.about()
         mock.about.assert_called()
+
+    @patch("accounts.views.res_check")
+    def test_res_check(self, res_check):
+        mock = Mock()
+        mock.res_check()
+        mock.res_check.assert_called()
