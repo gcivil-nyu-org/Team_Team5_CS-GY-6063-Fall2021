@@ -80,7 +80,7 @@ def register_restaurant(request):
                 user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_res = True
                 user_profile.save()
-                email = EmailMessage(mail_subject, message, to=[to_email])
+                email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
@@ -147,7 +147,7 @@ def register_foodredistributor(request):
                 user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_food_redis = True
                 user_profile.save()
-                email = EmailMessage(mail_subject, message, to=[to_email])
+                email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
