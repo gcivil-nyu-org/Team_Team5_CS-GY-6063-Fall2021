@@ -1,9 +1,9 @@
 {% load static %}
-{%  include 'accounts/navbar.html' %}
 
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- old links
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
@@ -20,13 +20,60 @@
       background-size: cover;
       background-repeat: no-repeat
   }
-</style>
+</style>-->
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}"/>
+	<link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+	<!-- Material Design javascript --->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body>
+	{%  include 'accounts/newnavbar.html' %}
 
+			<div class="split left">
+				<div class="about-container">
+					<div class="about-card mdl-card mdl-shadow--8dp">
+						<div class="about-card-title mdl-card__title">
+							<h3>{{user.get_username}}</h3>
+						</div>
+							<div class="info mdl-card__supporting-text">
+								<h5>About</h5>
+								<p>A casual but classy locale serving authentic fare. <br>
+									Locals and travelers alike recommend this place. <br>
+									Not Beyonce's favorite restaurant, but it could be...
+								</p>
+							</div>
+							<div class="info mdl-card__supporting-text">
+								<h5>Location</h5>
+								<p>248 Eat Street <br>
+									Brooklyn, NY <br>
+									11238 <br>
+								</p>
+							</div>
+							<!--
+							<div class="info mdl-card__supporting-text">
+								<h5>Rating:</h5><p>4.7</p>
+							</div>-->
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="split right">
+
+			</div>
+
+<!-- Old profile card
   <div class="row py-5 px-4">
       <div class="col-md-5 mx-auto">
-          <!-- Profile widget -->
           <div class="bg-white shadow rounded overflow-hidden">
               <div class="px-4 pt-0 pb-4 cover">
                   <div class="media align-items-end profile-head">
@@ -71,7 +118,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> -->
 </body>
 
 </html>
