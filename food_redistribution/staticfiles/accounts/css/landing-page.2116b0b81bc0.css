@@ -1,0 +1,19 @@
+body {
+  background-image: url("https://images.unsplash.com/photo-1554998171-89445e31c52b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=939&q=80");
+  background-size: cover;
+}
+
+.screen {
+  position: relative;
+}
+
+.smash {
+  position: fixed;
+  bottom: 5em;
+  right: 8em;
+}
+
+.smash-title {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-size: 90px;
+}

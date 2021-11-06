@@ -218,7 +218,7 @@ def login_restuarant(request):
                 login(request, user)
                 return redirect("home")
             else:
-                messages.info(request, "Username OR Password is incorrect")
+                messages.info(request, "Username or password is incorrect")
 
         context = {}
         # TO HERE
@@ -240,7 +240,7 @@ def login_foodredistributor(request):
                 login(request, user)
                 return redirect("home2")
             else:
-                messages.info(request, "Username OR Password is incorrect")
+                messages.info(request, "Username or password is incorrect")
                 # TO HERE
         context = {}
         return render(request, "accounts/foodredislogin.html", context)
