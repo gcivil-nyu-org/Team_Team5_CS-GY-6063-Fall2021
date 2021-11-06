@@ -9,9 +9,15 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'accounts/css/all_pages.css' %}" />
 	<!-- <script src="{% static 'accounts/js/food-red-register.js' %}"></script> -->
-	
+
 </head>
 <body>
+	{%  include 'accounts/newnavbar.html' %}
+
+
+
+
+	<!-- Old Register page-->
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
@@ -86,6 +92,7 @@
 	{{form.errors}}
 
 	<script src="{% static 'accounts/js/food-red-register.js' %}"></script>
+
 
 </body>
 </html>

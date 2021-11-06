@@ -126,7 +126,13 @@ STATIC_URL = "/static/"
 
 MEDIA_URL = "/images/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+WHITENOISE_MANIFEST_STRICT = False
+
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
