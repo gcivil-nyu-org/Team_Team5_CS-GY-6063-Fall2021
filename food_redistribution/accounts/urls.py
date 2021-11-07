@@ -67,4 +67,5 @@ urlpatterns = [
         views.activate,
         name="activate",
     ),
+    url("updateprofile/", views.profile_update, name="update_profile"),
 ]
