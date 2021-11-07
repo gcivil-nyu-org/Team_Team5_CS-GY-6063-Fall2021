@@ -102,10 +102,12 @@ class PostForm(forms.ModelForm):
             "body": forms.Textarea(attrs={"class": "form-control"}),
         }
 
+
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username",]
+
 
 class RestaurantUpdateForm(forms.ModelForm):
     class Meta:

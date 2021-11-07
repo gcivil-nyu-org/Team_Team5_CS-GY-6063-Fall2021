@@ -248,7 +248,7 @@ def login_foodredistributor(request):
 
 def profile_update(request):
     if request.method == "POST":
-        r_profile = Restaurant.objects.get(user = request.user)
+        r_profile = Restaurant.objects.get(user=request.user)
         u_form = UserUpdateForm(request.POST, instance=request.user)
         r_form = RestaurantUpdateForm(
             request.POST, instance=r_profile
@@ -260,17 +260,13 @@ def profile_update(request):
             return redirect("home")
 
     else:
-        r_profile = Restaurant.objects.get(user = request.user)
+        r_profile = Restaurant.objects.get(user=request.user)
         u_form = UserUpdateForm(instance=request.user)
         r_form = RestaurantUpdateForm(instance=r_profile)
 
     context = {"u_form": u_form, "r_form": r_form}
 
     return render(request, "accounts/updateprofile.html", context)
-
-
-
-
 
 
 def logout_restuarant(request):
