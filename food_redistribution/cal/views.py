@@ -75,6 +75,15 @@ def event_create(request):
     return render(request, "cal/create_event.html", {"event": form})
 
 
+def event_view(request, pk):
+    instance = get_object_or_404(Event, pk=pk)
+    form = EventForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse("cal:calendar"))
+    return render(request, "cal/view_event.html", {"event": form})
+
+
 def event_update(request, pk):
     instance = get_object_or_404(Event, pk=pk)
     form = EventForm(request.POST or None, instance=instance)
