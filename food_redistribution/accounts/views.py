@@ -30,7 +30,13 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 from .models import *
-from .forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm, UserUpdateForm,RestaurantUpdateForm
+from .forms import (
+    RestuarantUserForm,
+    FoodRedistributorUserForm,
+    PostForm,
+    UserUpdateForm,
+    RestaurantUpdateForm,
+)
 
 
 # @user_passes_test(res_check)
@@ -250,13 +256,11 @@ def profile_update(request):
     if request.method == "POST":
         r_profile = Restaurant.objects.get(user=request.user)
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        r_form = RestaurantUpdateForm(
-            request.POST, instance=r_profile
-        )
+        r_form = RestaurantUpdateForm(request.POST, instance=r_profile)
         if u_form.is_valid() and r_form.is_valid():
             u_form.save()
             r_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, f"Your account has been updated!")
             return redirect("home")
 
     else:
