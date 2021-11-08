@@ -6,6 +6,4 @@
 
 .gradient-navbar {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.346354) 50.52%, rgba(0, 0, 0, 0) 100%);
-  position: fixed;
-  z-index: 9999;
 }
