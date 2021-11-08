@@ -151,6 +151,22 @@ class ViewTests(BaseTest):
             fetch_redirect_response=True,
         )
 
+    def test_wrong_login_restaurant(self):
+        response = self.client.post(
+            "/restuarantlogin/",
+            data={"username": "test1", "password": "test1" + "test1",},
+            follow=True,
+        )
+        self.assertIn("", str(response.content))
+
+    def test_wrong_login_foodredis(self):
+        response = self.client.post(
+            "/foodredislogin/",
+            data={"username": "test1", "password": "test1" + "test1",},
+            follow=True,
+        )
+        self.assertIn("", str(response.content))
+
     def test_food_red_login(self):
         """
         Logging into the restaurant should direct them to home
