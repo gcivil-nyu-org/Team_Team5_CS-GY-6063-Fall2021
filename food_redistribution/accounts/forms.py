@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Post, Restaurant
+from .models import Post, Restaurant, FoodRedistributor
 
 
 class RestuarantUserForm(UserCreationForm):
@@ -116,6 +116,17 @@ class RestaurantUpdateForm(forms.ModelForm):
         model = Restaurant
         fields = [
             "name_of_restaurant",
+            "email",
+            "phone",
+            "address",
+        ]
+
+
+class FoodRedistributorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = FoodRedistributor
+        fields = [
+            "name_of_food_redis",
             "email",
             "phone",
             "address",

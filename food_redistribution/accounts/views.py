@@ -36,6 +36,7 @@ from .forms import (
     PostForm,
     UserUpdateForm,
     RestaurantUpdateForm,
+    FoodRedistributorUpdateForm,
 )
 
 
@@ -253,22 +254,47 @@ def login_foodredistributor(request):
 
 
 def profile_update(request):
+
+    user_update_form = None
+    entity_update_form = None
+    user_profile = None
     if request.method == "POST":
-        r_profile = Restaurant.objects.get(user=request.user)
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        r_form = RestaurantUpdateForm(request.POST, instance=r_profile)
-        if u_form.is_valid() and r_form.is_valid():
-            u_form.save()
-            r_form.save()
-            messages.success(request, f"Your account has been updated!")
-            return redirect("home")
+        if res_check(request.user):
+            user_profile = Restaurant.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(request.POST, instance=request.user)
+            entity_update_form = RestaurantUpdateForm(
+                request.POST, instance=user_profile
+            )
+            if user_update_form.is_valid() and entity_update_form.is_valid():
+                user_update_form.save()
+                entity_update_form.save()
+                messages.success(request, f"Your account has been updated!")
+                return redirect("home")
+
+        else:
+            user_profile = FoodRedistributor.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(request.POST, instance=request.user)
+            entity_update_form = FoodRedistributorUpdateForm(
+                request.POST, instance=user_profile
+            )
+            if user_update_form.is_valid() and entity_update_form.is_valid():
+                user_update_form.save()
+                entity_update_form.save()
+                messages.success(request, f"Your account has been updated!")
+                return redirect("home")
 
     else:
-        r_profile = Restaurant.objects.get(user=request.user)
-        u_form = UserUpdateForm(instance=request.user)
-        r_form = RestaurantUpdateForm(instance=r_profile)
+        if res_check(request.user):
+            user_profile = Restaurant.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(instance=request.user)
+            entity_update_form = RestaurantUpdateForm(instance=user_profile)
 
-    context = {"u_form": u_form, "r_form": r_form}
+        else:
+            user_profile = FoodRedistributor.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(instance=request.user)
+            entity_update_form = FoodRedistributorUpdateForm(instance=user_profile)
+
+    context = {"u_form": user_update_form, "r_form": entity_update_form}
 
     return render(request, "accounts/updateprofile.html", context)
 
