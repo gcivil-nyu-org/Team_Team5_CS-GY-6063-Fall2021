@@ -121,6 +121,7 @@ class RestaurantUpdateForm(forms.ModelForm):
             "address",
         ]
 
+
 class FoodRedistributorUpdateForm(forms.ModelForm):
     class Meta:
         model = FoodRedistributor
