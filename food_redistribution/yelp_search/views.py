@@ -11,6 +11,7 @@ import requests
 from urllib.parse import quote
 
 import os
+from accounts.models import Restaurant
 
 # from django.urls import reverse
 
@@ -46,7 +47,19 @@ def search_restaurants(request):
     context["location"] = location
     context["data"] = data
 
-    print("THE LOCATION WAS: ", context["location"])
+    
+    in_database = []
+    
+    for i in range(len(data)):
+        if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0:
+            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0]
+            in_database.append(res)
+            
+    context["in_database"] = in_database
+    # print(context["data"][0]["phone"])
+    for i in range(len(context["data"])):
+        context["data"][i]["phone"] = context["data"][i]["phone"][2:]
+    # print("THE LOCATION WAS: ", context["location"])
 
     return render(request, "yelp_search/search.html", context)
 
@@ -71,6 +84,7 @@ def search(api_key, term, location, num):
         "limit": num,
         "radius": 500,
     }
+    print(type(request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)))
     return request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
@@ -83,3 +97,4 @@ def get_business(api_key, business_id):
 # Helper function: get distance from the searched location
 def getDistance(restaurant_dic):
     return restaurant_dic["distance"]
+
