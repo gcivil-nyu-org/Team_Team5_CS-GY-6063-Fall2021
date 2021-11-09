@@ -53,9 +53,11 @@ def search_restaurants(request):
     for i in range(len(data)):
         if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0:
             res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0]
-            in_database.append(res)
+            in_database.append(res.phone)
+        print(data[i]["phone"])
             
     context["in_database"] = in_database
+    print(in_database)
     # print(context["data"][0]["phone"])
     for i in range(len(context["data"])):
         context["data"][i]["phone"] = context["data"][i]["phone"][2:]
