@@ -2,6 +2,7 @@
 from calendar import HTMLCalendar
 from .models import Event
 
+
 class Calendar(HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
@@ -17,7 +18,8 @@ class Calendar(HTMLCalendar):
             d += f"<li> {event.get_html_url} </li>"
 
         if day != 0:
-            return f"<td class='mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> {d} </ul></td>"
+            return f"<td class='mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
+             {d} </ul></td>"
         return "<td></td>"
 
     # formats a week as a tr
@@ -34,7 +36,8 @@ class Calendar(HTMLCalendar):
             start_time__year=self.year, start_time__month=self.month
         )
 
-        cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar mdl-data-table mdl-js-data-table mdl-shadow--2dp">\n'
+        cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar mdl-data-table \
+        mdl-js-data-table mdl-shadow--2dp">\n'
         cal += f"{self.formatmonthname(self.year, self.month, withyear=withyear)}\n"
         cal += f"{self.formatweekheader()}\n"
         for week in self.monthdays2calendar(self.year, self.month):
