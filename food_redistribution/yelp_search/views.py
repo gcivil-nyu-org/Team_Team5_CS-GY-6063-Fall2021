@@ -47,15 +47,14 @@ def search_restaurants(request):
     context["location"] = location
     context["data"] = data
 
-    
     in_database = []
-    
+
     for i in range(len(data)):
         if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0:
             res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0]
             in_database.append(res.phone)
         print(data[i]["phone"])
-            
+
     context["in_database"] = in_database
     print(in_database)
     # print(context["data"][0]["phone"])
@@ -99,4 +98,3 @@ def get_business(api_key, business_id):
 # Helper function: get distance from the searched location
 def getDistance(restaurant_dic):
     return restaurant_dic["distance"]
-
