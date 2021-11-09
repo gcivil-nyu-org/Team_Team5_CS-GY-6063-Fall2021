@@ -47,10 +47,8 @@
 								<h5>About</h5>
 								<p>A casual but classy locale serving authentic fare. <br>
 									Locals and travelers alike recommend this place. <br>
-									Not Beyonce's favorite restaurant, but it could be...
+									Not Beyonce's favorite restaurant, but it could be...<br>
 								</p>
-							</div>
-							<div class="info mdl-card__supporting-text">
 								<h5>Location</h5>
 								<p>248 Eat Street <br>
 									Brooklyn, NY <br>
@@ -61,6 +59,11 @@
 							<div class="info mdl-card__supporting-text">
 								<h5>Rating:</h5><p>4.7</p>
 							</div>-->
+							{% if user.is_authenticated %}
+							<div class="update-prof-btn mdl-card__actions mdl-card--border">
+								<a href="updateprofile/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Edit profile</a>
+							</div>
+							{% endif %}
 
 					</div>
 				</div>

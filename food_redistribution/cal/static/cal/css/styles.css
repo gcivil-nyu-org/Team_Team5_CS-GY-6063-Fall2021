@@ -1,6 +1,7 @@
 /* Common styles */
 body {
   font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: rgba(0,0,0,0.8);
 }
 
 .left {
@@ -127,10 +128,21 @@ body {
   height: 80vh;
   margin: auto;
   font-size: 13px;
+  color: black;
+}
+
+.add-btn.mdl-button {
+  left: 50%;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.nav-btn.mdl-button {
+  background-color: rgba(255,255,255,0.8);
 }
 
 .calendar tr, .calendar td {
-  border: 1px solid black;
+  border: 1px solid gray;
+  background-color: rgba(255,255,255,0.8);
 }
 
 .calendar th {
