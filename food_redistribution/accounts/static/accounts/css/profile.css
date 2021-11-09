@@ -55,3 +55,39 @@ body {
   padding-top: 0;
   line-height: 10px;
 }
+
+.offset {
+  height: 75px;
+}
+
+.spacer {
+  height: 40px;
+}
+
+.prof-card-image.mdl-card {
+  width: 220px;
+  height: 256px;
+  /*background: url('https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;*/
+}
+.prof-card-image > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+  padding-bottom: 1em;
+  background: rgba(255,255,255, 0.92);
+}
+.prof-card-image__filename {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.right.scroll {
+    /*margin:4px, 4px;
+    padding:4px;
+    background-color: green;
+    width: 500px;
+    height: 110px;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+    /*text-align:justify;*/
+}
