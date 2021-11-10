@@ -41,7 +41,7 @@
 				<div class="about-container">
 					<div class="about-card mdl-card mdl-shadow--8dp">
 						<div class="about-card-title mdl-card__title">
-							<h3>{{user.get_username}}</h3>
+							<h3>{{user.rest.name_of_restaurant}}</h3>
 						</div>
 							<div class="info mdl-card__supporting-text">
 								<h5>About</h5>
@@ -50,9 +50,7 @@
 									Not Beyonce's favorite restaurant, but it could be...<br>
 								</p>
 								<h5>Location</h5>
-								<p>248 Eat Street <br>
-									Brooklyn, NY <br>
-									11238 <br>
+								<p>{{user.rest.address}}<br>
 								</p>
 							</div>
 							<!--
