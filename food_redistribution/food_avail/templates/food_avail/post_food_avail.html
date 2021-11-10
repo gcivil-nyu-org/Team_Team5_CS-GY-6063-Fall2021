@@ -6,7 +6,27 @@
     <title>Food Availability</title>
 </head>
 <body>
-    <h1>Food Availability</h1>
+    
+
+    {% block title %}
+    Food Availability
+    {% endblock %}
+
+    {% block content %}
+    <div class="clearfix">
+    <a class="btn btn-info left" href="{% url 'accounts:profile' %}"> Go to Dashboard </a>
+    </div>
+
+    <main id="body-main">
+        <h1>Food Availability</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ food.as_p}}
+            <button type="submit">Post Availability</button>
+            <br>
+        </form>
+    </main>
+    {% endblock %}
     
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from .forms import FoodAvailForm
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 def post_available_food(request):
