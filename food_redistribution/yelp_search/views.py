@@ -12,6 +12,7 @@ from urllib.parse import quote
 
 import os
 from accounts.models import Restaurant
+from food_avail.models import Food_Avail
 
 # from django.urls import reverse
 
@@ -48,7 +49,7 @@ def search_restaurants(request):
     context["data"] = data
 
     in_database = []
-
+    meals_available = None
     for i in range(len(data)):
         if (
             len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0
@@ -57,15 +58,27 @@ def search_restaurants(request):
                 0
             ]  # pragma: no cover
             in_database.append(res.phone)
-        print(data[i]["phone"])
+            print("RES NAME: ", res.name)
+            print("CURR USER: ", request.user.username)
+            if res.name == request.user.username:
+                print("ITS EQUAL")
+                meals_available = Food_Avail.objects.filter(author=res.user)[0].food_available
+                print("THIS WORKS: ", Food_Avail.objects.filter(author=res.user)[0].author.username)
+                context["data"][i]["meals_available"] = meals_available
+
+                # print(meals_available)
+        # print(data[i]["phone"])
+    print("MEALS: ",meals_available)
+
 
     context["in_database"] = in_database
-    print(in_database)
+    context["meals"] = meals_available
+    # print(in_database)
     # print(context["data"][0]["phone"])
     for i in range(len(context["data"])):
         context["data"][i]["phone"] = context["data"][i]["phone"][2:]
     # print("THE LOCATION WAS: ", context["location"])
-
+    print(context["data"][9])
     return render(request, "yelp_search/search.html", context)
 
 
