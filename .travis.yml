@@ -9,8 +9,6 @@ script:
   - black --check .
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231,E722
   - cd food_redistribution
-  - python manage.py makemigrations
-  - python manage.py migrate
   - coverage run -a --source="." manage.py test accounts
   - coverage run -a --source="." manage.py test cal
   - coverage run -a --source="." manage.py test yelp_search.tests.test_views
