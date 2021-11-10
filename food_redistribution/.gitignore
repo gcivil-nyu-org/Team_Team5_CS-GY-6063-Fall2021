@@ -68,7 +68,6 @@ coverage.xml
 .pytest_cache/
 cover/
 
-
 # Django stuff:
 
 # IPython
