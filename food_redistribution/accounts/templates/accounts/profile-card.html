@@ -62,6 +62,7 @@
 							{% if user.is_authenticated %}
 							<div class="update-prof-btn mdl-card__actions mdl-card--border">
 								<a href="updateprofile/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Edit profile</a>
+								<a href="{% url 'food_avail:food_avail' %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Post Food Availability</a>
 							</div>
 							{% endif %}
 

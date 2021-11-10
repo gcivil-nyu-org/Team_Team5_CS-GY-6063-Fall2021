@@ -13,7 +13,7 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 # from cal import views as cal_views
-
+app_name = "accounts"
 urlpatterns = [
     path("restaurant/", views.register_restaurant, name="register"),
     path("profile/", views.profile, name="profile"),
