@@ -25,7 +25,10 @@
                   <img class="card-img-top" src={{d.image_url}} alt="Card image cap" style= "width:100%; height:9vw; object-fit: cover;">
                   <div class="card-body">
                     {% if d.phone in in_database %}
-                      <h5 style="color:green" class="card-title">In our database!</h5>            
+                      <h5 style="color:green" class="card-title">In our database!</h5>
+                      {% if d.meals_available %}
+                        <p class="card-text" style="color:green"> {{d.meals_available}} Meals Available</p>
+                        {% endif %}
                     {% endif %}
                     <h5 class="card-title">{{d.name}}</h5>
                     <p class="card-text">Phone: {{d.display_phone}}</p>

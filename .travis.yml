@@ -6,7 +6,7 @@ before-install:
   - pip install black
 script:
   - black .
-  - black --check .
+  - black --check . 
   - flake8 --max-line-length=130 --ignore=F405,F403,F541,W503,E231,E722
   - cd food_redistribution
   - coverage run -a --source="." manage.py test accounts

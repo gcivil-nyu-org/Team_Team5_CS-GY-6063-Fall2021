@@ -17,7 +17,7 @@ class EventForm(ModelForm):
             ),
             "title": TextInput(attrs={"placeholder": "Title"}),
             "description": TextInput(attrs={"placeholder": "Description"}),
-            "author":  forms.HiddenInput(),
+            "author": forms.HiddenInput(),
         }
         fields = ["title", "description", "start_time", "end_time", "author"]
 

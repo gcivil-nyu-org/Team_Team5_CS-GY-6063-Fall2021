@@ -12,6 +12,7 @@ from urllib.parse import quote
 
 import os
 from accounts.models import Restaurant
+from food_avail.models import Food_Avail
 
 # from django.urls import reverse
 
@@ -48,20 +49,34 @@ def search_restaurants(request):
     context["data"] = data
 
     in_database = []
-
+    meals_available = None
     for i in range(len(data)):
-        if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0:
-            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0]
+        if (
+            len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0
+        ):  # pragma: no cover
+            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[
+                0
+            ]  # pragma: no cover
             in_database.append(res.phone)
-        print(data[i]["phone"])
+            if len(Food_Avail.objects.filter(author=res.user)) > 0:
+                print(
+                    "RES NAME: ",
+                    Food_Avail.objects.filter(author=res.user)[0].author.username,
+                )
+                meals_available = Food_Avail.objects.filter(author=res.user)[
+                    0
+                ].food_available
+                context["data"][i]["meals_available"] = meals_available
+    print("MEALS: ", meals_available)
 
     context["in_database"] = in_database
-    print(in_database)
+    context["meals"] = meals_available
+    # print(in_database)
     # print(context["data"][0]["phone"])
     for i in range(len(context["data"])):
         context["data"][i]["phone"] = context["data"][i]["phone"][2:]
     # print("THE LOCATION WAS: ", context["location"])
-
+    # print(context["data"][9])
     return render(request, "yelp_search/search.html", context)
 
 
@@ -89,10 +104,10 @@ def search(api_key, term, location, num):
     return request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
-# Helper function: fetch one single business using the business id
-def get_business(api_key, business_id):
-    business_path = BUSINESS_PATH + business_id
-    return request(API_HOST, business_path, api_key)
+# # Helper function: fetch one single business using the business id
+# def get_business(api_key, business_id):
+#     business_path = BUSINESS_PATH + business_id
+#     return request(API_HOST, business_path, api_key)
 
 
 # Helper function: get distance from the searched location

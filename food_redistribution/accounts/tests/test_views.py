@@ -25,7 +25,7 @@ class BaseTest(TestCase):
         address = models.CharField(max_length=200)
         verified = models.BooleanField(default=False)
         """
-        self.registration_url = reverse("register")
+        self.registration_url = reverse("accounts:register")
         self.user = {
             "user": "testuser",
             "name": "name",
@@ -43,7 +43,7 @@ class BaseTest(TestCase):
 class AddPostTest(TestCase):
     def test_form_validity(self):
         c = Client()
-        response = c.get(reverse("posts"))
+        response = c.get(reverse("accounts:posts"))
         self.assertEqual(response.status_code, 200)
 
 
@@ -52,7 +52,7 @@ class PostViewTest(TestCase):
         """
         If no posts exist, an appropriate message is displayed.
         """
-        response = self.client.get(reverse("posts"))
+        response = self.client.get(reverse("accounts:posts"))
         self.assertEqual(response.status_code, 200)
         # self.assertContains(response, "No polls are available.")
 
@@ -92,7 +92,7 @@ class ViewTests(BaseTest):
         A get request to the restaurant registration page should yield a valid response
         """
         c = Client()
-        response = c.get(reverse("register"))
+        response = c.get(reverse("accounts:register"))
         self.assertEqual(response.status_code, 200)
 
     def test_food_red_register(self):
@@ -100,7 +100,7 @@ class ViewTests(BaseTest):
         A get request to the food redistributor registration page should yield a valid response
         """
         c = Client()
-        response = c.get(reverse("register2"))
+        response = c.get(reverse("accounts:register2"))
         self.assertEqual(response.status_code, 200)
 
     def test_restaurant_register_already_authenticated(self):
@@ -110,7 +110,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("register"))
+        response = c.get(reverse("accounts:register"))
         self.assertRedirects(
             response,
             "/profile/",
@@ -126,7 +126,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("register2"))
+        response = c.get(reverse("accounts:register2"))
         self.assertRedirects(
             response,
             "/profile/",
@@ -142,7 +142,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("login"))
+        response = c.get(reverse("accounts:login"))
         self.assertRedirects(
             response,
             "/profile/",
@@ -180,7 +180,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("login2"))
+        response = c.get(reverse("accounts:login2"))
         self.assertRedirects(
             response,
             "/profile/",
@@ -221,7 +221,7 @@ class ViewTests(BaseTest):
         Food redistributor user that is already logged in should be redirected to home
         """
         c = Client()
-        response = c.post(reverse("register2"), self.user)
+        response = c.post(reverse("accounts:register2"), self.user)
         self.assertEqual(response.status_code, 200)
 
     def test_food_red_login_already_authenticated_redirect(self):
@@ -231,7 +231,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("login2"))
+        response = c.get(reverse("accounts:login2"))
         self.assertRedirects(
             response,
             "/profile/",
@@ -255,7 +255,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("logout"))
+        response = c.get(reverse("accounts:logout"))
         self.assertRedirects(
             response,
             "/restuarantlogin/",
@@ -268,7 +268,7 @@ class ViewTests(BaseTest):
         c = Client()
         user = User.objects.create_user("Annika", "annika@email.com")
         c.force_login(user=user)
-        response = c.get(reverse("logout2"))
+        response = c.get(reverse("accounts:logout2"))
         self.assertRedirects(
             response,
             "/foodredislogin/",
@@ -281,20 +281,35 @@ class ViewTests(BaseTest):
     def test_landing_page_success(self):
         # Going to landing page should return the correct page
         c = Client()
-        response = c.get(reverse("landing"))
+        response = c.get(reverse("accounts:landing"))
         self.assertEqual(response.status_code, 200)
 
     def test_choose_login_page_success(self):
         # Going to choose login page should return the correct page
         c = Client()
-        response = c.get(reverse("chooselogin"))
+        response = c.get(reverse("accounts:chooselogin"))
         self.assertEqual(response.status_code, 200)
 
     def test_about_success(self):
         # Going to about page should return the correct page
         c = Client()
-        response = c.get(reverse("about"))
+        response = c.get(reverse("accounts:about"))
         self.assertEqual(response.status_code, 200)
+
+    def test_user_update(self):
+        c = Client()
+        response = c.get(reverse("accounts:update_profile"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_home(self):
+        c = Client()
+        response = c.get(reverse("accounts:home"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_home2(self):
+        c = Client()
+        response = c.get(reverse("accounts:home"))
+        self.assertEqual(response.status_code, 302)
 
 
 class UserActivationTest(TestCase):
@@ -304,7 +319,7 @@ class UserActivationTest(TestCase):
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         token = account_activation_token.make_token(user)
         response = self.client.get(
-            reverse("activate", kwargs={"uidb64": uid, "token": token})
+            reverse("accounts:activate", kwargs={"uidb64": uid, "token": token})
         )
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(username="testuser1")
@@ -316,7 +331,7 @@ class UserActivationTest(TestCase):
         token = account_activation_token.make_token(user)
         with self.assertRaises(User.DoesNotExist):
             response = self.client.get(
-                reverse("activate", kwargs={"uidb64": "123", "token": token})
+                reverse("accounts:activate", kwargs={"uidb64": "123", "token": token})
             )
             self.assertEqual(response.status_code, 200)
             user = User.objects.get(username="testuser3")

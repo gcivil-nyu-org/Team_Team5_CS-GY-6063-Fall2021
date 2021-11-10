@@ -27,7 +27,6 @@ from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
 
-
 # Create your views here.
 from .models import *
 from .forms import (
@@ -43,7 +42,7 @@ from .forms import (
 # @user_passes_test(res_check)
 def register_restaurant(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("accounts:home")
     else:
         form = RestuarantUserForm(request.POST)
         if request.method == "POST":
@@ -65,25 +64,12 @@ def register_restaurant(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-
-                # Just trying to condense some lines here
-
-                # to_email = form.cleaned_data.get("email")
-                # form.clean_email()
-                # user_profile.email = to_email
                 user_profile.email = form.cleaned_data.get("email")
-                # nameofres = form.cleaned_data.get("name_of_restaurant")
-                # user_profile.name = name
                 user_profile.name = form.cleaned_data.get("username")
-                # user_profile.name_of_restaurant = nameofres
                 user_profile.name_of_restaurant = form.cleaned_data.get(
                     "name_of_restaurant"
                 )
-                # phone_r = form.cleaned_data.get("phone")
-                # user_profile.phone = phone_r
                 user_profile.phone = form.cleaned_data.get("phone")
-                # address_r = form.cleaned_data.get("address")
-                # user_profile.address = address_r
                 user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_res = True
                 user_profile.save()
@@ -118,17 +104,15 @@ def activate(request, uidb64, token):
 
 def register_foodredistributor(request):
     if request.user.is_authenticated and request.user.is_active:
-        return redirect("home2")
+        return redirect("accounts:home2")
     else:
         form = FoodRedistributorUserForm(request.POST)
         if request.method == "POST":
             if form.is_valid():
-                # user = form.save()
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
                 user_profile = FoodRedistributor(user=user)
-                # name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -140,17 +124,12 @@ def register_foodredistributor(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-                # to_email = form.cleaned_data.get("email")
                 user_profile.email = form.cleaned_data.get("email")
-                # nameofredis = form.cleaned_data.get("name_of_food_redis")
-                # user_profile.name = name
                 user_profile.name = form.cleaned_data.get("username")
                 user_profile.name_of_food_redis = form.cleaned_data.get(
                     "name_of_food_redis"
                 )
-                # phone_r = form.cleaned_data.get("phone")
                 user_profile.phone = form.cleaned_data.get("phone")
-                # address_r = form.cleaned_data.get("address")
                 user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_food_redis = True
                 user_profile.save()
@@ -159,10 +138,6 @@ def register_foodredistributor(request):
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
                 )
-                # messages.success(
-                #     request, f'Success! Account created for {name}')
-                # user_profile.save()
-                # return redirect('login2')
 
         context = {"form": form}
         return render(request, "accounts/food_redistributor_register.html", context)
@@ -213,7 +188,7 @@ def res_check(user):
 
 def login_restuarant(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("accounts:home")
     else:
         if request.method == "POST":
             username = request.POST.get("username")
@@ -223,7 +198,7 @@ def login_restuarant(request):
 
             if user is not None and res_check(user) is True:
                 login(request, user)
-                return redirect("home")
+                return redirect("accounts:home")
             else:
                 messages.info(request, "Username or password is incorrect")
 
@@ -234,7 +209,7 @@ def login_restuarant(request):
 
 def login_foodredistributor(request):
     if request.user.is_authenticated:
-        return redirect("home2")
+        return redirect("accounts:home2")
     else:
         # TEST FROM HERE
         if request.method == "POST":
@@ -245,7 +220,7 @@ def login_foodredistributor(request):
 
             if user is not None and res_check(user) is False:
                 login(request, user)
-                return redirect("home2")
+                return redirect("accounts:home2")
             else:
                 messages.info(request, "Username or password is incorrect")
                 # TO HERE
@@ -253,6 +228,7 @@ def login_foodredistributor(request):
         return render(request, "accounts/foodredislogin.html", context)
 
 
+@login_required
 def profile_update(request):
 
     user_update_form = None
@@ -269,7 +245,7 @@ def profile_update(request):
                 user_update_form.save()
                 entity_update_form.save()
                 messages.success(request, f"Your account has been updated!")
-                return redirect("home")
+                return redirect("accounts:home")
 
         else:
             user_profile = FoodRedistributor.objects.get(user=request.user)
@@ -281,7 +257,7 @@ def profile_update(request):
                 user_update_form.save()
                 entity_update_form.save()
                 messages.success(request, f"Your account has been updated!")
-                return redirect("home")
+                return redirect("accounts:home")
 
     else:
         if res_check(request.user):
@@ -301,25 +277,25 @@ def profile_update(request):
 
 def logout_restuarant(request):
     logout(request)
-    return redirect("login")
+    return redirect("accounts:login")
 
 
 def logout_foodredistributor(request):
     logout(request)
-    return redirect("login2")
+    return redirect("accounts:login2")
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def home(request):
     return render(request, "accounts/dashboard.html")
 
 
-@login_required(login_url="login2")
+@login_required(login_url="accounts:login2")
 def home2(request):
     return render(request, "accounts/dashboard.html")
 
 
-@login_required(login_url="profile")
+@login_required(login_url="accounts:profile")
 def profile(request):
     return render(request, "accounts/profile-card.html")
 

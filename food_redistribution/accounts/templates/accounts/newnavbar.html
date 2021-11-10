@@ -20,14 +20,14 @@
         <div class="android-navigation-container">
           <nav class="android-navigation mdl-navigation">
             {% if user.is_authenticated %}
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'profile' %}">Profile</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'posts' %}">Posts</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:profile' %}">Profile</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:posts' %}">Posts</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'logout' %}">Log out</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
             {% else %}
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'about' %}">About</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:about' %}">About</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">FAQ</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'chooselogin' %}">Login</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:chooselogin' %}">Login</a>
             {% endif %}
           </nav>
         </div>
