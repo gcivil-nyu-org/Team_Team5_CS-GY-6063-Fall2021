@@ -3,8 +3,10 @@ from . import views
 
 app_name = "cal"
 urlpatterns = [
-    url(r"^index/$", views.index, name="index"),
-    url(r"^calendar/$", views.CalendarView.as_view(), name="calendar"),
-    url(r"^event/new/$", views.event, name="event_new"),
-    url(r"^event/edit/(?P<event_id>\d+)/$", views.event, name="event_edit"),
+    url("index/", views.index, name="index"),
+    url("calendar/", views.CalendarView.as_view(), name="calendar"),
+    url("event/new/", views.event_create, name="event_new"),
+    url(r"^event/view/(?P<pk>\d+)/$", views.event_view, name="event_view"),
+    url(r"^event/edit/(?P<pk>\d+)/$", views.event_update, name="event_edit"),
+    url(r"^event/delete/(?P<pk>\d+)/$", views.event_delete, name="event_delete"),
 ]

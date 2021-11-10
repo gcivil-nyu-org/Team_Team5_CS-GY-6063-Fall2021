@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Post
+from .models import Post, Restaurant, FoodRedistributor
 
 
 class RestuarantUserForm(UserCreationForm):
@@ -101,6 +101,36 @@ class PostForm(forms.ModelForm):
             "author": forms.Select(attrs={"class": "form-control"}),
             "body": forms.Textarea(attrs={"class": "form-control"}),
         }
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "username",
+        ]
+
+
+class RestaurantUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = [
+            "name_of_restaurant",
+            "email",
+            "phone",
+            "address",
+        ]
+
+
+class FoodRedistributorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = FoodRedistributor
+        fields = [
+            "name_of_food_redis",
+            "email",
+            "phone",
+            "address",
+        ]
 
 
 # class RestaurantUpdateForm(forms.ModelForm):

@@ -30,7 +30,14 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 from .models import *
-from .forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm
+from .forms import (
+    RestuarantUserForm,
+    FoodRedistributorUserForm,
+    PostForm,
+    UserUpdateForm,
+    RestaurantUpdateForm,
+    FoodRedistributorUpdateForm,
+)
 
 
 # @user_passes_test(res_check)
@@ -41,12 +48,12 @@ def register_restaurant(request):
         form = RestuarantUserForm(request.POST)
         if request.method == "POST":
             if form.is_valid():
-                # From here
+                # WRITE TEST FROM HERE
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
                 user_profile = Restaurant(user=user)
-                name = form.cleaned_data.get("username")
+                # name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -58,19 +65,29 @@ def register_restaurant(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-                to_email = form.cleaned_data.get("email")
-                form.clean_email()
-                user_profile.email = to_email
-                nameofres = form.cleaned_data.get("name_of_restaurant")
-                user_profile.name = name
-                user_profile.name_of_restaurant = nameofres
-                phone_r = form.cleaned_data.get("phone")
-                user_profile.phone = phone_r
-                address_r = form.cleaned_data.get("address")
-                user_profile.address = address_r
+
+                # Just trying to condense some lines here
+
+                # to_email = form.cleaned_data.get("email")
+                # form.clean_email()
+                # user_profile.email = to_email
+                user_profile.email = form.cleaned_data.get("email")
+                # nameofres = form.cleaned_data.get("name_of_restaurant")
+                # user_profile.name = name
+                user_profile.name = form.cleaned_data.get("username")
+                # user_profile.name_of_restaurant = nameofres
+                user_profile.name_of_restaurant = form.cleaned_data.get(
+                    "name_of_restaurant"
+                )
+                # phone_r = form.cleaned_data.get("phone")
+                # user_profile.phone = phone_r
+                user_profile.phone = form.cleaned_data.get("phone")
+                # address_r = form.cleaned_data.get("address")
+                # user_profile.address = address_r
+                user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_res = True
                 user_profile.save()
-                email = EmailMessage(mail_subject, message, to=[to_email])
+                email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
@@ -111,7 +128,7 @@ def register_foodredistributor(request):
                 user.is_active = False
                 user.save()
                 user_profile = FoodRedistributor(user=user)
-                name = form.cleaned_data.get("username")
+                # name = form.cleaned_data.get("username")
                 current_site = get_current_site(request)
                 mail_subject = "Activate your account."
                 message = render_to_string(
@@ -123,18 +140,21 @@ def register_foodredistributor(request):
                         "token": account_activation_token.make_token(user),
                     },
                 )
-                to_email = form.cleaned_data.get("email")
-                user_profile.email = to_email
-                nameofredis = form.cleaned_data.get("name_of_food_redis")
-                user_profile.name = name
-                user_profile.name_of_food_redis = nameofredis
-                phone_r = form.cleaned_data.get("phone")
-                user_profile.phone = phone_r
-                address_r = form.cleaned_data.get("address")
-                user_profile.address = address_r
+                # to_email = form.cleaned_data.get("email")
+                user_profile.email = form.cleaned_data.get("email")
+                # nameofredis = form.cleaned_data.get("name_of_food_redis")
+                # user_profile.name = name
+                user_profile.name = form.cleaned_data.get("username")
+                user_profile.name_of_food_redis = form.cleaned_data.get(
+                    "name_of_food_redis"
+                )
+                # phone_r = form.cleaned_data.get("phone")
+                user_profile.phone = form.cleaned_data.get("phone")
+                # address_r = form.cleaned_data.get("address")
+                user_profile.address = form.cleaned_data.get("address")
                 user_profile.is_food_redis = True
                 user_profile.save()
-                email = EmailMessage(mail_subject, message, to=[to_email])
+                email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
@@ -205,7 +225,7 @@ def login_restuarant(request):
                 login(request, user)
                 return redirect("home")
             else:
-                messages.info(request, "Username OR Password is incorrect")
+                messages.info(request, "Username or password is incorrect")
 
         context = {}
         # TO HERE
@@ -227,10 +247,56 @@ def login_foodredistributor(request):
                 login(request, user)
                 return redirect("home2")
             else:
-                messages.info(request, "Username OR Password is incorrect")
+                messages.info(request, "Username or password is incorrect")
                 # TO HERE
         context = {}
         return render(request, "accounts/foodredislogin.html", context)
+
+
+def profile_update(request):
+
+    user_update_form = None
+    entity_update_form = None
+    user_profile = None
+    if request.method == "POST":
+        if res_check(request.user):
+            user_profile = Restaurant.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(request.POST, instance=request.user)
+            entity_update_form = RestaurantUpdateForm(
+                request.POST, instance=user_profile
+            )
+            if user_update_form.is_valid() and entity_update_form.is_valid():
+                user_update_form.save()
+                entity_update_form.save()
+                messages.success(request, f"Your account has been updated!")
+                return redirect("home")
+
+        else:
+            user_profile = FoodRedistributor.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(request.POST, instance=request.user)
+            entity_update_form = FoodRedistributorUpdateForm(
+                request.POST, instance=user_profile
+            )
+            if user_update_form.is_valid() and entity_update_form.is_valid():
+                user_update_form.save()
+                entity_update_form.save()
+                messages.success(request, f"Your account has been updated!")
+                return redirect("home")
+
+    else:
+        if res_check(request.user):
+            user_profile = Restaurant.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(instance=request.user)
+            entity_update_form = RestaurantUpdateForm(instance=user_profile)
+
+        else:
+            user_profile = FoodRedistributor.objects.get(user=request.user)
+            user_update_form = UserUpdateForm(instance=request.user)
+            entity_update_form = FoodRedistributorUpdateForm(instance=user_profile)
+
+    context = {"u_form": user_update_form, "r_form": entity_update_form}
+
+    return render(request, "accounts/updateprofile.html", context)
 
 
 def logout_restuarant(request):
@@ -256,3 +322,15 @@ def home2(request):
 @login_required(login_url="profile")
 def profile(request):
     return render(request, "accounts/profile-card.html")
+
+
+def landing(request):
+    return render(request, "accounts/landing_page.html")
+
+
+def choose_login(request):
+    return render(request, "accounts/chooselogin.html")
+
+
+def about(request):
+    return render(request, "accounts/about.html")

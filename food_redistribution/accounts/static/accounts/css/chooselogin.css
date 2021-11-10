@@ -1,0 +1,56 @@
+body {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1554998171-89445e31c52b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=939&q=80');
+  background-size: cover;
+}
+
+.screen {
+  position: relative;
+  align-items: center;
+  align-content: center;
+}
+
+.text-container {
+  position: fixed;
+  right: 35vw;
+  top: 5vh;
+}
+
+.iama {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+.login-card-container {
+  display: inline-block;
+  position: fixed;
+  bottom: 5em;
+  right: 20vw;
+}
+
+
+.left-card-square.mdl-card {
+  float: left;
+  width: 320px;
+  height: 320px;
+}
+.left-card-square > .mdl-card__title {
+  background: url('https://images.unsplash.com/photo-1609139027234-57570f43f692?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80') bottom 40% right 25%;
+  color: black;
+  weight: bold;
+}
+
+.spacer {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.right-card-square.mdl-card {
+  float: right;
+  width: 320px;
+  height: 320px;
+}
+.right-card-square > .mdl-card__title {
+  background: url('https://images.unsplash.com/photo-1458644267420-66bc8a5f21e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1036&q=80') bottom 30% left;
+  color: white;
+}

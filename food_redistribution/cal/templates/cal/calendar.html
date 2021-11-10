@@ -5,10 +5,27 @@ Calendar
 {% endblock %}
 
 {% block content %}
-<div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'cal:calendar' %}?{{ prev_month }}"> << </a>
-	<a class="btn btn-info right" href="{% url 'cal:calendar' %}?{{ next_month }}"> >> </a>
-	<a class="btn btn-info right" href="{% url 'cal:event_new' %}"> + </a>
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--1-col">
+		<a class="nav-btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" href="{% url 'cal:calendar' %}?{{ prev_month }}">
+		  <i class="material-icons">navigate_before</i>
+		</a>
+	</div>
+	<div class="mdl-cell mdl-cell--4-col">
+
+	</div>
+	<div class="mdl-cell mdl-cell--2-col">
+		<a class="add-btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" href="{% url 'cal:event_new' %}">
+		  <i class="material-icons">add</i>
+		</a>
+	</div>
+	<div class="mdl-cell mdl-cell--4-col">
+	</div>
+	<div class="mdl-cell mdl-cell--1-col">
+		<a class="nav-btn mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" href="{% url 'cal:calendar' %}?{{ next_month }}">
+		  <i class="material-icons">navigate_next</i>
+		</a>
+	</div>
 </div>
 
 {{ calendar }}
