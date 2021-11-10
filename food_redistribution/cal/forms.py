@@ -1,4 +1,6 @@
-from django.forms import ModelForm, DateInput, TextInput
+from django import forms
+from django.forms import DateInput, ModelForm, TextInput
+
 from cal.models import Event
 
 
@@ -15,8 +17,9 @@ class EventForm(ModelForm):
             ),
             "title": TextInput(attrs={"placeholder": "Title"}),
             "description": TextInput(attrs={"placeholder": "Description"}),
+            "author": forms.HiddenInput(),
         }
-        fields = "__all__"
+        fields = ["title", "description", "start_time", "end_time", "author"]
 
         def __init__(self, *args, **kwargs):
             super(EventForm, self).__init__(*args, **kwargs)
