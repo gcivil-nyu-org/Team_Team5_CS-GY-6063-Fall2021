@@ -50,8 +50,12 @@ def search_restaurants(request):
     in_database = []
 
     for i in range(len(data)):
-        if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0: # pragma: no cover
-            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0] # pragma: no cover
+        if (
+            len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0
+        ):  # pragma: no cover
+            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[
+                0
+            ]  # pragma: no cover
             in_database.append(res.phone)
         print(data[i]["phone"])
 

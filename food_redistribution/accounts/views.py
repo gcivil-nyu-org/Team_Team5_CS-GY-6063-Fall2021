@@ -228,6 +228,7 @@ def login_foodredistributor(request):
         context = {}
         return render(request, "accounts/foodredislogin.html", context)
 
+
 @login_required
 def profile_update(request):
 

@@ -1,6 +1,6 @@
 from django.test import TestCase
 from accounts.forms import RestuarantUserForm, FoodRedistributorUserForm, PostForm
-from accounts.models import User, Post
+from accounts.models import User
 
 
 class TestForms(TestCase):
@@ -50,12 +50,13 @@ class TestBlogPostForms(TestCase):
         self.user = User.objects.create_user(
             username="john", email="jlennon@beatles.com", password="glass onion"
         )
+
     def test_form_valid(self):
         form = PostForm(
             data={
-            "title": "Test title",
-            "author": self.user,
-            "body": "Test body",
-        }
+                "title": "Test title",
+                "author": self.user,
+                "body": "Test body",
+            }
         )
-        self.assertTrue(form.is_valid())    
+        self.assertTrue(form.is_valid())

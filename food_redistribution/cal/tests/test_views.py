@@ -3,8 +3,8 @@ from django.urls import reverse
 from unittest.mock import Mock, patch
 from cal.models import Event
 
-class TestViews(TestCase):
 
+class TestViews(TestCase):
     def setUp(self):
         self.event = Event.objects.create(
             title="new event!",
@@ -12,6 +12,7 @@ class TestViews(TestCase):
             start_time="2021-10-29T19:30",
             end_time="2021-10-29T21:30",
         )
+
     def test_index(self):
         client = Client()
         response = client.get(reverse("cal:index"))

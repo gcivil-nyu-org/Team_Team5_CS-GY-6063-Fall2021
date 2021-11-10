@@ -15,7 +15,7 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_time__day=day)
         d = ""
         for event in events_per_day:
-            d += f"<li> {event.get_html_url} </li>" # pragma: no cover
+            d += f"<li> {event.get_html_url} </li>"  # pragma: no cover
 
         if day != 0:
             return f"<td class='mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
