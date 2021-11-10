@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "cal",
     "accounts",
     "yelp_search",
-    "food_avail"
+    "food_avail",
 ]
 
 MIDDLEWARE = [

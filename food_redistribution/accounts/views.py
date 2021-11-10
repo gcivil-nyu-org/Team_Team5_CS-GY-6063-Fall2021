@@ -26,7 +26,6 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
-from food_avail.models import Food_Avail
 
 # Create your views here.
 from .models import *
@@ -286,17 +285,17 @@ def logout_foodredistributor(request):
     return redirect("accounts:login2")
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def home(request):
     return render(request, "accounts/dashboard.html")
 
 
-@login_required(login_url="login2")
+@login_required(login_url="accounts:login2")
 def home2(request):
     return render(request, "accounts/dashboard.html")
 
 
-@login_required(login_url="profile")
+@login_required(login_url="accounts:profile")
 def profile(request):
     return render(request, "accounts/profile-card.html")
 

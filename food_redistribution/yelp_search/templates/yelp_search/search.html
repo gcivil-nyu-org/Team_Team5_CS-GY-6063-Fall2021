@@ -27,7 +27,7 @@
                     {% if d.phone in in_database %}
                       <h5 style="color:green" class="card-title">In our database!</h5>
                       {% if d.meals_available %}
-                        <p class="card-text" style="color:green"> {{meals}} Meals Available</p>
+                        <p class="card-text" style="color:green"> {{d.meals_available}} Meals Available</p>
                         {% endif %}
                     {% endif %}
                     <h5 class="card-title">{{d.name}}</h5>

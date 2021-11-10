@@ -59,11 +59,15 @@ def search_restaurants(request):
             ]  # pragma: no cover
             in_database.append(res.phone)
             if len(Food_Avail.objects.filter(author=res.user)) > 0:
-                print("RES NAME: ", Food_Avail.objects.filter(author=res.user)[0].author.username)
-                meals_available = Food_Avail.objects.filter(author=res.user)[0].food_available    
+                print(
+                    "RES NAME: ",
+                    Food_Avail.objects.filter(author=res.user)[0].author.username,
+                )
+                meals_available = Food_Avail.objects.filter(author=res.user)[
+                    0
+                ].food_available
                 context["data"][i]["meals_available"] = meals_available
-    print("MEALS: ",meals_available)
-
+    print("MEALS: ", meals_available)
 
     context["in_database"] = in_database
     context["meals"] = meals_available
@@ -72,7 +76,7 @@ def search_restaurants(request):
     for i in range(len(context["data"])):
         context["data"][i]["phone"] = context["data"][i]["phone"][2:]
     # print("THE LOCATION WAS: ", context["location"])
-    print(context["data"][9])
+    # print(context["data"][9])
     return render(request, "yelp_search/search.html", context)
 
 

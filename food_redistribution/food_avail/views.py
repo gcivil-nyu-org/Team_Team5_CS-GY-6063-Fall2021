@@ -3,6 +3,7 @@ from .models import *
 from .forms import FoodAvailForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.urls import reverse
 # Create your views here.
 
 
@@ -13,6 +14,8 @@ def check_existing_post(request):
         return False
     else:
         return True
+
+
 def post_available_food(request):
     instance = Food_Avail()
     data = request.POST.copy()
@@ -22,8 +25,11 @@ def post_available_food(request):
         form.save()
         return HttpResponseRedirect(reverse("accounts:home"))
     else:
-        messages.info(request, "food availability by restaurant has already been posted!")
+        messages.info(
+            request, "food availability by restaurant has already been posted!"
+        )
     return render(request, "food_avail/post_food_avail.html", {"food": form})
+
 
 def check_food_availibility(request):
     food = Food_Avail.objects.all()
