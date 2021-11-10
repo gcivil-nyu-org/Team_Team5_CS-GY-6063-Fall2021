@@ -1,5 +1,6 @@
 from django.test import TestCase
 from cal.models import Event
+from accounts.models import User
 
 
 class TestEvent(TestCase):

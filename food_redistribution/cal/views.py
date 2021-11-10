@@ -68,7 +68,9 @@ def event(request, event_id=None):
 
 def event_create(request):
     instance = Event()
-    form = EventForm(request.POST or None, instance=instance)
+    data = request.POST.copy()
+    data["author"] = request.user
+    form = EventForm(data or None, instance=instance)
     if request.POST and form.is_valid():
         form.save()
         return HttpResponseRedirect(reverse("cal:calendar"))
