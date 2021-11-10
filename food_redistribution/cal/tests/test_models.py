@@ -1,6 +1,7 @@
 from django.test import TestCase
 from cal.models import Event
 
+
 class TestEvent(TestCase):
     def setUp(self):
         self.event = Event.objects.create(  # pragma: no cover
