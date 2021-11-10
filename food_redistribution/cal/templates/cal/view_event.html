@@ -25,12 +25,23 @@ Event
     {% endfor %}
 {% endif %}
         <form> 
-          {% for field in event %}
-                  <h5>{{ field.label }} </h5>
-                  <br>
-                <h5>{{ field.value }}</h5>
-                  <br>
-          {% endfor %}
+            <h5>Title</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.title.value }} </h5> <br>
+            <h5>Description</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.description.value }} </h5> <br>
+            <h5>Starts at</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.start_time.value }} </h5> <br>
+            <h5>Ends at</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.end_time.value }} </h5> <br>
       </form>
+      {% if user.is_authenticated %}
+        {% if user.id == event.author.value %}
         <a href = "{% url 'cal:event_edit' event.instance.id %}">Edit</a>
+            {% else %}
+                Only the author can delete this post!
+            {% endif %}
+    {% else %}
+        Please login to access this page!
+    {% endif %}
 {% endblock %}
+    
