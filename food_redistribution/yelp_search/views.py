@@ -58,16 +58,10 @@ def search_restaurants(request):
                 0
             ]  # pragma: no cover
             in_database.append(res.phone)
-            print("RES NAME: ", res.name)
-            print("CURR USER: ", request.user.username)
-            if res.name == request.user.username:
-                print("ITS EQUAL")
-                meals_available = Food_Avail.objects.filter(author=res.user)[0].food_available
-                print("THIS WORKS: ", Food_Avail.objects.filter(author=res.user)[0].author.username)
+            if len(Food_Avail.objects.filter(author=res.user)) > 0:
+                print("RES NAME: ", Food_Avail.objects.filter(author=res.user)[0].author.username)
+                meals_available = Food_Avail.objects.filter(author=res.user)[0].food_available    
                 context["data"][i]["meals_available"] = meals_available
-
-                # print(meals_available)
-        # print(data[i]["phone"])
     print("MEALS: ",meals_available)
 
 
