@@ -50,8 +50,12 @@ def search_restaurants(request):
     in_database = []
 
     for i in range(len(data)):
-        if len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0:
-            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[0]
+        if (
+            len(Restaurant.objects.filter(phone=data[i]["phone"][2:])) > 0
+        ):  # pragma: no cover
+            res = Restaurant.objects.filter(phone=data[i]["phone"][2:])[
+                0
+            ]  # pragma: no cover
             in_database.append(res.phone)
         print(data[i]["phone"])
 
@@ -89,10 +93,10 @@ def search(api_key, term, location, num):
     return request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
-# Helper function: fetch one single business using the business id
-def get_business(api_key, business_id):
-    business_path = BUSINESS_PATH + business_id
-    return request(API_HOST, business_path, api_key)
+# # Helper function: fetch one single business using the business id
+# def get_business(api_key, business_id):
+#     business_path = BUSINESS_PATH + business_id
+#     return request(API_HOST, business_path, api_key)
 
 
 # Helper function: get distance from the searched location

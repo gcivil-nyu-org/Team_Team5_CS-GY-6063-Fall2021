@@ -296,6 +296,21 @@ class ViewTests(BaseTest):
         response = c.get(reverse("about"))
         self.assertEqual(response.status_code, 200)
 
+    def test_user_update(self):
+        c = Client()
+        response = c.get(reverse("update_profile"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_home(self):
+        c = Client()
+        response = c.get(reverse("home"))
+        self.assertEqual(response.status_code, 302)
+
+    def test_home2(self):
+        c = Client()
+        response = c.get(reverse("home"))
+        self.assertEqual(response.status_code, 302)
+
 
 class UserActivationTest(TestCase):
     def test_user_activate_success(self):

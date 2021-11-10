@@ -9,14 +9,16 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cal', '0001_initial'),
+        ("cal", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='author',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='auth.user'),
+            model_name="event",
+            name="author",
+            field=models.ForeignKey(
+                default=0, on_delete=django.db.models.deletion.CASCADE, to="auth.user"
+            ),
             preserve_default=False,
         ),
     ]
