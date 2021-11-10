@@ -1,4 +1,6 @@
+
 {% load static %}
+
 
 
 <style>
@@ -32,7 +34,10 @@
         <a class="nav-link" href="{% url 'accounts:add-post' %}">Add a post</a>
       </li>
       <li class="nav-item active">
-        <form class="form-inline my-2 my-lg-0" method="POST">
+        <a class="nav-link" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
+      </li>
+      <li class="nav-item active">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'yelp_search:search_restaurants' %}">
         	{% csrf_token %}
         <input class="form-control mr-sm-2" type="search" placeholder="Search Location" name = "searched" required="required">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

@@ -25,6 +25,11 @@
             <button type="submit">Post Availability</button>
             <br>
         </form>
+
+        <div class="error-message">
+            {% for message in messages %}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
     </main>
     {% endblock %}
     

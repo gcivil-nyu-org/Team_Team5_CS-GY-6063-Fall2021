@@ -26,7 +26,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404
-
+from food_avail.models import Food_Avail
 
 # Create your views here.
 from .models import *

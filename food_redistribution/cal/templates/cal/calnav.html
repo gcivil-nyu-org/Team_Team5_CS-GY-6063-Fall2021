@@ -1,4 +1,6 @@
+
 {% load static %}
+
 
 
 <style>
@@ -30,6 +32,9 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'accounts:add-post' %}">Add a post</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
       </li>
       <li class="nav-item active">
         <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'yelp_search:search_restaurants' %}">

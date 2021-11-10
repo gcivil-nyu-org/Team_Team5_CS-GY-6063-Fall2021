@@ -1,0 +1,11 @@
+{%  include 'food_avail/base.html' %}
+
+{% for f in food %}
+    <h2>{{f.author.username}}</h2>
+        <p>{{f.food_available}} meals</p>
+        <p>{{f.description}}</p>
+        <p>{{f.available_till}}</p>
+    <br>
+
+    {% endfor %}
+</ul>
