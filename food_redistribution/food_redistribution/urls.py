@@ -24,4 +24,5 @@ urlpatterns = [
     path("", include("accounts.urls")),
     path("", include("cal.urls")),
     path("", include("yelp_search.urls")),
+    path("", include("food_avail.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

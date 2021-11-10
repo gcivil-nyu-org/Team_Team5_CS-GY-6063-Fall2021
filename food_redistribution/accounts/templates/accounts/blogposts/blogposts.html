@@ -12,8 +12,8 @@
     <li> <a href="{% url 'blog-details' post.pk %}"> {{post.title}}</a> 
     - {{post.author}} 
         {% if user.id == post.author.id %}
-            - <small>   <a href = "{% url 'update_post' post.pk %}">(Edit)</a>
-                        <a href = "{% url 'delete_post' post.pk %}">(Delete)</a>
+            - <small>   <a href = "{% url 'accounts:update_post' post.pk %}">(Edit)</a>
+                        <a href = "{% url 'accounts:delete_post' post.pk %}">(Delete)</a>
             </small> <br/> 
         {% endif %}
 
