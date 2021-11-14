@@ -126,6 +126,7 @@ class RestaurantUpdateForm(forms.ModelForm):
             "phone",
             "address",
             "about",
+            "profile_pic",
         ]
 
 
@@ -143,6 +144,7 @@ class FoodRedistributorUpdateForm(forms.ModelForm):
             "phone",
             "address",
             "about",
+            "profile_pic",
         ]
 
 # class RestaurantUpdateForm(forms.ModelForm):
