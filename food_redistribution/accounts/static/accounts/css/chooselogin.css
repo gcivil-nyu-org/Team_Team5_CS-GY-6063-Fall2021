@@ -4,15 +4,12 @@ body {
 }
 
 .screen {
-  position: relative;
-  align-items: center;
-  align-content: center;
+  display: block;
 }
 
 .text-container {
-  position: fixed;
-  right: 35vw;
-  top: 5vh;
+  display: flex;
+  justify-content: center;
 }
 
 .iama {
@@ -22,10 +19,8 @@ body {
 }
 
 .login-card-container {
-  display: inline-block;
-  position: fixed;
-  bottom: 5em;
-  right: 20vw;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -35,7 +30,7 @@ body {
   height: 320px;
 }
 .left-card-square > .mdl-card__title {
-  background: url('https://images.unsplash.com/photo-1609139027234-57570f43f692?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80') bottom 40% right 25%;
+  background: url('https://images.unsplash.com/photo-1597514402413-17eac2b501c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=796&q=80') bottom 40% right 25%;
   color: black;
   weight: bold;
 }

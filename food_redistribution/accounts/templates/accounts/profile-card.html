@@ -3,24 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- old links
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="../templates/css/all_pages.css">
-
-<style media="screen">
-  .profile-head {
-      transform: translateY(5rem)
-  }
-
-  .cover {
-      background-image: url('https://images.unsplash.com/photo-1505935428862-770b6f24f629?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=867&q=80');
-      background-size: cover;
-      background-repeat: no-repeat
-  }
-</style>-->
 
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -36,7 +18,6 @@
 </head>
 {% if  user.rest.profile_pic %}
 <body style="background-image: url('{{ user.rest.profile_pic.url }}');">
-
 {% else %}
 <body style="background-image: url('https://images.unsplash.com/photo-1606021511779-aae22948af3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80');">
 {% endif %}
