@@ -87,7 +87,8 @@ class FoodRedistributorUserForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
-    field_order = ["name_of_food_redis", "email", "username", "password1", "password2"]
+    field_order = ["name_of_food_redis", "email",
+                   "username", "password1", "password2"]
 
 
 class PostForm(forms.ModelForm):
@@ -114,24 +115,35 @@ class UserUpdateForm(forms.ModelForm):
 class RestaurantUpdateForm(forms.ModelForm):
     class Meta:
         model = Restaurant
+        # fields = [
+        #     "name_of_restaurant",
+        #     "email",
+        #     "phone",
+        #     "address",
+        # ]
         fields = [
             "name_of_restaurant",
-            "email",
             "phone",
             "address",
+            "about",
         ]
 
 
 class FoodRedistributorUpdateForm(forms.ModelForm):
     class Meta:
         model = FoodRedistributor
+        # fields = [
+        #     "name_of_food_redis",
+        #     "email",
+        #     "phone",
+        #     "address",
+        # ]
         fields = [
             "name_of_food_redis",
-            "email",
             "phone",
             "address",
+            "about",
         ]
-
 
 # class RestaurantUpdateForm(forms.ModelForm):
 #     # Keep configuration in one place
