@@ -239,7 +239,7 @@ def profile_update(request):
             user_profile = Restaurant.objects.get(user=request.user)
             user_update_form = UserUpdateForm(request.POST, instance=request.user)
             entity_update_form = RestaurantUpdateForm(
-                request.POST, instance=user_profile
+                request.POST, request.FILES, instance=user_profile
             )
             if user_update_form.is_valid() and entity_update_form.is_valid():
                 user_update_form.save()
@@ -251,7 +251,7 @@ def profile_update(request):
             user_profile = FoodRedistributor.objects.get(user=request.user)
             user_update_form = UserUpdateForm(request.POST, instance=request.user)
             entity_update_form = FoodRedistributorUpdateForm(
-                request.POST, instance=user_profile
+                request.POST, request.FILES, instance=user_profile
             )
             if user_update_form.is_valid() and entity_update_form.is_valid():
                 user_update_form.save()
