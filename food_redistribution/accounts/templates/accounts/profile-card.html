@@ -34,20 +34,26 @@
 	<!-- Material Design javascript --->
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
-<body>
+{% if  user.rest.profile_pic %}
+<body style="background-image: url('{{ user.rest.profile_pic.url }}');">
+
+{% else %}
+<body style="background-image: url('https://images.unsplash.com/photo-1606021511779-aae22948af3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80');">
+{% endif %}
 	{%  include 'accounts/newnavbar.html' %}
 
 			<div class="split left">
 				<div class="about-container">
 					<div class="about-card mdl-card mdl-shadow--8dp">
+					<!--{% if  user.rest.profile_pic %}
+					<img src="{{ user.rest.profile_pic.url}}" width=200 height=200 class="rounded-circle">
+					{% endif %}-->
 						<div class="about-card-title mdl-card__title">
 							<h3>{{user.rest.name_of_restaurant}}</h3>
 						</div>
 							<div class="info mdl-card__supporting-text">
 								<h5>About</h5>
-								<p>A casual but classy locale serving authentic fare. <br>
-									Locals and travelers alike recommend this place. <br>
-									Not Beyonce's favorite restaurant, but it could be...<br>
+								<p>{{user.rest.about}}
 								</p>
 								<h5>Location</h5>
 								<p>{{user.rest.address}}<br>
