@@ -87,7 +87,22 @@ class FoodRedistributorUserForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+<<<<<<< HEAD
     field_order = ["name_of_food_redis", "email", "username", "password1", "password2"]
+=======
+    # field_order = ["name_of_food_redis", "email",
+    #               "username", "password1", "password2"]
+
+    field_order = [
+        "name_of_food_redis",
+        "email",
+        "username",
+        "phone",
+        "address",
+        "password1",
+        "password2",
+    ]
+>>>>>>> 9433bd180e5f4e6a1f35fd325f5924b20b4a8a7c
 
 
 class PostForm(forms.ModelForm):

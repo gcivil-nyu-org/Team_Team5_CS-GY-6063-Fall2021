@@ -1,10 +1,33 @@
-h3 {text-align: center;}
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+}
+.demo-card-square.mdl-card__title {
+  color: #fff;
+}
+
+.searchresults {
+  display: flex;
+  justify-content: center;
+  float: left;
+  width: 33.33%;
+  padding-bottom: 3%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/*h3 {text-align: center;}
   body,
   html {
     margin: 0;
     padding: 0;
     height: 100%;
-    /* background: #232323 !important; */
+    background: #232323 !important;
     background: white !important;
     overflow-x: hidden;
     font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -68,11 +91,11 @@ h3 {text-align: center;}
   }
 
 
-/* The grid: Three equal columns that floats next to each other*/
+The grid: Three equal columns that floats next to each other
 .column {
   float: left;
   width: 33.33%;
-  /*padding: 10px;*/
+ padding: 10px;
   text-align: center;
   font-size: 25px;
   cursor: pointer;
@@ -90,10 +113,10 @@ h3 {text-align: center;}
   width: 50%;
   height: 10vh;
   font-size: 10px;
-  /*padding: 10px;*/
+  /*padding: 10px;
 }
 
-/* Clear floats after the columns */
+/* Clear floats after the columns
 .row:after {
   content: "";
   display: table;
@@ -103,3 +126,4 @@ h3 {text-align: center;}
 .card-text {
   font-size: 15px;
 }
+*/
