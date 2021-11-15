@@ -3,6 +3,7 @@ from accounts.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 
+
 class FoodAvail(models.Model):
     food_available = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.TextField(blank=True)
