@@ -14,9 +14,8 @@ class FoodRedistributor(models.Model):
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     is_food_redis = models.BooleanField(default=False)
-    about = models.TextField(max_length=500,default="Add a description here!")
-    profile_pic = models.ImageField(
-        null=True, blank=True, upload_to="images/profile/")
+    about = models.TextField(max_length=500, default="Add a description here!")
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
 
     def __str__(self):
         return self.name
@@ -33,9 +32,8 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     is_res = models.BooleanField(default=False)
-    about = models.TextField(max_length=500,default="Add a description here!")
-    profile_pic = models.ImageField(
-        null=True, blank=True, upload_to="images/profile/")
+    about = models.TextField(max_length=500, default="Add a description here!")
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
 
     def __str__(self):
         return self.name

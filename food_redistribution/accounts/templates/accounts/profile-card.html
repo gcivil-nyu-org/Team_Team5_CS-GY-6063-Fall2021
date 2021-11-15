@@ -34,7 +34,7 @@
 	<!-- Material Design javascript --->
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
-{% if  user.rest.profile_pic %}
+{% if user.rest.profile_pic %}
 <body style="background-image: url('{{ user.rest.profile_pic.url }}');">
 
 {% else %}
