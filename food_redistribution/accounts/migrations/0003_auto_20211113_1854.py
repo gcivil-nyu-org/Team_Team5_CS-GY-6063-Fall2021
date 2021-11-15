@@ -6,19 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0002_alter_restaurant_user'),
+        ("accounts", "0002_alter_restaurant_user"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='foodredistributor',
-            name='about',
+            model_name="foodredistributor",
+            name="about",
             field=models.TextField(default=1, max_length=500),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='restaurant',
-            name='about',
+            model_name="restaurant",
+            name="about",
             field=models.TextField(default=1, max_length=500),
             preserve_default=False,
         ),
