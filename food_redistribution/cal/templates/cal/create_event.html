@@ -5,10 +5,11 @@ Event
 {% endblock %}
 
 {% block content %}
+<!--
 <div class="clearfix">
   <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
-</div>
-
+</div>-->
+<!--
 <main id="body-main">
     <h1>Create New Event</h1>
     <form method="POST">
@@ -17,5 +18,40 @@ Event
         <button type="submit">Create Event</button>
         <br>
     </form>
-</main>
+</main>-->
+
+<div class="screen">
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      <div class="login-card-title">
+        <h4>Create a new event</h4>
+      </div>
+      <div class="horizontal">
+        <!--<div class="spacer1"></div>-->
+        <div class="user-pass-form mdl-card__supporting-text">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="id_title" name="title">{{form.title}}</input>
+              <label class="mdl-textfield__label" for="id_title">TITLE</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="id_description" name="description">{{form.description}}</input>
+              <label class="mdl-textfield__label" for="id_description">DESCRIPTION</label>
+            </div>
+            <div class="">
+              <input type="datetime-local" id="id_start_time" name="start_time">{{form.start_time}}</input>
+            </div>
+            <div class="">
+              <input type="datetime-local" id="id_end_time" name="end_time">{{form.end_time}}</input>
+            </div>
+            <div class="create-btn">
+              <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Create">
+            </div>
+          </form>
+        </div> <!-- user-pass-form -->
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

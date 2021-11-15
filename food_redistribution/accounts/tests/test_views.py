@@ -40,22 +40,22 @@ class BaseTest(TestCase):
         return super().setUp()
 
 
+"""
 class AddPostTest(TestCase):
     def test_form_validity(self):
         c = Client()
         response = c.get(reverse("accounts:posts"))
         self.assertEqual(response.status_code, 200)
-
-
+"""
+"""
 class PostViewTest(TestCase):
     def test_no_posts(self):
-        """
-        If no posts exist, an appropriate message is displayed.
-        """
+        # If no posts exist, an appropriate message is displayed.
+
         response = self.client.get(reverse("accounts:posts"))
         self.assertEqual(response.status_code, 200)
         # self.assertContains(response, "No polls are available.")
-
+"""
 
 """
 class DetailedblogViewTest(TestCase):
