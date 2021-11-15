@@ -87,8 +87,7 @@ class FoodRedistributorUserForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
-    field_order = ["name_of_food_redis", "email",
-                   "username", "password1", "password2"]
+    field_order = ["name_of_food_redis", "email", "username", "password1", "password2"]
 
 
 class PostForm(forms.ModelForm):
@@ -146,6 +145,7 @@ class FoodRedistributorUpdateForm(forms.ModelForm):
             "about",
             "profile_pic",
         ]
+
 
 # class RestaurantUpdateForm(forms.ModelForm):
 #     # Keep configuration in one place

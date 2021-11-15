@@ -15,13 +15,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='FoodAvail',
+            name="FoodAvail",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('food_available', models.IntegerField()),
-                ('description', models.TextField(blank=True)),
-                ('available_till', models.DateTimeField()),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("food_available", models.IntegerField()),
+                ("description", models.TextField(blank=True)),
+                ("available_till", models.DateTimeField()),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
