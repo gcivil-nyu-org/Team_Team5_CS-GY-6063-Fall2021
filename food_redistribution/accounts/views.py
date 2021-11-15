@@ -174,7 +174,7 @@ class UpdatePostView(UpdateView):
 class DeletePostView(DeleteView):
     model = Post
     template_name = "accounts/blogposts/delete_post.html"
-    success_url = reverse_lazy("posts")
+    success_url = reverse_lazy("accounts:posts")
 
 
 def res_check(user):
