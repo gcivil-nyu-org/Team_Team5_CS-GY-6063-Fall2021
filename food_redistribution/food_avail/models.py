@@ -5,13 +5,11 @@ from django.core.validators import MinValueValidator
 from datetime import datetime
 import pytz
 
-class FoodAvail(models.Model):
 
+class FoodAvail(models.Model):
     def present_or_future_date(value):
-        eastern = pytz.timezone('US/Eastern')
+        eastern = pytz.timezone("US/Eastern")
         if value < eastern.localize(datetime.now()):
-            print(eastern.localize(datetime.now()))
-            print(datetime.now())
             raise ValidationError("The date cannot be in the past!")
         return value
 
@@ -26,5 +24,3 @@ class FoodAvail(models.Model):
     def allow_only_one_instance(self, instance):
         if len(FoodAvail.objects.filter(author=instance.author)) > 0:
             raise ValidationError("User has already created food availibility post!")
-
-    
