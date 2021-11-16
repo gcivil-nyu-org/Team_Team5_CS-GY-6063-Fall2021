@@ -18,7 +18,7 @@ Event
     <form method="POST">
         {% csrf_token %}
         {{ event.as_p}}
-        <!-- {% if event.non_field_errors %}
+        {% if event.non_field_errors %}
             <h1>YES</h1>
   <div class="non-field-errors">
     {% for err in form.non_field_errors %}
@@ -38,7 +38,7 @@ Event
         <h4>Create a new event</h4>
       </div>
       <div class="horizontal">
-        <div class="spacer1"></div>-->
+        <div class="spacer1"></div>
         <div class="user-pass-form mdl-card__supporting-text">
           <form method="POST" action="">
             {% csrf_token %}

@@ -48,13 +48,13 @@
 								<input class="login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Log In">
 							</div>
 						</form>
+					</div> <!-- user-pass-form -->
+				</div>
 					<div class="error-message">
 						{% for message in messages %}
 							<p id="messages">{{message}}</p>
 						{% endfor %}
 					</div>
-					</div> <!-- user-pass-form -->
-				</div>
 					<div class="reset-pass">
 						<p>Forgot your password? <a href="{% url 'accounts:reset_password' %}">Reset your password.</a></p>
 					</div>
