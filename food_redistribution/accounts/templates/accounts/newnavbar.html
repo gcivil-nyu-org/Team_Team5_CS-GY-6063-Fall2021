@@ -1,21 +1,14 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
-
-<!-- New Navbar -->
-<!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
-    <div class="android-header mdl-layout__header mdl-layout__header--waterfall gradient-navbar">
-      <div class="mdl-layout__header-row">
-      -->
       <div class="">
         <div class="gradient-navbar">
           <div class="mdl-layout__header-row">
+            <!-- Title -->
             {% if user.is_authenticated %}
-            <span class="android-title mdl-layout-title">
-              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">Welcome, {{user.name}}</a>
-            </span>
+              <span class="mdl-typography--text-uppercase">Welcome, {{user.username}}</span>
             {% endif %}
+
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="android-header-spacer mdl-layout-spacer"></div>
         <!-- Navigation -->
@@ -44,7 +37,7 @@
               <i class="material-icons">search</i>
             </label>
             <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search-field" name="searched">
+              <input class="mdl-textfield__input" type="text" id="search-field" name="searched" placeholder="SEARCH">
             </div>
         </form>
         </div>
