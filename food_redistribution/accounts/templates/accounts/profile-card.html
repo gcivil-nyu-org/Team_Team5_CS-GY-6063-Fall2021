@@ -20,6 +20,11 @@
 {% if user.rest.profile_pic %}
 
 <body style="background-image: url('{{ user.rest.profile_pic.url }}');">
+{% endif %}
+{% if user.foodredis.profile_pic %}
+
+<body style="background-image: url('{{ user.foodredis.profile_pic.url }}');">
+
 	{% else %}
 
 	<body
