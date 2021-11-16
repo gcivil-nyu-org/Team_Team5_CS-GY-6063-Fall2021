@@ -39,6 +39,7 @@ class BaseTest(TestCase):
         }
         return super().setUp()
 
+
 """
 class AddPostTest(TestCase):
     def test_form_validity(self):

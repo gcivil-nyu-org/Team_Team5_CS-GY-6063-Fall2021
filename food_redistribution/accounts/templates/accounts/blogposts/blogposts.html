@@ -9,7 +9,7 @@
 <ul>
     {% for post in object_list %}
 
-    <li> <a href="{% url 'blog-details' post.pk %}"> {{post.title}}</a> 
+    <li> <a href="{% url 'accounts:blog-details' post.pk %}"> {{post.title}}</a> 
     - {{post.author}} 
         {% if user.id == post.author.id %}
             - <small>   <a href = "{% url 'accounts:update_post' post.pk %}">(Edit)</a>
