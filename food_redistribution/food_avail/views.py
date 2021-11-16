@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import FoodAvailForm
 from django.http import HttpResponseRedirect
-from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -11,27 +11,35 @@ from django.urls import reverse
 def check_existing_post(request):
     data = request.POST.copy()
     data["author"] = request.user
-    if len(Food_Avail.objects.filter(author=request.user)) > 0:
-        return False
-    else:
+    if len(FoodAvail.objects.filter(author=request.user)) > 0:
         return True
-
-
-def post_available_food(request):
-    instance = Food_Avail()
-    data = request.POST.copy()
-    data["author"] = request.user
-    form = FoodAvailForm(data or None, instance=instance)
-    if request.POST and form.is_valid() and check_existing_post(request):
-        form.save()
-        return HttpResponseRedirect(reverse("accounts:home"))
     else:
-        messages.info(
-            request, "food availability by restaurant has already been posted!"
-        )
+        return False
+
+
+@login_required
+def post_available_food(request):
+    if not check_existing_post(request):
+        instance = FoodAvail()
+        data = request.POST.copy()
+        data["author"] = request.user
+        form = FoodAvailForm(data or None, instance=instance)
+        if request.POST and form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("accounts:home"))
+    else:
+        instance = get_object_or_404(FoodAvail, author=request.user)
+        form = FoodAvailForm(request.POST, request.FILES, instance=instance)
+        if request.method == "POST":
+            form = FoodAvailForm(request.POST or None, instance=instance)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse("accounts:home"))
+        else:
+            form = FoodAvailForm(instance=instance)
     return render(request, "food_avail/post_food_avail.html", {"food": form})
 
 
 def check_food_availibility(request):
-    food = Food_Avail.objects.all()
+    food = FoodAvail.objects.all()
     return render(request, "food_avail/view_food_avail.html", {"food": food})

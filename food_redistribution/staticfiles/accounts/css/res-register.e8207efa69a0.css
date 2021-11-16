@@ -9,10 +9,6 @@ body {
 }
 
 .login-container {
-  /*position: fixed;
-  right: 30vw;
-  top: 15vh;
-  justify-content: center;*/
   display: flex;
   justify-content: center;
 }
@@ -23,53 +19,50 @@ body {
   color: white;
 }
 
-.horizontal {
+/*.separate {
   display: inline-block;
-  justify-content: center;
-  width: 100%;
-  padding-left: 18%;
-  /*display: flex;
-  justify-content: center;*/
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}*/
+
+
 .login-card.mdl-card {
+  display: flex;
   justify-content: center;
-  width: 512px;
-  height: 75vh;
+  width: 55vw;
+  height: 80vh;
   background-color: rgba(255,255,255,0.92);
 }
 
 .login-card-title {
   width: 100%;
   color: black;
-  /*justify-content: center;
-  padding-left: 30%;*/
   display: flex;
   justify-content: center;
 }
 
 .login-btn {
-  padding-left: 23%;
-  /*display: flex;
-  justify-content: flex-start;*/
+  display: flex;
+  justify-content: center;
 }
 
 .user-pass-form.mdl-card__supporting-text {
   display: flex;
   justify-content: center;
+  padding-left: 3em;
 }
 
 .reset-pass {
-  /*padding-left: 1.7em;*/
   display: flex;
   justify-content: center;
 }
 
-.new-user {
-  /*padding-left: 4.6em;*/
-  display: flex;
-  justify-content: center;
-}
 
 a {
   text-decoration: none;
@@ -81,9 +74,7 @@ a {
 }
 
 .error-message {
-  /*padding-top: 2em;
+  padding-top: 2em;
   padding-left: 3em;
-  color: red;*/
-  display: flex;
-  justify-content: center;
+  color: red;
 }

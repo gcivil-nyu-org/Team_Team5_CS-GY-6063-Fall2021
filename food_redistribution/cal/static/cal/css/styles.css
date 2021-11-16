@@ -1,7 +1,7 @@
 /* Common styles */
 body {
   font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgba(0,0,0,0.8);
+  background-color: white;
 }
 
 .left {

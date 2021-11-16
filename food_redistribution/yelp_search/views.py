@@ -12,7 +12,7 @@ from urllib.parse import quote
 
 import os
 from accounts.models import Restaurant
-from food_avail.models import Food_Avail
+from food_avail.models import FoodAvail
 
 # from django.urls import reverse
 
@@ -58,12 +58,12 @@ def search_restaurants(request):
                 0
             ]  # pragma: no cover
             in_database.append(res.phone)
-            if len(Food_Avail.objects.filter(author=res.user)) > 0:
+            if len(FoodAvail.objects.filter(author=res.user)) > 0:
                 print(
                     "RES NAME: ",
-                    Food_Avail.objects.filter(author=res.user)[0].author.username,
+                    FoodAvail.objects.filter(author=res.user)[0].author.username,
                 )
-                meals_available = Food_Avail.objects.filter(author=res.user)[
+                meals_available = FoodAvail.objects.filter(author=res.user)[
                     0
                 ].food_available
                 context["data"][i]["meals_available"] = meals_available

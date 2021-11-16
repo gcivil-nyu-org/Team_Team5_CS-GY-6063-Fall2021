@@ -3,13 +3,131 @@
 <html>
 
 <head>
+	<title>Register As Food Restaurant</title>
+	<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'accounts/css/all_pages.css' %}" />
+	<script src="{% static 'accounts/js/food-red-register.js' %}"></script> -->
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{% static 'accounts/css/res-register.css' %}"/>
+	<link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+	<!-- Material Design javascript --->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+</head>
+<body>
+	{%  include 'accounts/newnavbar.html' %}
+
+	<div class="screen">
+		<div class="login-container">
+			<div class="login-card mdl-card mdl-shadow--8dp">
+				<div class="login-card-title">
+					<h4> Restaurant Registration</h4>
+				</div>
+				<div class="horizontal">
+					<!--<div class="spacer1"></div>-->
+					<div class="user-pass-form mdl-card__supporting-text">
+						<form method="POST" action="">
+							{% csrf_token %}
+							<div class="separate">
+								<div class="left">
+									<!-- NAME -->
+								  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<!--<input class="mdl-textfield__input" type="text" id="id_name_of_food_redis" name="name_of_food_redis">{{form.name_of_food_redis}}</input>-->
+										<input class="mdl-textfield__input" type="text" required id="id_name_of_restaurant" name="name_of_restaurant"></input>
+			              <label class="mdl-textfield__label" for="id_name_of_restaurant" placeholder="NAME">NAME OF RESTAURANT</label>
+										<span class="mdl-textfield__error">This field is required.</span>
+									</div>
+
+									<!-- EMAIL -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" required id="id_email" name="email"></input>
+			              <label class="mdl-textfield__label" for="id_email" placeholder="EMAIL">EMAIL</label>
+										<span class="mdl-textfield__error">This field is required.</span>
+									</div>
+
+									<!-- USERNAME -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" required id="id_username" name="username"></input>
+			              <label class="mdl-textfield__label" for="id_username" placeholder="USERNAME">USERNAME</label>
+										<span class="mdl-textfield__error">This field is required.</span>
+									</div>
+
+									<!-- PHONE -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" required id="id_phone" name="phone"></input>
+			              <label class="mdl-textfield__label" for="id_phone" placeholder="PHONE">PHONE</label>
+										<span class="mdl-textfield__error">This field is required.</span>
+									</div>
+								</div>
+
+								<div class="right">
+
+									<!-- ADDRESS -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="text" required id="id_address" name="address"></input>
+			              <label class="mdl-textfield__label" for="id_address" placeholder="ADDRESS">ADDRESS</label>
+										<span class="mdl-textfield__error">This field is required.</span>
+									</div>
+
+									<!-- PASSWORD 1-->
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="password" required id="id_password1" name="password1"></input>
+								    <label class="mdl-textfield__label" for="id_password1" placeholder="PASSWORD">PASSWORD</label>
+								  </div>
+
+									<!-- PASSWORD 2 -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="password" required id="id_password2" name="password2"></input>
+								    <label class="mdl-textfield__label" for="id_password2" placeholder="CONFIRM PASSWORD">CONFIRM PASSWORD</label>
+								  </div>
+								</div>
+							</div>
+							<div class="login-btn">
+								<input class="login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Register">
+							</div>
+						</form>
+					<!--<div class="error-message">
+						{% for message in messages %}
+							<p id="messages">{{message}}</p>
+						{% endfor %}
+					</div>-->
+					</div> <!-- user-pass-form -->
+					<div class="reset-pass">
+						<p>Already have an account?<a href="{% url 'accounts:login' %}"> Log In</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'accounts/js/food-red-register.js' %}"></script>
+
+
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
 	<title>Register As Restaurant</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'accounts/css/all_pages.css' %}" />
-	
-	
+
+
 </head>
 <body>
 	<div class="container h-100">
@@ -88,4 +206,4 @@
 
 	<script src="{% static 'accounts/js/restaurant-register.js' %}"></script>
 </body>
-</html>
+</html>-->

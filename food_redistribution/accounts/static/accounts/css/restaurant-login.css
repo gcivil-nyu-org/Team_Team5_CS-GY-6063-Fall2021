@@ -4,16 +4,16 @@ body {
 }
 
 .screen {
-  position: relative;
-  align-items: center;
-  align-content: center;
+  display: flex;
   justify-content: center;
 }
 
 .login-container {
-  position: fixed;
+  /*position: fixed;
   right: 30vw;
   top: 15vh;
+  justify-content: center;*/
+  display: flex;
   justify-content: center;
 }
 
@@ -27,7 +27,9 @@ body {
   display: inline-block;
   justify-content: center;
   width: 100%;
-  padding-left: 18%
+  padding-left: 18%;
+  /*display: flex;
+  justify-content: center;*/
 }
 
 .login-card.mdl-card {
@@ -40,24 +42,33 @@ body {
 .login-card-title {
   width: 100%;
   color: black;
+  /*justify-content: center;
+  padding-left: 30%;*/
+  display: flex;
   justify-content: center;
-  padding-left: 30%;
 }
 
 .login-btn {
-  padding-left: 8.5em;
+  padding-left: 23%;
+  /*display: flex;
+  justify-content: flex-start;*/
 }
 
-.user-pass-form > .mdl-card__supporting-text {
+.user-pass-form.mdl-card__supporting-text {
+  display: flex;
   justify-content: center;
 }
 
 .reset-pass {
-  padding-left: 1.7em;
+  /*padding-left: 1.7em;*/
+  display: flex;
+  justify-content: center;
 }
 
 .new-user {
-  padding-left: 4.6em;
+  /*padding-left: 4.6em;*/
+  display: flex;
+  justify-content: center;
 }
 
 a {
@@ -70,7 +81,9 @@ a {
 }
 
 .error-message {
-  padding-top: 2em;
+  /*padding-top: 2em;
   padding-left: 3em;
-  color: red;
+  color: red;*/
+  display: flex;
+  justify-content: center;
 }
