@@ -44,10 +44,10 @@ class TestViews(TestCase):
         response = client.get(reverse("cal:event_new"))
         self.assertEquals(response.status_code, 200)
 
-    def test_event_view(self):
-        client = Client()
-        response = client.get(reverse("cal:event_view", args=(self.event.pk,)))
-        self.assertEquals(response.status_code, 200)
+    # def test_event_view(self):
+    #     client = Client()
+    #     response = client.get(reverse("cal:event_view", args=(self.event.pk,)))
+    #     self.assertEquals(response.status_code, 200)
 
     def test_event_create(self):
         client = Client()
