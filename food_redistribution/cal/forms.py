@@ -21,6 +21,19 @@ class EventForm(ModelForm):
         }
         fields = ["title", "description", "start_time", "end_time", "author"]
 
+    def clean(self):
+
+        start_time = self.cleaned_data.get("start_time")
+        end_time = self.cleaned_data.get("end_time")
+
+        if start_time and end_time:
+            if start_time > end_time:
+                # raise forms.ValidationError("Start time cannot be greater than end time")
+                self.add_error(
+                    "start_time", "start time cannot be greater than end time!"
+                )
+        return self.cleaned_data
+
         def __init__(self, *args, **kwargs):
             super(EventForm, self).__init__(*args, **kwargs)
             # input_formats parses HTML5 datetime-local input to datetime field
