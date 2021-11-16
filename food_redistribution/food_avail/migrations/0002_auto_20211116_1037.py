@@ -8,18 +8,22 @@ import food_avail.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('food_avail', '0001_initial'),
+        ("food_avail", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='foodavail',
-            name='available_till',
-            field=models.DateTimeField(validators=[food_avail.models.FoodAvail.present_or_future_date]),
+            model_name="foodavail",
+            name="available_till",
+            field=models.DateTimeField(
+                validators=[food_avail.models.FoodAvail.present_or_future_date]
+            ),
         ),
         migrations.AlterField(
-            model_name='foodavail',
-            name='food_available',
-            field=models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0)]),
+            model_name="foodavail",
+            name="food_available",
+            field=models.IntegerField(
+                default=0, validators=[django.core.validators.MinValueValidator(0)]
+            ),
         ),
     ]

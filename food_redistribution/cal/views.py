@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.contrib import messages
+
 import calendar
 
 from .models import *
@@ -69,11 +71,17 @@ def event(request, event_id=None):
 def event_create(request):
     instance = Event()
     data = request.POST.copy()
+    print("The data:", data)
     data["author"] = request.user
     form = EventForm(data or None, instance=instance)
-    if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse("cal:calendar"))
+    if request.POST:
+        if form.is_valid():
+            # print("TYPE:", type(data["start_time"]))
+            form.save()
+            return HttpResponseRedirect(reverse("cal:calendar"))
+        else:
+            print("The start time is > than the end time")
+            messages.info(request, "Start time must be before end time")
     return render(request, "cal/create_event.html", {"event": form})
 
 
