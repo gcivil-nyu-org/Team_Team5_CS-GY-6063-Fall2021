@@ -257,7 +257,7 @@ def profile_update(request):
                 user_update_form.save()
                 entity_update_form.save()
                 messages.success(request, f"Your account has been updated!")
-                return redirect("accounts:home")
+                return redirect("accounts:home2")
 
     else:
         if res_check(request.user):
@@ -297,7 +297,14 @@ def home2(request):
 
 @login_required(login_url="accounts:profile")
 def profile(request):
-    return render(request, "accounts/profile-card.html")
+    context = {}
+    if res_check(request.user):
+        context["res"] = True
+        context["user"] = Restaurant.objects.get(user=request.user)
+    else:
+        context["res"] = False
+        context["user"] = FoodRedistributor.objects.get(user=request.user)
+    return render(request, "accounts/profile-card.html", {"profile": context})
 
 
 def landing(request):
