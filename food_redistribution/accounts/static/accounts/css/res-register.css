@@ -1,0 +1,80 @@
+body {
+  background-image: url('https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80');
+  background-size: cover;
+}
+
+.screen {
+  display: flex;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+}
+
+.iama {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+/*.separate {
+  display: inline-block;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}*/
+
+
+.login-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 55vw;
+  height: 80vh;
+  background-color: rgba(255,255,255,0.92);
+}
+
+.login-card-title {
+  width: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.login-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.user-pass-form.mdl-card__supporting-text {
+  display: flex;
+  justify-content: center;
+  padding-left: 3em;
+}
+
+.reset-pass {
+  display: flex;
+  justify-content: center;
+}
+
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+.login > .mdl-button--raised {
+  color: #5BBE71;
+}
+
+.error-message {
+  padding-top: 2em;
+  padding-left: 3em;
+  color: red;
+}
