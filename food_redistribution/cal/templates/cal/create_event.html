@@ -6,22 +6,30 @@ Event
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'cal/css/create-event.css' %}"/>
-<!--
+<link rel="stylesheet" href="{% static 'cal/css/create-event.css' %}" />
+
 <div class="clearfix">
   <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
 </div>-->
-<!--
+
 <main id="body-main">
     <h1>Create New Event</h1>
     <form method="POST">
         {% csrf_token %}
         {{ event.as_p}}
+        <!-- {% if event.non_field_errors %}
+            <h1>YES</h1>
+  <div class="non-field-errors">
+    {% for err in form.non_field_errors %}
+      <p class="form-error">{{ err }}</p>
+    {% endfor %}
+  </div>
+{% endif %} -->
         <button type="submit">Create Event</button>
         <br>
     </form>
-</main>-->
-
+</main>
+<!-- 
 <div class="screen">
   <div class="login-container">
     <div class="login-card mdl-card mdl-shadow--8dp">
@@ -29,8 +37,8 @@ Event
         <h4>Create a new event</h4>
       </div>
       <div class="horizontal">
-        <!--<div class="spacer1"></div>-->
-        <div class="user-pass-form mdl-card__supporting-text">
+        <div class="spacer1"></div>-->
+        <!-- <div class="user-pass-form mdl-card__supporting-text">
           <form method="POST" action="">
             {% csrf_token %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -38,7 +46,8 @@ Event
               <label class="mdl-textfield__label" for="id_title">TITLE</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="id_description" name="description">{{form.description}}</input>
+              <input class="mdl-textfield__input" type="text" id="id_description"
+                name="description">{{form.description}}</input>
               <label class="mdl-textfield__label" for="id_description">DESCRIPTION</label>
             </div>
             <div class="">
@@ -48,12 +57,19 @@ Event
               <input type="datetime-local" id="id_end_time" name="end_time">{{form.end_time}}</input>
             </div>
             <div class="create-btn">
-              <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Create">
+              <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit"
+                value="Create">
             </div>
+            {% if event.non_field_errors %}
+            <h1>YES</h1>
+  <div class="non-field-errors">
+    {% for err in form.non_field_errors %}
+      <p class="form-error">{{ err }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
           </form>
-        </div> <!-- user-pass-form -->
-      </div>
     </div>
   </div>
-</div>
+</div> -->
 {% endblock %}
