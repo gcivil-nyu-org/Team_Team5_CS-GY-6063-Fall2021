@@ -8,9 +8,10 @@ Event
 {% block content %}
 <link rel="stylesheet" href="{% static 'cal/css/create-event.css' %}" />
 
+<!--
 <div class="clearfix">
   <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
-</div>-->
+</div>
 
 <main id="body-main">
     <h1>Create New Event</h1>
@@ -24,12 +25,12 @@ Event
       <p class="form-error">{{ err }}</p>
     {% endfor %}
   </div>
-{% endif %} -->
+{% endif %}
         <button type="submit">Create Event</button>
         <br>
     </form>
-</main>
-<!-- 
+</main>-->
+
 <div class="screen">
   <div class="login-container">
     <div class="login-card mdl-card mdl-shadow--8dp">
@@ -38,7 +39,7 @@ Event
       </div>
       <div class="horizontal">
         <div class="spacer1"></div>-->
-        <!-- <div class="user-pass-form mdl-card__supporting-text">
+        <div class="user-pass-form mdl-card__supporting-text">
           <form method="POST" action="">
             {% csrf_token %}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -56,20 +57,26 @@ Event
             <div class="">
               <input type="datetime-local" id="id_end_time" name="end_time">{{form.end_time}}</input>
             </div>
+            <div class="error-message">
+  						{% for message in messages %}
+  							<p id="messages">{{message}}</p>
+  						{% endfor %}
+  					</div>
+              <!--{% if event.non_field_errors %}
+                <h1>YES</h1>
+                <div class="non-field-errors">
+                  {% for err in form.non_field_errors %}
+                    <p class="form-error">{{ err }}</p>
+                  {% endfor %}
+                </div>
+            {% endif %}-->
+
             <div class="create-btn">
               <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit"
                 value="Create">
             </div>
-            {% if event.non_field_errors %}
-            <h1>YES</h1>
-  <div class="non-field-errors">
-    {% for err in form.non_field_errors %}
-      <p class="form-error">{{ err }}</p>
-    {% endfor %}
-  </div>
-{% endif %}
           </form>
     </div>
   </div>
-</div> -->
+</div>
 {% endblock %}

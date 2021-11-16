@@ -7,7 +7,8 @@ from django.urls import reverse
 
 class FoodRedistributor(models.Model):
     user = models.OneToOneField(
-        User, related_name="foodredis", null=True, on_delete=models.CASCADE)
+        User, related_name="foodredis", null=True, on_delete=models.CASCADE
+    )
     name = models.CharField(max_length=200, default="")
     name_of_food_redis = models.CharField(max_length=200)
     email = models.CharField(max_length=200, unique=True)
@@ -16,8 +17,7 @@ class FoodRedistributor(models.Model):
     verified = models.BooleanField(default=False)
     is_food_redis = models.BooleanField(default=False)
     about = models.TextField(max_length=500, default="Add a description here!")
-    profile_pic = models.ImageField(
-        null=True, blank=True, upload_to="images/profile/")
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
 
     def __str__(self):
         return self.name
@@ -35,8 +35,7 @@ class Restaurant(models.Model):
     verified = models.BooleanField(default=False)
     is_res = models.BooleanField(default=False)
     about = models.TextField(max_length=500, default="Add a description here!")
-    profile_pic = models.ImageField(
-        null=True, blank=True, upload_to="images/profile/")
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
 
     def __str__(self):
         return self.name
