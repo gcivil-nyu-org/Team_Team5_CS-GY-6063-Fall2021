@@ -2,12 +2,13 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}"/>
-	<link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}" />
+	<link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}" />
 	<link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,95 +18,120 @@
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 {% if user.rest.profile_pic %}
-<body style="background-image: url('{{ user.rest.profile_pic.url }}');">
-{% else %}
-<body style="background-image: url('https://images.unsplash.com/photo-1606021511779-aae22948af3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80');">
-{% endif %}
-	{%  include 'accounts/newnavbar.html' %}
 
-			<div class="split left">
-				<div class="about-container">
-					<div class="about-card mdl-card mdl-shadow--8dp">
+<body style="background-image: url('{{ user.rest.profile_pic.url }}');">
+	{% else %}
+
+	<body
+		style="background-image: url('https://images.unsplash.com/photo-1606021511779-aae22948af3e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&q=80');">
+		{% endif %}
+		{%  include 'accounts/newnavbar.html' %}
+
+		<div class="split left">
+			<div class="about-container">
+				<div class="about-card mdl-card mdl-shadow--8dp">
 					<!--{% if  user.rest.profile_pic %}
 					<img src="{{ user.rest.profile_pic.url}}" width=200 height=200 class="rounded-circle">
 					{% endif %}-->
-						<div class="about-card-title mdl-card__title">
-							<h3>{{user.rest.name_of_restaurant}}</h3>
-						</div>
-							<div class="info mdl-card__supporting-text">
-								<h5>About</h5>
-								<p>{{user.rest.about}}
-								</p>
-								<h5>Location</h5>
-								<p>{{user.rest.address}}<br>
-								</p>
-							</div>
-							<!--
+					<div class="about-card-title mdl-card__title">
+						{% if profile.res %}
+						<h3>{{profile.user.name_of_restaurant}}</h3>
+					</div>
+					<div class="info mdl-card__supporting-text">
+						<h5>About</h5>
+						<p>{{profile.user.about}}
+						</p>
+						<h5>Location</h5>
+						<p>{{profile.user.address}}<br>
+						</p>
+					</div>
+					{% else %}
+
+					<h3>{{profile.user.name_of_food_redis}}</h3>
+				</div>
+				<div class="info mdl-card__supporting-text">
+					<h5>About</h5>
+					<p>{{profile.user.about}}
+					</p>
+					<h5>Location</h5>
+					<p>{{profile.user.address}}<br>
+					</p>
+				</div>
+				{% endif %}
+				<!--
 							<div class="info mdl-card__supporting-text">
 								<h5>Rating:</h5><p>4.7</p>
 							</div>-->
-							{% if user.is_authenticated %}
-							<div class="update-prof-btn mdl-card__actions mdl-card--border">
-								<a href="updateprofile/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Edit profile</a>
-								<a href="{% url 'food_avail:food_avail' %}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Post Food Availability</a>
-							</div>
-							{% endif %}
+				{% if user.is_authenticated %}
+				<div class="update-prof-btn mdl-card__actions mdl-card--border">
+					<a href="updateprofile/"
+						class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Edit profile</a>
+					<a href="{% url 'food_avail:food_avail' %}"
+						class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Post Food
+						Availability</a>
+				</div>
+				{% endif %}
 
+			</div>
+		</div>
+		</div>
+
+
+		<div class="split right">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--1-col">
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<div class="prof-card-image mdl-card mdl-shadow--2dp"
+						style="background: url('https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+						<div class="mdl-card__actions">
+							<span class="demo-card-image__filename">Delicious!</span>
+						</div>
+					</div>
+					<div class="spacer">
+					</div>
+					<div class="prof-card-image mdl-card mdl-shadow--2dp"
+						style="background: url('https://images.unsplash.com/photo-1581954548218-415cd6ee5f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+						<div class="mdl-card__actions">
+							<span class="demo-card-image__filename">Looks tasty!</span>
+						</div>
+					</div>
+					<div class="spacer">
+					</div>
+					<div class="prof-card-image mdl-card mdl-shadow--2dp"
+						style="background: url('https://images.unsplash.com/photo-1601118964938-228a89955311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+						<div class="mdl-card__actions">
+							<span class="demo-card-image__filename">Mmmm!</span>
+						</div>
+					</div>
+				</div>
+				<div class="mdl-cell mdl-cell--2-col">
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<div class="offset">
+					</div>
+					<div class="prof-card-image mdl-card mdl-shadow--2dp"
+						style="background: url('https://images.unsplash.com/photo-1563881188152-d874ad4dc3be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+						<div class="mdl-card__actions">
+							<span class="demo-card-image__filename">Yum!</span>
+						</div>
+					</div>
+					<div class="spacer">
+					</div>
+					<div class="prof-card-image mdl-card mdl-shadow--2dp"
+						style="background: url('https://images.unsplash.com/photo-1597667079555-78f5c6a05d2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+						<div class="mdl-card__actions">
+							<span class="demo-card-image__filename">Great!</span>
+						</div>
 					</div>
 				</div>
 			</div>
-
-
-			<div class="split right">
-				<div class="mdl-grid">
-					<div class="mdl-cell mdl-cell--1-col">
-					</div>
-				  <div class="mdl-cell mdl-cell--4-col">
-						<div class="prof-card-image mdl-card mdl-shadow--2dp" style="background: url('https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
-						  <div class="mdl-card__title mdl-card--expand"></div>
-						  <div class="mdl-card__actions">
-						    <span class="demo-card-image__filename">Delicious!</span>
-						  </div>
-						</div>
-						<div class="spacer">
-						</div>
-						<div class="prof-card-image mdl-card mdl-shadow--2dp" style="background: url('https://images.unsplash.com/photo-1581954548218-415cd6ee5f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80') center / cover;">
-						  <div class="mdl-card__title mdl-card--expand"></div>
-						  <div class="mdl-card__actions">
-						    <span class="demo-card-image__filename">Looks tasty!</span>
-						  </div>
-						</div>
-						<div class="spacer">
-						</div>
-						<div class="prof-card-image mdl-card mdl-shadow--2dp" style="background: url('https://images.unsplash.com/photo-1601118964938-228a89955311?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
-						  <div class="mdl-card__title mdl-card--expand"></div>
-						  <div class="mdl-card__actions">
-						    <span class="demo-card-image__filename">Mmmm!</span>
-						  </div>
-						</div>
-				  </div>
-					<div class="mdl-cell mdl-cell--2-col">
-					</div>
-				  <div class="mdl-cell mdl-cell--4-col">
-						<div class="offset">
-						</div>
-						<div class="prof-card-image mdl-card mdl-shadow--2dp" style="background: url('https://images.unsplash.com/photo-1563881188152-d874ad4dc3be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
-						  <div class="mdl-card__title mdl-card--expand"></div>
-						  <div class="mdl-card__actions">
-						    <span class="demo-card-image__filename">Yum!</span>
-						  </div>
-						</div>
-						<div class="spacer">
-						</div>
-						<div class="prof-card-image mdl-card mdl-shadow--2dp" style="background: url('https://images.unsplash.com/photo-1597667079555-78f5c6a05d2b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') center / cover;">
-						  <div class="mdl-card__title mdl-card--expand"></div>
-						  <div class="mdl-card__actions">
-						    <span class="demo-card-image__filename">Great!</span>
-						  </div>
-						</div>
-				  </div>
-				</div>
-			</div>
-</body>
+		</div>
+	</body>
 
 </html>
