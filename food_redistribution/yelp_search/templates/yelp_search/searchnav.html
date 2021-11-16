@@ -11,9 +11,11 @@
       <div class="">
         <div class="gradient-navbar">
           <div class="mdl-layout__header-row">
-        <!--<span class="android-title mdl-layout-title">
-          <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">Smash</a>
-        </span>-->
+            {% if user.is_authenticated %}
+            <span class="android-title mdl-layout-title">
+              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">Welcome, {{user.username}}</a>
+            </span>
+            {% endif %}
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="android-header-spacer mdl-layout-spacer"></div>
         <!-- Navigation -->

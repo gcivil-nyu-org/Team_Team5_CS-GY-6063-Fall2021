@@ -1,10 +1,11 @@
 {% extends 'cal/base.html' %}
-
+{% load static %}
 {% block title %}
 Event
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'cal/css/view-event.css' %}">
 
 
 <!--<div class="clearfix">
@@ -24,7 +25,71 @@ Event
         </div>
     {% endfor %}
 {% endif %}
-        <form> 
+{% if user.is_authenticated %}
+<div class="screen">
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      <div class="mdl-card__title">
+        <h4>
+          {{ event.title.value }}<br>
+        </h4>
+        </div>
+        <div class="user-pass-form mdl-card__supporting-text mdl-card--expand">
+          Description: {{ event.description.value }}<br>
+          Start: {{ event.start_time.value }}<br>
+          End: {{ event.end_time.value }}
+        </div>
+        {% if user.id == event.author.value %}
+          <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href = "{% url 'cal:event_edit' event.instance.id %}">
+              Edit Event
+            </a>
+          </div>
+        {% else %}
+            Only the author may edit this event.
+        {% endif %}
+    </div>
+
+<!--
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      <div class="login-card-title">
+        <h4>View Event</h4>
+      </div>
+      <div class="horizontal">
+        <!--<div class="spacer1"></div>
+        <div class="user-pass-form mdl-card__supporting-text">
+          <div>
+            {{ event.title.value }}
+          </div>
+          <div>
+            {{ event.description.value }}
+          </div>
+          <div>
+            From {{ event.start_time.value }}
+          </div>
+          <div>
+            To {{ event.end_time.value }}
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            {% if user.id == event.author.value %}
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href = "{% url 'cal:event_edit' event.instance.id %}">
+              Edit Event
+            </a>
+            {% else %}
+                Only the author may edit this event.
+            {% endif %}
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+{% else %}
+    <h2>Please login to access this page!</h2>
+{% endif %}
+
+<!--
+        <form>
             <h5>Title</h5>
             <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.title.value }} </h5> <br>
             <h5>Description</h5>
@@ -42,6 +107,5 @@ Event
             {% endif %}
     {% else %}
         Please login to access this page!
-    {% endif %}
+    {% endif %}-->
 {% endblock %}
-    
