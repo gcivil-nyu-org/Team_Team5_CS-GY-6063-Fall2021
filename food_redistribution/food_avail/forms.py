@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import DateInput, ModelForm, TextInput
 
-from food_avail.models import FoodAvail
+from food_avail.models import FoodAvail, TimeSlot
 
 
 class FoodAvailForm(ModelForm):
@@ -25,3 +25,10 @@ class FoodAvailForm(ModelForm):
             super(FoodAvailForm, self).__init__(*args, **kwargs)
             # input_formats parses HTML5 datetime-local input to datetime field
             self.fields["available_till"].input_formats = ("%Y-%m-%dT%H:%M",)
+
+class TimeSlotForm(ModelForm):
+
+    class Meta:
+        model = TimeSlot
+        fields = ["start_time", "end_time"]
+

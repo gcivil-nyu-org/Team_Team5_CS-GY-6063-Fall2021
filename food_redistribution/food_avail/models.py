@@ -21,6 +21,16 @@ class FoodAvail(models.Model):
     def __str__(self):
         return self.description
 
-    def allow_only_one_instance(self, instance):
-        if len(FoodAvail.objects.filter(author=instance.author)) > 0:
-            raise ValidationError("User has already created food availibility post!")
+    # def allow_only_one_instance(self, instance):
+    #     if len(FoodAvail.objects.filter(author=instance.author)) > 0:
+    #         raise ValidationError("User has already created food availibility post!")
+
+
+class TimeSlot(models.Model):
+    time_slot_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    food_avail_id = models.ForeignKey(FoodAvail, on_delete=models.CASCADE)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    def __str__(self):
+        return str(self.start_time) + "-" + str(self.end_time)
