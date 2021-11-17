@@ -11,6 +11,10 @@
       <div class="">
         <div class="gradient-navbar">
           <div class="mdl-layout__header-row">
+            <!-- Title -->
+            {% if user.is_authenticated %}
+              <span class="mdl-typography--text-uppercase">Welcome, {{user.username}}</span>
+            {% endif %}
         <!--<span class="android-title mdl-layout-title">
           <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">Smash</a>
         </span>-->
