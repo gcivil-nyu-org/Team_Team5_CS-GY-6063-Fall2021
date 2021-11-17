@@ -16,10 +16,10 @@
     <h4>Edit Food Availability</h4>
     <br><br>
     <main id="body-main">
-        <h1>Food Availability</h1>
+        <h1>Update Food Availability</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p}}
+            {{ food.as_p}}
             <button type="submit">Post Availability</button>
             <br>
         </form>
