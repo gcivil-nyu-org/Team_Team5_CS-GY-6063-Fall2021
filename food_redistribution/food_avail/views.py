@@ -16,8 +16,10 @@ def check_existing_post(request):
     else:
         return False
 
+
 def create_bookings(request):
     return render(request, "food_avail/bookings.html")
+
 
 @login_required
 def post_available_food(request):
