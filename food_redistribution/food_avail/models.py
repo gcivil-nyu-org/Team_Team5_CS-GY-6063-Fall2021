@@ -28,7 +28,7 @@ class FoodAvail(models.Model):
 
 class TimeSlot(models.Model):
     time_slot_owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    food_avail_id = models.ForeignKey(FoodAvail, on_delete=models.CASCADE)
+    # food_avail_id = models.ForeignKey(FoodAvail, on_delete=models.CASCADE)
     start_time = models.TimeField()
     end_time = models.TimeField()
 

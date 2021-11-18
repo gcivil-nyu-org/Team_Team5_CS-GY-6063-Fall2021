@@ -52,5 +52,7 @@ class TimeSlotForm(ModelForm):
 
     class Meta:
         model = TimeSlot
-        fields = ["start_time", "end_time"]
+        widgets = {"time_slot_owner" : forms.HiddenInput(),}
+        fields = ["start_time", "end_time", "time_slot_owner"]
+
 

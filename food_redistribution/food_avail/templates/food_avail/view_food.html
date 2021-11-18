@@ -27,3 +27,55 @@
           {% endif %}
         </div>
     </div>
+
+    <div>
+        <h4>Add Time Slot</h4>
+        <br><br>
+    </div>
+    <div>
+        <div>
+            <form method="post">
+                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <div>
+                    <label>Start Time</label>
+                    <input type="time" name="start_time" class="form-control" value="12:00"  required>
+                </div>
+                <div class="form-group">
+                    <label>End Time</label>
+                    <input type="time" name="end_time" class="form-control" value="15:00"  required>
+                </div>
+                <button type="submit" class="button btn-success">Submit</button>
+            </form>
+        </div>
+
+    
+        {% if time_slots_all %}
+        <h4> List Of Time Slots </h4>
+              </div>
+              <div class="card-body">
+                  
+                <div class="table-responsive">
+                  <table class="table table-hover ">
+                    <thead>
+                      <tr>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in time_slots_all %}
+                          <tr>
+                              <td>{{x.start_time | time:'H:i:s'}}</td>
+                              <td>{{x.end_time | time:'H:i:s'}}</td>
+                              <td>
+                                  {% endfor %}
+                    {% endif %}
+
+                    <div class="error-message">
+                        {% for message in messages %}
+                            <p id="messages">{{message}}</p>
+                        {% endfor %}
+                    </div>
