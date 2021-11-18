@@ -26,6 +26,7 @@ class FoodAvailForm(ModelForm):
             # input_formats parses HTML5 datetime-local input to datetime field
             self.fields["available_till"].input_formats = ("%Y-%m-%dT%H:%M",)
 
+
 class FoodAvailUpdateForm(ModelForm):
     class Meta:
         model = FoodAvail
@@ -48,11 +49,11 @@ class FoodAvailUpdateForm(ModelForm):
             # input_formats parses HTML5 datetime-local input to datetime field
             self.fields["available_till"].input_formats = ("%Y-%m-%dT%H:%M",)
 
-class TimeSlotForm(ModelForm):
 
+class TimeSlotForm(ModelForm):
     class Meta:
         model = TimeSlot
-        widgets = {"time_slot_owner" : forms.HiddenInput(),}
+        widgets = {
+            "time_slot_owner": forms.HiddenInput(),
+        }
         fields = ["start_time", "end_time", "time_slot_owner"]
-
-

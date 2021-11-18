@@ -9,18 +9,38 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('food_avail', '0002_auto_20211116_1037'),
+        ("food_avail", "0002_auto_20211116_1037"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TimeSlot',
+            name="TimeSlot",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('start_time', models.TimeField()),
-                ('end_time', models.TimeField()),
-                ('food_avail_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='food_avail.foodavail')),
-                ('time_slot_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("start_time", models.TimeField()),
+                ("end_time", models.TimeField()),
+                (
+                    "food_avail_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="food_avail.foodavail",
+                    ),
+                ),
+                (
+                    "time_slot_owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -10,5 +10,4 @@ urlpatterns = [
     path("food_avail_all/", views.check_food_availibility, name="view_food_avail"),
     path("food_avail_res/", views.view_available_food, name="view_food_avail_res"),
     # path("food_avail_res/",  views.post_available_timeslots, name="create_timeslots"),
-
 ]

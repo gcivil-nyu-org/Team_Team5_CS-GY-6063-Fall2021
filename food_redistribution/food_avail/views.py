@@ -1,12 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from .models import *
-from .forms import FoodAvailForm, FoodAvailUpdateForm, TimeSlotForm
+from .forms import FoodAvailForm, TimeSlotForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, UpdateView
+
+# from django.views.generic import CreateView, UpdateView
+
 # from django.views.generic.base import View
 from django.contrib import messages
+
 # Create your views here.
 
 
@@ -18,6 +21,7 @@ def check_existing_post(request):
     else:
         return False
 
+
 def check_existing_timeslot(request):
     data = request.POST.copy()
     data["time_slot_owner"] = request.user
@@ -25,15 +29,26 @@ def check_existing_timeslot(request):
         time_slot = TimeSlot.objects.get(time_slot_owner=request.user)
         start_time = time_slot.start_time
         end_time = time_slot.end_time
-        if len(TimeSlot.objects.filter(time_slot_owner=request.user, start_time=start_time, end_time=end_time)) > 0:
+        if (
+            len(
+                TimeSlot.objects.filter(
+                    time_slot_owner=request.user,
+                    start_time=start_time,
+                    end_time=end_time,
+                )
+            )
+            > 0
+        ):
             return True
         else:
             return False
     else:
         return False
 
+
 def create_bookings(request):
     return render(request, "food_avail/bookings.html")
+
 
 # class TimeSlotView(CreateView):
 #     model = TimeSlot
@@ -72,7 +87,7 @@ def create_bookings(request):
 #         # data["food_avail_id"] = FoodAvail.objects.get(author=request.user).pk
 #         form = TimeSlotForm(data or None, instance=instance)
 #         if request.POST and form.is_valid():
-#             form.save() 
+#             form.save()
 #             return redirect(request.META.HTTP_REFERER)
 #             # return redirect("food_avail:view_food_avail_res")
 #     else:
@@ -106,7 +121,7 @@ def create_bookings(request):
 #         return redirect("food_avail:update_food_avail")
 #         # return HttpResponseRedirect(reverse("food_avail:update_food_avail"))
 #      else:
-#         return super().get(*args, **kwargs)       
+#         return super().get(*args, **kwargs)
 
 #     def get_context_data(self, **kwargs):
 #         context = super().get_context_data(**kwargs)
@@ -155,11 +170,12 @@ def create_bookings(request):
 #             return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
 #         else:
 #             form = FoodAvailUpdateForm(instance=instance)
-#     return form 
+#     return form
 #     # print("not working")
 #     # food_avail = FoodAvail.objects.get(author=request.user)
 #     # return render(request, "food_avail/update_food_avail.html", {'form': form, 'food': instance})
-    
+
+
 @login_required
 def post_available_food(request):
     if not check_existing_post(request):
@@ -182,6 +198,7 @@ def post_available_food(request):
             form = FoodAvailForm(instance=instance)
     return render(request, "food_avail/post_food_avail.html", {"food": form})
 
+
 @login_required
 def view_available_food(request):
     context = {}
@@ -190,10 +207,10 @@ def view_available_food(request):
     if request.method == "POST":
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
-        
+
         print("PRINT START TIME: ", start_time)
         print("PRINT END TIME: ", end_time)
-        
+
         # if not check_existing_timeslot(request):
         print("Time slot does not exist")
         print("DATA")
@@ -203,30 +220,44 @@ def view_available_food(request):
         data["time_slot_owner"] = request.user
         time_slot_owner = request.POST.get("time_slot_owner")
         print("PRINT CREATOR: ", time_slot_owner)
-        print(TimeSlot.objects.filter(time_slot_owner=request.user, start_time=start_time, end_time=end_time))
-        if len(TimeSlot.objects.filter(time_slot_owner=request.user, start_time=start_time, end_time=end_time)) == 0:
-        # data["food_avail_id"] = FoodAvail.objects.get(author=request.user).pk
+        print(
+            TimeSlot.objects.filter(
+                time_slot_owner=request.user, start_time=start_time, end_time=end_time
+            )
+        )
+        if (
+            len(
+                TimeSlot.objects.filter(
+                    time_slot_owner=request.user,
+                    start_time=start_time,
+                    end_time=end_time,
+                )
+            )
+            == 0
+        ):
+            # data["food_avail_id"] = FoodAvail.objects.get(author=request.user).pk
             form = TimeSlotForm(data or None, instance=time_slot)
             if form.is_valid():
-                form.save() 
+                form.save()
                 print("its working")
                 context["time_slot"] = form
         else:
             print("it already exists")
-            messages.info(request, "Time Slot Already Exists")  
-
+            messages.info(request, "Time Slot Already Exists")
 
     time_slots_all = TimeSlot.objects.filter(time_slot_owner=request.user)
     context["time_slots_all"] = time_slots_all
     # context = {
-    #     "food": instance, 
-    #     "time_slot": form, 
+    #     "food": instance,
+    #     "time_slot": form,
     #     "time_slots_all": time_slots_all}
     return render(request, "food_avail/view_food.html", context)
+
 
 def check_food_availibility(request):
     food = FoodAvail.objects.all()
     return render(request, "food_avail/view_food_avail.html", {"food": food})
+
 
 # @login_required
 # def create_timeslots(request):
@@ -250,4 +281,3 @@ def check_food_availibility(request):
 #         else:
 #             form = TimeSlotForm(instance=instance)
 #     return render(request, "food_avail/view_food_avail.html", {"timeslot": form})
-
