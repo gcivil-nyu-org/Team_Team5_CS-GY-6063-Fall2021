@@ -1,14 +1,41 @@
 {%  include 'food_avail/base.html' %}
 
-{% for f in food %}
-    <h2>{{f.author.username}}</h2>
-        <p>{{f.food_available}} meals</p>
-        <p>{{f.description}}</p>
-        <p>Food available till: {{f.available_till}}</p>
-    <br>
+<table>
+    {% for key, value in user_info.items %}
+    {% for key2,value2 in value.items %}
+    <tr>
+        <td>{{key2}}:</td>
+
+        {% if key2 == 'timeslot' %}
+        <td>
+            {% if value2 %}
+            {% for i in value2 %}
+
+
+
+            {{i.start_time}} <-> {{i.end_time}}
+
+
+
+                {% endfor %}
+                {% else %}
+        No Available Time slots
+        {% endif %}
+
+        </td>
+        {% else %}
+        <td>{{value2}}
+        <td>
+
+            {% endif %}
+    </tr>
+    {% endfor %}
 
     {% endfor %}
-</ul>
+</table>
+
+
+
 
 
 </div>

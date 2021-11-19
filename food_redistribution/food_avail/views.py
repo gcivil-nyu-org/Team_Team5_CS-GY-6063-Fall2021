@@ -121,4 +121,22 @@ def delete_time_slot(request, pk):
 
 def check_food_availibility(request):
     food = FoodAvail.objects.all()
-    return render(request, "food_avail/view_food_avail.html", {"food": food})
+    timeslots = TimeSlot.objects.all()
+    users_dict = {}
+    users_lst = []
+    for i in range(len(food)):
+        user = {
+            "author": None,
+            "food_available": None,
+            "description": None,
+            "timeslot": None
+        }
+        user["author"] = food[i].author.username
+        user["food_available"] = food[i].food_available
+        user["description"] = food[i].description
+        if TimeSlot.objects.filter(time_slot_owner=food[i].author):
+            user["timeslot"] = TimeSlot.objects.filter(time_slot_owner=food[i].author)
+        users_dict[food[i].author.username] = user
+        users_lst.append(user)
+
+    return render(request, "food_avail/view_food_avail.html", {"user_info": users_dict})
