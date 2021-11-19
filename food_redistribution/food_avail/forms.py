@@ -55,5 +55,32 @@ class TimeSlotForm(ModelForm):
         model = TimeSlot
         widgets = {
             "time_slot_owner": forms.HiddenInput(),
+            "start_time": DateInput(
+                attrs={"type": "time"}, format="%H:%M"
+            ),
+            "end_time": DateInput(
+                attrs={"type": "time"}, format="%H:%M"
+            ),
+
         }
         fields = ["start_time", "end_time", "time_slot_owner"]
+    
+    def clean(self):
+        start_time = self.cleaned_data.get("start_time")
+        end_time = self.cleaned_data.get("end_time")
+
+        print(start_time)
+        print
+        if start_time and end_time:
+            if start_time > end_time:
+                # raise forms.ValidationError("Start time cannot be greater than end time")
+                self.add_error(
+                    "start_time", "start time cannot be greater than end time!"
+                )
+        return self.cleaned_data
+
+    def __init__(self, *args, **kwargs):
+        super(TimeSlotForm, self).__init__(*args, **kwargs)
+        # input_formats parses HTML5 datetime-local input to datetime field
+        self.fields["start_time"].input_formats = ("%H:%M",)
+        self.fields["end_time"].input_formats = ("%H:%M",)

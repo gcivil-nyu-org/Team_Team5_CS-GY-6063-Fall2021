@@ -28,33 +28,39 @@
         </div>
     </div>
 
-    <div>
-        <h4>Add Time Slot</h4>
-        <br><br>
-    </div>
-    <div>
-        <div>
-            <form method="post">
-                 {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}">
-                <div>
-                    <label>Start Time</label>
-                    <input type="time" name="start_time" class="form-control" value="12:00"  required>
+    <div class="row mt-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-title">
+                    <h4>Add Time Slot</h4>
+                    <br><br>
                 </div>
-                <div class="form-group">
-                    <label>End Time</label>
-                    <input type="time" name="end_time" class="form-control" value="15:00"  required>
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="post">
+                             {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ next }}">
+                            <div class="form-group">
+                                <label>Start Time</label>
+                                <input type="time" name="start_time" class="form-control" value="12:00"  required>
+                            </div>
+                            <div class="form-group">
+                                <label>End Time</label>
+                                <input type="time" name="end_time" class="form-control" value="15:00"  required>
+                            </div>
+                            <button type="submit" class="button btn-success" style="cursor:pointer">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <button type="submit" class="button btn-success">Submit</button>
-            </form>
+            </div>
         </div>
-
-    
-        {% if time_slots_all %}
-        <h4> List Of Time Slots </h4>
+        <div class="col-lg-6">
+            <div class="card">
+              <div class="card-title">
+                <h4> List Of Time Slots </h4>
               </div>
               <div class="card-body">
-                  
+                  {% if time_slots_all %}
                 <div class="table-responsive">
                   <table class="table table-hover ">
                     <thead>
@@ -66,16 +72,39 @@
                       </tr>
                     </thead>
                     <tbody>
-                        {% for x in time_slots_all %}
-                          <tr>
-                              <td>{{x.start_time | time:'H:i:s'}}</td>
-                              <td>{{x.end_time | time:'H:i:s'}}</td>
-                              <td>
-                                  {% endfor %}
-                    {% endif %}
+                    {% for x in time_slots_all %}
+                      <tr>
+                          <td>{{x.start_time | time:'H:i:s'}}</td>
+                          <td>{{x.end_time | time:'H:i:s'}}</td>
+                          <td>
+                              <span>
+                                  <a href="{% url 'food_avail:update_time_slot' x.id %}" class="button button-primary">Edit</a>                                
+                              </span>
+                          </td>
+                          <td>
+                              <span>
+                                <a href="#" class="button button-primary">Delete</a>
+                              </span>
+                          </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+                {% else %}
+                  <br>
+                        <p>No Time Slot Available.</p>
+                  {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="error-message">
+    {% for message in messages %}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
+</div>
 
-                    <div class="error-message">
-                        {% for message in messages %}
-                            <p id="messages">{{message}}</p>
-                        {% endfor %}
-                    </div>
+ 

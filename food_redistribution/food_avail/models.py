@@ -34,3 +34,9 @@ class TimeSlot(models.Model):
 
     def __str__(self):
         return str(self.start_time) + "-" + str(self.end_time)
+
+    @property
+    def get_html_url(self):
+        url = reverse("food_avail:update_time_slot", args=(self.id,))
+        return f'<a href="{url}"> {self.title} </a>'
+
