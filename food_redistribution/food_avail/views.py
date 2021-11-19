@@ -121,7 +121,6 @@ def delete_time_slot(request, pk):
 
 def check_food_availibility(request):
     food = FoodAvail.objects.all()
-    timeslots = TimeSlot.objects.all()
     users_dict = {}
     users_lst = []
     for i in range(len(food)):
@@ -129,7 +128,7 @@ def check_food_availibility(request):
             "author": None,
             "food_available": None,
             "description": None,
-            "timeslot": None
+            "timeslot": None,
         }
         user["author"] = food[i].author.username
         user["food_available"] = food[i].food_available
