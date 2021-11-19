@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from datetime import datetime
 import pytz
+from django.urls import reverse
 
 
 class FoodAvail(models.Model):
@@ -39,4 +40,3 @@ class TimeSlot(models.Model):
     def get_html_url(self):
         url = reverse("food_avail:update_time_slot", args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
-

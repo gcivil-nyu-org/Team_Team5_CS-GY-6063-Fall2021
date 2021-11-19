@@ -55,16 +55,11 @@ class TimeSlotForm(ModelForm):
         model = TimeSlot
         widgets = {
             "time_slot_owner": forms.HiddenInput(),
-            "start_time": DateInput(
-                attrs={"type": "time"}, format="%H:%M"
-            ),
-            "end_time": DateInput(
-                attrs={"type": "time"}, format="%H:%M"
-            ),
-
+            "start_time": DateInput(attrs={"type": "time"}, format="%H:%M"),
+            "end_time": DateInput(attrs={"type": "time"}, format="%H:%M"),
         }
         fields = ["start_time", "end_time", "time_slot_owner"]
-    
+
     def clean(self):
         start_time = self.cleaned_data.get("start_time")
         end_time = self.cleaned_data.get("end_time")
