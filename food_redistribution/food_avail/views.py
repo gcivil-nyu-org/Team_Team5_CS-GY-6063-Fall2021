@@ -97,14 +97,6 @@ def view_available_food(request):
     context["time_slots_all"] = time_slots_all
     return render(request, "food_avail/view_food.html", context)
 
-def event_update(request, pk):
-    instance = get_object_or_404(Event, pk=pk)
-    form = EventForm(request.POST or None, instance=instance)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse("cal:calendar"))
-    return render(request, "cal/update_event.html", {"event": form})
-
 def update_time_slot(request, pk):
     instance = get_object_or_404(TimeSlot, pk=pk)
     form = TimeSlotForm(request.POST or None, instance=instance)
@@ -115,6 +107,14 @@ def update_time_slot(request, pk):
         print("not working")
         messages.info(request, "Start time cannot be after end time!")
     return render(request, "food_avail/update_time_slot.html", {"timeslot": form})
+
+def delete_time_slot(request, pk):
+    timeslot = get_object_or_404(TimeSlot, pk=pk)
+    if request.method == "POST":
+        timeslot.delete()
+        # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
+    return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
+    # return render(request, "food_avail/delete_time_slot.html", {"timeslot": timeslot})
 
 def check_food_availibility(request):
     food = FoodAvail.objects.all()
