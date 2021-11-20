@@ -138,4 +138,4 @@ def check_food_availibility(request):
         users_dict[food[i].author.username] = user
         users_lst.append(user)
 
-    return render(request, "food_avail/view_food_avail.html", {"user_info": users_dict})
+    return render(request, "food_avail/view_food_avail.html", {"user_info": users_lst})
