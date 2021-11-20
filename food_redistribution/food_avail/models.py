@@ -16,7 +16,7 @@ class FoodAvail(models.Model):
 
     food_available = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.TextField(blank=True)
-    available_till = models.DateTimeField(validators=[present_or_future_date])
+    # available_till = models.DateTimeField(validators=[present_or_future_date])
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
