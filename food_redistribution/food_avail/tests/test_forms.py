@@ -12,8 +12,8 @@ class TestForms(TestCase):
     def test_FoodAvailForm_valid_data(self):
         form = FoodAvailForm(
             data={
-                "food_available": "2021-10-29T19:30",
-                "description": "2021-10-29T21:30",
+                "food_available": 10,
+                "description": "We have food!",
                 "author": self.user,
             }
         )

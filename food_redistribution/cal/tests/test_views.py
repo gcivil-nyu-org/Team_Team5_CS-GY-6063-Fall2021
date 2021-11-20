@@ -39,16 +39,6 @@ class TestViews(TestCase):
         response = client.get(reverse("cal:calendar"))
         self.assertEquals(response.status_code, 200)
 
-    def test_event(self):
-        client = Client()
-        response = client.get(reverse("cal:event_new"))
-        self.assertEquals(response.status_code, 200)
-
-    # def test_event_view(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:event_view", args=(self.event.pk,)))
-    #     self.assertEquals(response.status_code, 200)
-
     def test_event_create(self):
         client = Client()
         response = client.get(reverse("cal:event_new"))
@@ -82,8 +72,8 @@ class TestViews(TestCase):
         mock.next_month()
         mock.next_month.assert_called()
 
-    @patch("cal.views.event")
-    def test_event_function(self, event):
-        mock = Mock()
-        mock.event()
-        mock.event.assert_called()
+    # @patch("cal.views.event")
+    # def test_event_function(self, event):
+    #     mock = Mock()
+    #     mock.event()
+    #     mock.event.assert_called()

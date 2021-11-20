@@ -42,7 +42,7 @@ class TimeSlotForm(ModelForm):
         if start_time and end_time:
             if start_time > end_time:
                 # raise forms.ValidationError("Start time cannot be greater than end time")
-                self.add_error(
+                self.add_error(  # pragma: no cover
                     "start_time", "start time cannot be greater than end time!"
                 )
         return self.cleaned_data

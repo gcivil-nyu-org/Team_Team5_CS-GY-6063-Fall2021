@@ -1,48 +1,26 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
-from accounts.models import Post, Restaurant, FoodRedistributor
+from food_avail.models import User, FoodAvail, TimeSlot
 
 
-class test_FoodRedis(TestCase):
+class test_FoodAvail(TestCase):
     def test_setUp(self):
-        self.redis1 = FoodRedistributor.objects.create(
-            name="Test username",
-            name_of_food_redis="Test Redis",
-            email="testemail@gmaili.com",
-            phone=5849721452,
-            address="Test address",
-            verified=True,
-        )
-
-
-class test_Restaurant(TestCase):
-    def test_setUp(self):
-        self.rest1 = Restaurant.objects.create(
-            name="Test username",
-            name_of_restaurant="Test Rest",
-            email="testemail@gmaili.com",
-            phone=5849721452,
-            address="Test address",
-            verified=True,
-        )
-
-
-class test_Post(TestCase):
-    def test_setUp(self):
-        user = User.objects.create_user(
+        self.user = User.objects.create_user(
             username="john", email="jlennon@beatles.com", password="glass onion"
         )
-        self.post1 = Post.objects.create(
-            title="Test title", author=user, body="Test body"
+        self.foodavail1 = FoodAvail.objects.create(
+            food_available=10,
+            description="We have food",
+            author=self.user,
         )
 
-    def test_get_absolute_url(self):
-        user = User.objects.create_user(
+
+class test_TimeSlot(TestCase):
+    def test_setUp(self):
+        self.user = User.objects.create_user(
             username="john", email="jlennon@beatles.com", password="glass onion"
         )
-        self.post1 = Post.objects.create(
-            title="Test title", author=user, body="Test body"
-        )
-        self.assertEqual(
-            self.post1.get_absolute_url(), "/blogposts/" + str(self.post1.id)
+        self.timeslot1 = TimeSlot.objects.create(
+            time_slot_owner=self.user,
+            start_time="19:30",
+            end_time="21:30",
         )
