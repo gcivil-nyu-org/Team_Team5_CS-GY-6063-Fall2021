@@ -427,3 +427,10 @@ class TestUserProfileCreation(TestCase):
         }
         form = RestuarantUserForm(data)
         self.assertTrue(form.is_valid())
+    
+    def test_access_signup(self):
+        """
+        A get request to the signup page should yield a valid response
+        """
+        response = self.client.get(reverse("accounts:register"))
+        self.assertEqual(response.status_code, 200)
