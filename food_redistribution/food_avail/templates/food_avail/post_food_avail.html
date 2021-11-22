@@ -20,7 +20,9 @@
     
 
     {% block title %}
+    <div class="heading_container">
     Food Availability
+    </div>
     {% endblock %}
 
     {% block content %}
@@ -29,6 +31,7 @@
     </div>
 
     <main id="body-main">
+        <div class="mainbody_container">
         <h1>Food Availability</h1>
         <form method="POST">
             {% csrf_token %}
@@ -36,7 +39,7 @@
             <button type="submit">Post Availability</button>
             <br>
         </form>
-
+        </div>
         <div class="error-message">
             {% for message in messages %}
                 <p id="messages">{{message}}</p>
