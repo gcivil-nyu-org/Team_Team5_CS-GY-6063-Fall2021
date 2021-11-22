@@ -40,11 +40,11 @@ class TestViews(TestCase):
     #     response = client.get(reverse("cal:calendar"))
     #     self.assertEquals(response.status_code, 200)
 
-    def test_post_available_food(self):
-        client = Client()
-        client.force_login(user=self.user)
-        response = client.get(reverse("food_avail:post_food_avail"))
-        self.assertEquals(response.status_code, 200)
+    # def test_post_available_food(self):
+    #     client = Client()
+    #     client.force_login(user=self.user)
+    #     response = client.get(reverse("food_avail:post_food_avail"))
+    #     self.assertEquals(response.status_code, 200)
 
     def test_view_available_food(self):
         client = Client()

@@ -11,12 +11,10 @@ class FoodAvail(models.Model):
     def present_or_future_date(value):
         eastern = pytz.timezone("US/Eastern")  # pragma: no cover
         if value < eastern.localize(datetime.now()):  # pragma: no cover
-            raise ValidationError(
-                "The date cannot be in the past!")  # pragma: no cover
+            raise ValidationError("The date cannot be in the past!")  # pragma: no cover
         return value  # pragma: no cover
 
-    food_available = models.IntegerField(
-        default=0, validators=[MinValueValidator(0)])
+    food_available = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.TextField(blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
