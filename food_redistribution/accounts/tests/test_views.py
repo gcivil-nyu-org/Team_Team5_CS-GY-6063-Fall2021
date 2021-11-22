@@ -408,3 +408,22 @@ class ViewTestsAgain(TestCase):
         mock = Mock()
         mock.res_check()
         mock.res_check.assert_called()
+
+class TestUserProfileCreation(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username="test")
+        self.user.set_password("test")
+        self.user.save()
+
+    def test_form_valid(self):
+        data = {
+            "name_of_restaurant": "fivefries",
+            "email": "fivefries@somemail.com",
+            "username": "five_fries",
+            "phone": "1234567890",
+            "address": "123 Fries Way",
+            "password1": "qaz2wsedc4rf",
+            "password2": "qaz2wsedc4rf",
+        }
+        form = RestuarantUserForm(data)
+        self.assertTrue(form.is_valid())
