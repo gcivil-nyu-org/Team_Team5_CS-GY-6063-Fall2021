@@ -434,3 +434,24 @@ class TestUserProfileCreation(TestCase):
         """
         response = self.client.get(reverse("accounts:register"))
         self.assertEqual(response.status_code, 200)
+    
+    def test_profile_normal_access(self):
+        """
+        Once a user is logged in, the profile page should be accessible
+        """
+        c = Client()
+        user = User.objects.create_user("Annika", "annika@email.com")
+        c.force_login(user=user)
+        response = self.client.post(
+            reverse("accounts:register"),
+            data = {
+            "name_of_restaurant": "fivefries",
+            "email": "fivefries@somemail.com",
+            "username": "five_fries",
+            "phone": "1234567890",
+            "address": "123 Fries Way",
+            "password1": "qaz2wsedc4rf",
+            "password2": "qaz2wsedc4rf",
+        }
+        )
+        self.assertEqual(response.status_code, 200)
