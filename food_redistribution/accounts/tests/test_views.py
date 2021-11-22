@@ -409,6 +409,7 @@ class ViewTestsAgain(TestCase):
         mock.res_check()
         mock.res_check.assert_called()
 
+
 class TestUserProfileCreation(TestCase):
     def setUp(self):
         self.user = User.objects.create(username="test")
@@ -427,14 +428,14 @@ class TestUserProfileCreation(TestCase):
         }
         form = RestuarantUserForm(data)
         self.assertTrue(form.is_valid())
-    
+
     def test_access_signup(self):
         """
         A get request to the signup page should yield a valid response
         """
         response = self.client.get(reverse("accounts:register"))
         self.assertEqual(response.status_code, 200)
-    
+
     def test_profile_normal_access_res(self):
         """
         Once a user is logged in, the profile page should be accessible
@@ -444,15 +445,15 @@ class TestUserProfileCreation(TestCase):
         c.force_login(user=user)
         response = self.client.post(
             reverse("accounts:register"),
-            data = {
-            "name_of_restaurant": "fivefries",
-            "email": "fivefries@somemail.com",
-            "username": "five_fries",
-            "phone": "1234567890",
-            "address": "123 Fries Way",
-            "password1": "qaz2wsedc4rf",
-            "password2": "qaz2wsedc4rf",
-        }
+            data={
+                "name_of_restaurant": "fivefries",
+                "email": "fivefries@somemail.com",
+                "username": "five_fries",
+                "phone": "1234567890",
+                "address": "123 Fries Way",
+                "password1": "qaz2wsedc4rf",
+                "password2": "qaz2wsedc4rf",
+            },
         )
         self.assertEqual(response.status_code, 200)
 
@@ -465,14 +466,14 @@ class TestUserProfileCreation(TestCase):
         c.force_login(user=user)
         response = self.client.post(
             reverse("accounts:register2"),
-            data = {
-            "name_of_food_redis": "fivefries",
-            "email": "fivefries@somemail.com",
-            "username": "five_fries",
-            "phone": "1234567890",
-            "address": "123 Fries Way",
-            "password1": "qaz2wsedc4rf",
-            "password2": "qaz2wsedc4rf",
-        }
+            data={
+                "name_of_food_redis": "fivefries",
+                "email": "fivefries@somemail.com",
+                "username": "five_fries",
+                "phone": "1234567890",
+                "address": "123 Fries Way",
+                "password1": "qaz2wsedc4rf",
+                "password2": "qaz2wsedc4rf",
+            },
         )
         self.assertEqual(response.status_code, 200)

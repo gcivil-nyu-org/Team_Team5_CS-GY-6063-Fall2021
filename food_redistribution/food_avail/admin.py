@@ -1,5 +1,6 @@
 from django.contrib import admin
-from food_avail.models import FoodAvail
+from .models import FoodAvail, TimeSlot
 
 # Register your models here.
 admin.site.register(FoodAvail)
+admin.site.register(TimeSlot)

@@ -1,11 +1,56 @@
 {%  include 'food_avail/base.html' %}
 
-{% for f in food %}
-    <h2>{{f.author.username}}</h2>
-        <p>{{f.food_available}} meals</p>
-        <p>{{f.description}}</p>
-        <p>Food available till: {{f.available_till}}</p>
-    <br>
 
-    {% endfor %}
-</ul>
+<div>
+    <div>
+        <div>
+            <div>
+                {% for u in user_info %}
+                <h4>
+                    {{ u.author }}<br>
+                </h4>
+            </div>
+            <div>
+                Food Available: {{ u.food_available }}<br>
+                Description: {{ u.description }}<br>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-lg-6">
+                <div class="card">
+                    {% if u.timeslot %}
+                    <div class="card-title">
+                        <h4> List Of Time Slots </h4>
+                    </div>
+                    {% for t in u.timeslot %}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                    <tr>
+                                        <td>{{t.start_time | time:'H:i:s'}}</td>
+                                        <td>{{t.end_time | time:'H:i:s'}}</td>
+                    
+                                    </tr>
+                
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p>{{u.author }} has not posted any timeslots yet.</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>

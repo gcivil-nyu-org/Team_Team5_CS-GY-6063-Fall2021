@@ -12,6 +12,7 @@ script:
   - coverage run -a --source="." manage.py test accounts
   - coverage run -a --source="." manage.py test cal
   - coverage run -a --source="." manage.py test yelp_search.tests.test_views
+  - coverage run -a --source="." manage.py test food_avail
 
 after_success:
   - coveralls
