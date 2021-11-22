@@ -15,27 +15,29 @@
 {% endfor %}
 {% endif %}
 {% if user.is_authenticated %}
-<div>
-    <div>
-        <div>
-            <div>
-                <h4>
-                    {{ food.author.username }}<br>
-                </h4>
-            </div>
-            <div>
-                <meta charset="UTF-8">
+<head>            
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Availability</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="{% static 'food_avail/css/post_food_avail.css' %}" />
+	<link rel="stylesheet" href="https://fonts.googleapi0s.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{% static 'food_avail/css/view_food.css' %}" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
 
 	<!-- Material Design javascript --->
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<div>
+    <div>
+        <div class="mainbody_container">
+            <div>
+                <h4>
+                    {{ food.author.username }}<br>
+                </h4>
+            </div>
+            <div>
                 Food Available: {{ food.food_available }}<br>
                 Description: {{ food.description }}<br>
                 {% endif %}
