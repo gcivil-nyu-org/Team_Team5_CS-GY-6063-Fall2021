@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
 from . import views
 
 # from . import
@@ -27,7 +27,9 @@ urlpatterns = [
     path(
         "reset_password/",
         auth_views.PasswordResetView.as_view(
-            template_name="accounts/password_reset.html"
+            template_name="accounts/password_reset.html",
+            success_url=reverse_lazy("accounts:password_reset_done"),
+            email_template_name="accounts/password_reset_new.html",
         ),
         name="reset_password",
     ),
@@ -41,7 +43,8 @@ urlpatterns = [
     path(
         "reset/<uidb64>/<token>/",
         auth_views.PasswordResetConfirmView.as_view(
-            template_name="accounts/password_reset_form.html"
+            template_name="accounts/password_reset_form.html",
+            success_url=reverse_lazy("accounts:password_reset_complete"),
         ),
         name="password_reset_confirm",
     ),

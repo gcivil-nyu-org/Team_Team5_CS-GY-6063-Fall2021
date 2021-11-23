@@ -163,3 +163,7 @@ def check_food_availibility(request):
         users_lst.append(user)
 
     return render(request, "food_avail/view_food_avail.html", {"user_info": users_lst})
+
+
+def create_bookings(request):
+    return render(request, "food_avail/bookings.html")
