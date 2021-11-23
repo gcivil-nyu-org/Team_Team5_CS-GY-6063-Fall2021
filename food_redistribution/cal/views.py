@@ -96,6 +96,4 @@ def event_delete(request, pk):
     if request.method == "POST":
         event.delete()
         return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
-    return render(
-        request, "cal/delete_event.html", {"event": form}
-    )  # pragma: no cover
+    return render(request, "cal/delete_event.html", {"event": form})  # pragma: no cover

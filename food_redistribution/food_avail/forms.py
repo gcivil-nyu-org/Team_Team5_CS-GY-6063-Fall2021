@@ -3,6 +3,7 @@ from django.forms import DateInput, ModelForm, TextInput
 
 from food_avail.models import FoodAvail, TimeSlot
 
+
 class FoodAvailForm(ModelForm):
     class Meta:
         model = FoodAvail
