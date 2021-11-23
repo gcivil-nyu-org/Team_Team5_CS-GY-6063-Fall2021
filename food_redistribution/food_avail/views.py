@@ -71,22 +71,29 @@ def view_available_food(request):
                 time_slot_owner=request.user, start_time=start_time, end_time=end_time
             )
         )
-        if (
-            len(
-                TimeSlot.objects.filter(
-                    time_slot_owner=request.user,
-                    start_time=start_time,
-                    end_time=end_time,
-                )
-            )
-            == 0
-        ):
-            # data["food_avail_id"] = FoodAvail.objects.get(author=request.user).pk
+        if (len(TimeSlot.objects.filter(time_slot_owner=request.user, start_time=start_time, end_time=end_time)) == 0):
+
             form = TimeSlotForm(data or None, instance=time_slot)
             if form.is_valid():
-                form.save()
-                print("its working")
-                context["time_slot"] = form
+                # if time slot exists from 12-15, check if start time is between 12 and 15
+                if TimeSlot.objects.filter(start_time__lt=start_time, end_time__gt=start_time).exists():
+                    messages.info(request, "Time slots cannot overlap!")
+
+                # if time slot exists from 12-15, check if end time is between 12 and 15
+                elif TimeSlot.objects.filter(start_time__lt=end_time, end_time__gt=end_time).exists():
+                    messages.info(request, "Time slots cannot overlap!")
+
+                # if time slot exists from 12-15, check if start time and end time are between 12 and 15 (13, 14)
+                elif TimeSlot.objects.filter(start_time__lt=start_time, end_time__gt=end_time):
+                    messages.info(request, "Time slots cannot overlap!")
+
+                # if time slot exists from 12-15, check if start time and time are both outside 12 and 15 (11-16)
+                elif TimeSlot.objects.filter(start_time__gt=start_time, end_time__lt=end_time):
+                    messages.info(request, "Time slots cannot overlap!")
+                else:
+                    form.save()
+                    print("its working")
+                    context["time_slot"] = form
             else:
                 messages.info(request, "Start time cannot be after end time!")
         else:
