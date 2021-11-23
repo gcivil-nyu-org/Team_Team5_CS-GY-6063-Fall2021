@@ -14,6 +14,9 @@
 
   <!-- Material Design javascript --->
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  {% if user.is_authenticated %}	
+		<meta http-equiv="refresh" content="0; URL=http://127.0.0.1:8000/profile/" />
+	{% endif %}
 </head>
 
 <body>
