@@ -92,9 +92,10 @@ def event_update(request, pk):
 
 def event_delete(request, pk):
     event = get_object_or_404(Event, pk=pk)
+    form = EventForm(request.POST or None, instance=event)
     if request.method == "POST":
         event.delete()
         return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
     return render(
-        request, "cal/delete_event.html", {"event": event}
+        request, "cal/delete_event.html", {"event": form}
     )  # pragma: no cover
