@@ -34,11 +34,11 @@
         <div>
         <div>
             <div>
-                <div>
+                <div class="heading_container">
                     <h4>Edit Time Slot</h4>
                     <br><br>
                 </div>
-                <div>
+                <div class="ma">
                     <div>
                         <form method="post" action="">
                             {% csrf_token %}
@@ -54,6 +54,6 @@
 
     <div class="error-message">
         {% for message in messages %}
-            <p id="messages">{{message}}</p>
+            <p id="messages" style="color:white;">{{message}}</p>
         {% endfor %}
     </div>

@@ -1,9 +1,9 @@
 body {
-  background-image: url("https://media.istockphoto.com/photos/man-smiles-while-picking-up-curbside-order-picture-id1318003130?b=1&k=20&m=1318003130&s=170667a&w=0&h=-FmEqD46sbBYRSG9I6vPYWdEB95JSqXEQT0hcuLkmsc=");
+  background-image: url("https://media.istockphoto.com/photos/antique-glass-clocks-in-the-desert-picture-id1279083466?b=1&k=20&m=1279083466&s=170667a&w=0&h=v2VkLGAXg0yDjHnxCO99FQKTlZTZ3f6JkLAcAC8PeUs=");
   background-size: cover;
   display: flex;
 }
-/* 
+
 .heading_container {
   width: 100%;
   height: 4vh;
@@ -11,12 +11,9 @@ body {
   justify-content: center;
 }
 
-.mainbody_container {
-  width: 100%;
-  height: 4vh;
+.ma {
   color: white;
-  justify-content: center;
-} */
+}
 
 .button {
   background-color: #4caf50; /* Green */
