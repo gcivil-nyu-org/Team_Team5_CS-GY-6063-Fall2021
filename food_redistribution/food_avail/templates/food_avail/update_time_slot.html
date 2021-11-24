@@ -1,9 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Edit Time Slot</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{% static 'food_avail/css/update_timeslot.css' %}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+        <!-- Material Design javascript --->
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
    </head>
    {%  include 'food_avail/base.html' %}
     <div>
@@ -33,7 +43,7 @@
                         <form method="post" action="">
                             {% csrf_token %}
                             {{ timeslot.as_p}}
-                            <button type="submit" style="cursor:pointer">Submit</button>
+                            <button class="button button 1" type="submit" style="cursor:pointer">Submit</button>
                         </form>
                     </div>
                 </div>
