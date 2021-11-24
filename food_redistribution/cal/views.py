@@ -65,11 +65,9 @@ def event_create(request):
             form.save()  # pragma: no cover
             return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
         else:  # pragma: no cover
-            print("Fields",data["author"],data["title"],data["description"])
+            print("Fields", data["author"], data["title"], data["description"])
             if data["title"] == "" or data["description"] == "":
-                messages.info(
-                    request, "Required fields missing."
-                )
+                messages.info(request, "Required fields missing.")
             print("The start time is > than the end time")  # pragma: no cover
             messages.info(
                 request, "Please make sure that start time is before end time"

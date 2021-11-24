@@ -7,18 +7,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='foodredistributor',
-            name='phone',
-            field=models.CharField(max_length=10, validators=[django.core.validators.MinLengthValidator(10)]),
+            model_name="foodredistributor",
+            name="phone",
+            field=models.CharField(
+                max_length=10,
+                validators=[django.core.validators.MinLengthValidator(10)],
+            ),
         ),
         migrations.AlterField(
-            model_name='restaurant',
-            name='phone',
-            field=models.CharField(max_length=10, validators=[django.core.validators.MinLengthValidator(10)]),
+            model_name="restaurant",
+            name="phone",
+            field=models.CharField(
+                max_length=10,
+                validators=[django.core.validators.MinLengthValidator(10)],
+            ),
         ),
     ]
