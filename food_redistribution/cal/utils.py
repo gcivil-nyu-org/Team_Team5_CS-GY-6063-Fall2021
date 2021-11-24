@@ -18,7 +18,7 @@ class Calendar(HTMLCalendar):
             d += f"<li> {event.get_html_url} </li>"  # pragma: no cover
 
         if day != 0:
-            #return f"<td class='calcell mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
+            # return f"<td class='calcell mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
             return f"<td class='calcell mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
              {d} </ul></td>"
         return "<td></td>"
