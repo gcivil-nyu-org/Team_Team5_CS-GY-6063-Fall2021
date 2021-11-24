@@ -57,7 +57,7 @@ def next_month(d):
 def event_create(request):
     instance = Event()
     data = request.POST.copy()
-    print("The data:", data)
+    # print("The data:", data)
     data["author"] = request.user
     form = EventForm(data or None, instance=instance)
     if request.POST:
@@ -65,9 +65,14 @@ def event_create(request):
             form.save()  # pragma: no cover
             return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
         else:  # pragma: no cover
+            print("Fields",data["author"],data["title"],data["description"])
+            if data["title"] == "" or data["description"] == "":
+                messages.info(
+                    request, "Required fields missing."
+                )
             print("The start time is > than the end time")  # pragma: no cover
             messages.info(
-                request, "Start time must be before end time"
+                request, "Please make sure that start time is before end time"
             )  # pragma: no cover
     return render(request, "cal/create_event.html", {"event": form})  # pragma: no cover
 
