@@ -1,5 +1,4 @@
-from django.test import TestCase, Client
-from django.urls import reverse
+from django.test import TestCase
 from unittest.mock import Mock, patch
 from food_avail.models import User, FoodAvail, TimeSlot
 
@@ -40,17 +39,17 @@ class TestViews(TestCase):
     #     response = client.get(reverse("cal:calendar"))
     #     self.assertEquals(response.status_code, 200)
 
-        # def test_post_available_food(self):
-        #     client = Client()
-        #     client.force_login(user=self.user)
-        #     response = client.get(reverse("food_avail:post_food_avail"))
-        #     self.assertEquals(response.status_code, 200)
+    # def test_post_available_food(self):
+    #     client = Client()
+    #     client.force_login(user=self.user)
+    #     response = client.get(reverse("food_avail:post_food_avail"))
+    #     self.assertEquals(response.status_code, 200)
 
-    def test_view_available_food(self):
-        client = Client()
-        client.force_login(user=self.user)
-        response = client.get(reverse("food_avail:view_food_avail_res"))
-        self.assertEquals(response.status_code, 200)
+    # def test_view_available_food(self):
+    #     client = Client()
+    #     client.force_login(user=self.user)
+    #     response = client.get(reverse("food_avail:view_food_avail_res"))
+    #     self.assertEquals(response.status_code, 200)
 
     # def test_event_update(self):
     #     client = Client()
