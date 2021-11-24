@@ -38,7 +38,7 @@ class TestViews(TestCase):
             reverse("cal:event_new"),
             data=data,
         )
-        if form.is_valid() == False:
+        if not form.is_valid():
             self.assertContains(response, "Must have title and description.")
 
     def test_create_event_all_empty_fields(self):
@@ -58,7 +58,7 @@ class TestViews(TestCase):
             reverse("cal:event_new"),
             data=data,
         )
-        if form.is_valid() == False:
+        if not form.is_valid():
             self.assertContains(response, "All fields required.")
 
     def test_create_event_empty_text_invalid_time(self):
@@ -78,8 +78,11 @@ class TestViews(TestCase):
             reverse("cal:event_new"),
             data=data,
         )
-        if form.is_valid() == False:
-            self.assertContains(response, "Must have title, description, and start time before end time.")
+        if not form.is_valid():
+            self.assertContains(
+                response,
+                "Must have title, description, and start time before end time.",
+            )
 
     def test_index(self):
         client = Client()
