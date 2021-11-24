@@ -154,7 +154,8 @@ body {
 .calendar td {
   width: 150px;
   height: 150px;
-  padding: 20px 0px 0px 5px;
+  padding-top: 2.5em;
+  padding-left: 0.5em;
 }
 
 .month {
