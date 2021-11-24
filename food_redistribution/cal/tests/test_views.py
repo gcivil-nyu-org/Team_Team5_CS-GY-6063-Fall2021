@@ -3,6 +3,7 @@ from django.urls import reverse
 from unittest.mock import Mock, patch
 from cal.models import Event
 from accounts.models import User
+from cal.forms import *
 
 
 class TestViews(TestCase):
@@ -18,6 +19,70 @@ class TestViews(TestCase):
             end_time="2021-10-29T21:30",
             author=self.user,
         )
+
+    def test_create_event_no_title_description(self):
+        """
+        If someone tries to make an event without title or description
+        but with correct/valid time, then they should get an error
+        """
+        client = Client()
+        data = {
+            "title": "",
+            "description": "",
+            "start_time": "2021-10-29T19:30",
+            "end_time": "2021-10-29T21:30",
+            "author": self.user,
+        }
+        form = EventForm(data)
+        response = client.post(
+            reverse("cal:event_new"),
+            data=data,
+        )
+        if not form.is_valid():
+            self.assertContains(response, "Must have title and description.")
+
+    def test_create_event_all_empty_fields(self):
+        """
+        All empty fields yields an error
+        """
+        client = Client()
+        data = {
+            "title": "",
+            "description": "",
+            "start_time": "",
+            "end_time": "",
+            "author": self.user,
+        }
+        form = EventForm(data)
+        response = client.post(
+            reverse("cal:event_new"),
+            data=data,
+        )
+        if not form.is_valid():
+            self.assertContains(response, "All fields required.")
+
+    def test_create_event_empty_text_invalid_time(self):
+        """
+        Empty text and invalid time yields an error
+        """
+        client = Client()
+        data = {
+            "title": "",
+            "description": "",
+            "start_time": "2021-10-29T19:30",
+            "end_time": "2021-10-10T19:30",
+            "author": self.user,
+        }
+        form = EventForm(data)
+        response = client.post(
+            reverse("cal:event_new"),
+            data=data,
+        )
+        if not form.is_valid():
+            self.assertContains(
+                response,
+                "Must have title, description, and start time before end time.",
+            )
 
     def test_index(self):
         client = Client()

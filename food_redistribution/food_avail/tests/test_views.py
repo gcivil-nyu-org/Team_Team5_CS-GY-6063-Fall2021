@@ -61,6 +61,24 @@ class TestViews(TestCase):
     #     response = client.get(reverse("cal:event_delete", args=(self.event.pk,)))
     #     self.assertEquals(response.status_code, 200)
 
+    @patch("food_avail.views.delete_time_slot")
+    def test_delete_time_slot(self, delete_time_slot):
+        mock = Mock()
+        mock.delete_time_slot()
+        mock.delete_time_slot.assert_called()
+
+    @patch("food_avail.views.update_time_slot")
+    def test_update_time_slot(self, update_time_slot):
+        mock = Mock()
+        mock.update_time_slot()
+        mock.update_time_slot.assert_called()
+
+    @patch("food_avail.views.view_available_food")
+    def test_view_available_food(self, view_available_food):
+        mock = Mock()
+        mock.view_available_food()
+        mock.view_available_food.assert_called()
+
     @patch("food_avail.views.check_existing_post")
     def test_check_existing_post(self, check_existing_post):
         mock = Mock()
