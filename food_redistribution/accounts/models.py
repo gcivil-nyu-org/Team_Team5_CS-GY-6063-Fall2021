@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.validators import MinLengthValidator
+
 
 # Create your models here.
 
@@ -12,7 +14,7 @@ class FoodRedistributor(models.Model):
     name = models.CharField(max_length=200, default="")
     name_of_food_redis = models.CharField(max_length=200)
     email = models.CharField(max_length=200, unique=True)
-    phone = models.CharField(max_length=200)
+    phone = models.CharField(max_length=10,validators=[MinLengthValidator(10)])
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     is_food_redis = models.BooleanField(default=False)
@@ -30,7 +32,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=200, default="")
     name_of_restaurant = models.CharField(max_length=200)
     email = models.CharField(max_length=200, unique=True)
-    phone = models.CharField(max_length=200)
+    phone = models.CharField(max_length=10,validators=[MinLengthValidator(10)])
     address = models.CharField(max_length=200)
     verified = models.BooleanField(default=False)
     is_res = models.BooleanField(default=False)

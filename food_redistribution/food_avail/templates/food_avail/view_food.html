@@ -122,7 +122,9 @@
     </div>
 </div>
 <div class="error-message">
-    {% for message in messages %}
-    <p id="messages">{{message}}</p>
-    {% endfor %}
+    <div class="msg_container">
+        {% for message in messages %}
+        <p id="messages" style="color:white;">{{message}}</p>
+        {% endfor %}
+    </div>
 </div>
