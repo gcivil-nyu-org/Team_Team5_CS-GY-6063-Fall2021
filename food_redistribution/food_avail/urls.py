@@ -11,6 +11,6 @@ urlpatterns = [
     path("food_avail_res/", views.view_available_food, name="view_food_avail_res"),
     path("update_time_slot/<int:pk>/", views.update_time_slot, name="update_time_slot"),
     path("delete_time_slot/<int:pk>/", views.delete_time_slot, name="delete_time_slot"),
-    path("create_bookings/", views.create_bookings, name="create_bookings"),
+    path("bookings/", views.bookings, name="bookings"),
     # path("food_avail_res/",  views.post_available_timeslots, name="create_timeslots"),
 ]

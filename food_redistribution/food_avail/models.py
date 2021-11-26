@@ -34,3 +34,7 @@ class TimeSlot(models.Model):
     def get_html_url(self):
         url = reverse("food_avail:update_time_slot", args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+
+class Booking(models.Model):
+    bookings_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    meals_booked = models.IntegerField(default=0, validators=[MinValueValidator(0)])

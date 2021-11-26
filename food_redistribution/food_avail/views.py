@@ -165,8 +165,8 @@ def check_food_availibility(request):
     return render(request, "food_avail/view_food_avail.html", {"user_info": users_lst})
 
 
-def create_bookings(request):
-
+def bookings(request):
     timeslots = TimeSlot.objects.all()
-
     return render(request, "food_avail/bookings.html", {'time_slot': timeslots})
+
+# def creat
