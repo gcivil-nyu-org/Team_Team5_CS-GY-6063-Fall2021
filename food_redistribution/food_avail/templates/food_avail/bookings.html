@@ -7,5 +7,57 @@
 </head>
 <body>
     <h1>Bookings</h1>
+
+    <div class="card mt-5">
+        <div class="card-title">
+            <h4>Available Time Slots</h4>
+        </div>
+        <div class="card-body">
+            {% if time_slot %}
+            <div class="table-responsive">
+                <table class="table table-hover ">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Restaurant Name</th>
+                            <th>Book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for slot in time_slot %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{slot.start_time | time:"H:i:s"}}</td>
+                            <td>{{slot.end_time | time:"H:i:s" }}</td>
+                            <td><span class="badge badge-primary">{{ slot.time_slot_owner }}</span></td>
+
+                            <td>
+                                <form action="#" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="owner" value="{{ slot.time_slot_owner.id }}"/>
+                                    <input type="hidden" name="start_time" value="{{slot.start_time | time:'H:i:s'}}"/>
+                                    <input type="hidden" name="end_time" value="{{ slot.end_time | time:'H:i:s'}}"/>
+                                    <input type="submit" value="Book" class="button btn-success" style="cursor:pointer">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <hr>
+            <div class="text-center medium">
+                No Search Results Found.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
