@@ -12,5 +12,6 @@ urlpatterns = [
     path("update_time_slot/<int:pk>/", views.update_time_slot, name="update_time_slot"),
     path("delete_time_slot/<int:pk>/", views.delete_time_slot, name="delete_time_slot"),
     path("bookings/", views.bookings, name="bookings"),
+    path("create_bookings/", views.create_booking, name="create_booking"),
     # path("food_avail_res/",  views.post_available_timeslots, name="create_timeslots"),
 ]

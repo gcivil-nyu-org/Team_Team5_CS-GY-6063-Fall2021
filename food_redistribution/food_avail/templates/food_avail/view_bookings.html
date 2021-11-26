@@ -1,0 +1,27 @@
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-hover ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Food Redistributor Name</th>
+                    <th>Cancelled</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for x in booked %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{x.username}}</td>
+
+
+
+                        <td>
+                        </td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+

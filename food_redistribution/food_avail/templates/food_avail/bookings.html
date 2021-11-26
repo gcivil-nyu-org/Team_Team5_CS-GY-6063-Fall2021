@@ -33,15 +33,10 @@
                             <td>{{slot.start_time | time:"H:i:s"}}</td>
                             <td>{{slot.end_time | time:"H:i:s" }}</td>
                             <td><span class="badge badge-primary">{{ slot.time_slot_owner }}</span></td>
-
                             <td>
-                                <form action="#" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="owner" value="{{ slot.time_slot_owner.id }}"/>
-                                    <input type="hidden" name="start_time" value="{{slot.start_time | time:'H:i:s'}}"/>
-                                    <input type="hidden" name="end_time" value="{{ slot.end_time | time:'H:i:s'}}"/>
-                                    <input type="submit" value="Book" class="button btn-success" style="cursor:pointer">
-                                </form>
+                                <span>
+                                    <a href="{% url 'food_avail:create_booking' %}">Book</a>
+                                </span>
                             </td>
                         </tr>
                     {% endfor %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
-from .forms import FoodAvailForm, TimeSlotForm
+from .forms import FoodAvailForm, TimeSlotForm, BookingForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -169,4 +169,32 @@ def bookings(request):
     timeslots = TimeSlot.objects.all()
     return render(request, "food_avail/bookings.html", {'time_slot': timeslots})
 
-# def creat
+def create_booking(request):
+    instance = Booking()
+    data = request.POST.copy()
+    # print(data)
+    # print(instance)
+    data["bookings_owner"] = request.user
+    # data["time_slot"] = request.POST.get("time_slot")
+    form = BookingForm(data or None, instance=instance)
+    print(data["time_slot"])
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        # print(request.POST["time_slot"])
+        # timeslot = TimeSlot.objects.get(id=request.POST["time_slot"].id)
+        # print(timeslot)
+        # print(request.POST.get("meals_booked"))
+        # data["time_slot"] = request.POST.get("time_slot")
+        # print("TIME SLOT: ", request.POST.get("time_slot"))
+        # if len(Booking.objects.filter(time_slot=request.POST.get("time_slot"))) > 0:
+            # messages.info(request, "Time Slot Has Already Been Booked!")
+        # else:
+            # if form.is_valid():
+                # form.save()
+            # else:
+                # messages.info(request, "Cannot make booking at this time")
+    
+    return render(request, "food_avail/create_booking.html", {"booking": form})
+
+def view_bookings(request):
+    
