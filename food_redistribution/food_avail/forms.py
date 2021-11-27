@@ -53,6 +53,7 @@ class TimeSlotForm(ModelForm):
         self.fields["start_time"].input_formats = ("%H:%M",)
         self.fields["end_time"].input_formats = ("%H:%M",)
 
+
 class BookingForm(ModelForm):
     class Meta:
         model = Booking
@@ -61,8 +62,12 @@ class BookingForm(ModelForm):
             "restaurant": forms.HiddenInput(),
             "start_time": forms.HiddenInput(),
             "end_time": forms.HiddenInput(),
-            "meals_booked": forms.NumberInput(
-                attrs={"placeholder": "Food Available"}
-            ),
+            "meals_booked": forms.NumberInput(attrs={"placeholder": "Food Available"}),
         }
-        fields = ["meals_booked", "bookings_owner", "restaurant", "start_time", "end_time"]
+        fields = [
+            "meals_booked",
+            "bookings_owner",
+            "restaurant",
+            "start_time",
+            "end_time",
+        ]
