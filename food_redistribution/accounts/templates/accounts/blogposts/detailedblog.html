@@ -1,3 +1,5 @@
+{% load static %}
+{%  include './navbar.html' %}
 {% if user.is_authenticated %}
 
 <h1>{{ post.title }}</h1>

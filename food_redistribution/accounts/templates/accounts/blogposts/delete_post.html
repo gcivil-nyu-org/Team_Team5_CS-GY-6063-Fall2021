@@ -1,4 +1,6 @@
+{% load static %}
 {% block content %}
+{%  include './navbar.html' %}
 
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
