@@ -175,14 +175,30 @@ def check_food_availibility(request):
 def bookings(request):
     timeslots = TimeSlot.objects.all()
     timeslots_avail = []
+
+    authors = [food.author for food in FoodAvail.objects.all()]
+    print(authors)
+    
+    leftover_dict = {}
+    for a in authors:
+        food_available = FoodAvail.objects.get(author=a).food_available
+        total_bookings = 0
+        for b in Booking.objects.filter(restaurant=a):
+            total_bookings += b.meals_booked
+        print(total_bookings)
+        leftover = food_available - total_bookings
+        leftover_dict[a] = leftover
+    print(leftover_dict)
+
     for t in timeslots:
         if not Booking.objects.filter(
             bookings_owner=request.user,
             restaurant=t.time_slot_owner,
             start_time=t.start_time,
             end_time=t.end_time,
-        ).exists():
+        ).exists() and leftover_dict[t.time_slot_owner] > 0:
             timeslots_avail.append(t)
+
     return render(request, "food_avail/bookings.html", {"time_slot": timeslots_avail})
 
 
@@ -214,7 +230,7 @@ def create_booking(request):
         for b in prev_bookings:
             prev_bookings_count += b.meals_booked
         print(type(curr_meals))
-        if curr_meals - prev_bookings_count - meals_booked <= 0:
+        if curr_meals - prev_bookings_count - meals_booked < 0:
             messages.info(request, "No more meals available for pickup!")
         else:
             FoodAvail.objects.get(author=restaurant).food_available -= meals_booked
