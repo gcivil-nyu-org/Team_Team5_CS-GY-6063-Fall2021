@@ -49,7 +49,16 @@ def post_available_food(request):
 def view_available_food(request):
     context = {}
     instance = FoodAvail.objects.get(author=request.user)
+    meals_booked = 0
+    bookings = Booking.objects.filter(restaurant=request.user)
+    for b in bookings:
+        meals_booked += b.meals_booked
+    print(meals_booked)
+    instance.food_available -= meals_booked
+    if instance.food_available < 0:
+        instance.food_available = 0
     context["food"] = instance
+    print("FOOOOOD", context["food"])
     if request.method == "POST":
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
@@ -146,12 +155,19 @@ def check_food_availibility(request):
             "timeslot": None,
         }
         user["author"] = food[i].author.username
-        user["food_available"] = food[i].food_available
+        meals_booked = 0
+        bookings = Booking.objects.filter(restaurant=food[i].author)
+        for b in bookings:
+            meals_booked += b.meals_booked
+        user["food_available"] = food[i].food_available - meals_booked
+        if user["food_available"] < 0:
+            user["food_available"] = 0
         user["description"] = food[i].description
         if TimeSlot.objects.filter(time_slot_owner=food[i].author):
             user["timeslot"] = TimeSlot.objects.filter(time_slot_owner=food[i].author)
         users_dict[food[i].author.username] = user
         users_lst.append(user)
+
 
     return render(request, "food_avail/view_food_avail.html", {"user_info": users_lst})
 
@@ -189,19 +205,29 @@ def create_booking(request):
     # data[]
     form = BookingForm(data or None, instance=instance)
     if request.method == "POST" and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse("food_avail:view_bookings"))    
+        meals_booked = request.POST.get("meals_booked")
+        meals_booked = int(meals_booked)
+        print(type(meals_booked))
+        
+        curr_meals = FoodAvail.objects.get(author=restaurant).food_available
+        prev_bookings_count = 0
+        prev_bookings = Booking.objects.filter(restaurant=restaurant)
+        for b in prev_bookings:
+            prev_bookings_count += b.meals_booked
+        print(type(curr_meals))
+        if curr_meals - prev_bookings_count - meals_booked <= 0:
+            messages.info(request, "No more meals available for pickup!")
+        else:
+            FoodAvail.objects.get(author=restaurant).food_available -= meals_booked
+            print(FoodAvail.objects.get(author=restaurant).food_available)
+            form.save()
+            return HttpResponseRedirect(reverse("food_avail:view_bookings"))    
     return render(request, "food_avail/create_booking.html", {"booking": form})
 
 def view_bookings(request):
     instance = Booking()
     data = request.POST.copy()
     print(data)
-    if request.method == "POST":
-        start_time = request.POST.get("start_time")
-        end_time = request.POST.get("end_time")
-        print(start_time)
-        print(end_time)
     booked = Booking.objects.filter(bookings_owner=request.user)    
     print(booked)
 
@@ -213,3 +239,6 @@ def delete_booking(request, pk):
         booking.delete()
         # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
     return HttpResponseRedirect(reverse("food_avail:view_bookings"))
+
+def calculate_meals_left(request):
+    pass
