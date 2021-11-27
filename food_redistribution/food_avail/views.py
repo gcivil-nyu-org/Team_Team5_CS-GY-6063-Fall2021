@@ -178,7 +178,7 @@ def bookings(request):
 
     authors = [food.author for food in FoodAvail.objects.all()]
     print(authors)
-    
+
     leftover_dict = {}
     for a in authors:
         food_available = FoodAvail.objects.get(author=a).food_available
@@ -191,12 +191,15 @@ def bookings(request):
     print(leftover_dict)
 
     for t in timeslots:
-        if not Booking.objects.filter(
-            bookings_owner=request.user,
-            restaurant=t.time_slot_owner,
-            start_time=t.start_time,
-            end_time=t.end_time,
-        ).exists() and leftover_dict[t.time_slot_owner] > 0:
+        if (
+            not Booking.objects.filter(
+                bookings_owner=request.user,
+                restaurant=t.time_slot_owner,
+                start_time=t.start_time,
+                end_time=t.end_time,
+            ).exists()
+            and leftover_dict[t.time_slot_owner] > 0
+        ):
             timeslots_avail.append(t)
 
     return render(request, "food_avail/bookings.html", {"time_slot": timeslots_avail})
