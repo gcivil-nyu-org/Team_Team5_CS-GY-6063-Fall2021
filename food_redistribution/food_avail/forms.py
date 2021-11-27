@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import DateInput, ModelForm, TextInput
 
-from food_avail.models import FoodAvail, TimeSlot
+from food_avail.models import FoodAvail, TimeSlot, Booking
 
 
 class FoodAvailForm(ModelForm):
@@ -52,3 +52,22 @@ class TimeSlotForm(ModelForm):
         # input_formats parses HTML5 datetime-local input to datetime field
         self.fields["start_time"].input_formats = ("%H:%M",)
         self.fields["end_time"].input_formats = ("%H:%M",)
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Booking
+        widgets = {
+            "bookings_owner": forms.HiddenInput(),
+            "restaurant": forms.HiddenInput(),
+            "start_time": forms.HiddenInput(),
+            "end_time": forms.HiddenInput(),
+            "meals_booked": forms.NumberInput(attrs={"placeholder": "Food Available"}),
+        }
+        fields = [
+            "meals_booked",
+            "bookings_owner",
+            "restaurant",
+            "start_time",
+            "end_time",
+        ]

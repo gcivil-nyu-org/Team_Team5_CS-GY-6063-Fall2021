@@ -23,6 +23,7 @@
               {% if user.rest %}
                 <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
               {% else %}
+              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings' %}">View Bookings</a>
               <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout2' %}">Log out</a>
               {% endif %}
             {% else %}

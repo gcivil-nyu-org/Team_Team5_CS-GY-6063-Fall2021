@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
-from .forms import FoodAvailForm, TimeSlotForm
+from .forms import FoodAvailForm, TimeSlotForm, BookingForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+
 
 # from django.views.generic import CreateView, UpdateView
 
@@ -49,21 +50,24 @@ def post_available_food(request):
 def view_available_food(request):
     context = {}
     instance = FoodAvail.objects.get(author=request.user)
+    meals_booked = 0
+    bookings = Booking.objects.filter(restaurant=request.user)
+    for b in bookings:
+        meals_booked += b.meals_booked
+    print(meals_booked)
+    instance.food_available -= meals_booked
+    if instance.food_available < 0:
+        instance.food_available = 0
     context["food"] = instance
+    print("FOOOOOD", context["food"])
     if request.method == "POST":
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
-
-        print("PRINT START TIME: ", start_time)
-        print("PRINT END TIME: ", end_time)
-
-        # if not check_existing_timeslot(request):
-        print("Time slot does not exist")
-        print("DATA")
         time_slot = TimeSlot()
         data = request.POST.copy()
-        print(time_slot)
+        print("-----DATA----", data)
         data["time_slot_owner"] = request.user
+        print("------DATA AFTER------", data)
         time_slot_owner = request.POST.get("time_slot_owner")
         print("PRINT CREATOR: ", time_slot_owner)
         print(
@@ -109,12 +113,10 @@ def view_available_food(request):
                     messages.info(request, "Time slots cannot overlap!")
                 else:
                     form.save()
-                    print("its working")
                     context["time_slot"] = form
             else:
                 messages.info(request, "Start time cannot be after end time!")
         else:
-            print("it already exists")
             messages.info(request, "Time Slot Already Exists")
 
     time_slots_all = TimeSlot.objects.filter(time_slot_owner=request.user)
@@ -129,7 +131,6 @@ def update_time_slot(request, pk):
         form.save()
         return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
     else:
-        print("not working")
         messages.info(request, "Start time cannot be after end time!")
     return render(request, "food_avail/update_time_slot.html", {"timeslot": form})
 
@@ -155,7 +156,13 @@ def check_food_availibility(request):
             "timeslot": None,
         }
         user["author"] = food[i].author.username
-        user["food_available"] = food[i].food_available
+        meals_booked = 0
+        bookings = Booking.objects.filter(restaurant=food[i].author)
+        for b in bookings:
+            meals_booked += b.meals_booked
+        user["food_available"] = food[i].food_available - meals_booked
+        if user["food_available"] < 0:
+            user["food_available"] = 0
         user["description"] = food[i].description
         if TimeSlot.objects.filter(time_slot_owner=food[i].author):
             user["timeslot"] = TimeSlot.objects.filter(time_slot_owner=food[i].author)
@@ -165,5 +172,72 @@ def check_food_availibility(request):
     return render(request, "food_avail/view_food_avail.html", {"user_info": users_lst})
 
 
-def create_bookings(request):
-    return render(request, "food_avail/bookings.html")
+def bookings(request):
+    timeslots = TimeSlot.objects.all()
+    timeslots_avail = []
+    for t in timeslots:
+        if not Booking.objects.filter(
+            bookings_owner=request.user,
+            restaurant=t.time_slot_owner,
+            start_time=t.start_time,
+            end_time=t.end_time,
+        ).exists():
+            timeslots_avail.append(t)
+    return render(request, "food_avail/bookings.html", {"time_slot": timeslots_avail})
+
+
+def create_booking(request):
+    instance = Booking()
+    data = request.POST.copy()
+    print(data)
+    bookings_owner_id = data["bookings_owner"]
+    # print(bookings_owner_name)
+    restaurant_id = data["restaurant"]
+    # print(bookings_owner_name)
+    print("DATAAAAAA", data)
+    print("BOOKING OWNER", data["bookings_owner"])
+    bookings_owner = User.objects.get(pk=bookings_owner_id)
+    restaurant = User.objects.get(pk=restaurant_id)
+    data["bookings_owner"] = bookings_owner
+    data["restaurant"] = restaurant
+    print(data)
+    # data[]
+    form = BookingForm(data or None, instance=instance)
+    if request.method == "POST" and form.is_valid():
+        meals_booked = request.POST.get("meals_booked")
+        meals_booked = int(meals_booked)
+        print(type(meals_booked))
+
+        curr_meals = FoodAvail.objects.get(author=restaurant).food_available
+        prev_bookings_count = 0
+        prev_bookings = Booking.objects.filter(restaurant=restaurant)
+        for b in prev_bookings:
+            prev_bookings_count += b.meals_booked
+        print(type(curr_meals))
+        if curr_meals - prev_bookings_count - meals_booked <= 0:
+            messages.info(request, "No more meals available for pickup!")
+        else:
+            FoodAvail.objects.get(author=restaurant).food_available -= meals_booked
+            print(FoodAvail.objects.get(author=restaurant).food_available)
+            form.save()
+            return HttpResponseRedirect(reverse("food_avail:view_bookings"))
+    return render(request, "food_avail/create_booking.html", {"booking": form})
+
+
+def view_bookings(request):
+
+    booked = Booking.objects.filter(bookings_owner=request.user)
+
+    return render(request, "food_avail/view_bookings.html", {"booked": booked})
+
+
+def delete_booking(request, pk):
+    booking = get_object_or_404(Booking, pk=pk)
+    if request.method == "POST":
+        booking.delete()
+        # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
+    return HttpResponseRedirect(reverse("food_avail:view_bookings"))
+
+
+def calculate_meals_left(request):
+    pass

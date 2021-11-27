@@ -20,30 +20,34 @@
     
 
     {% block title %}
-    <div class="heading_container">
-    Food Availability
-    </div>
     {% endblock %}
 
     {% block content %}
     <div class="clearfix">
     <a class="btn btn-info left" href="{% url 'accounts:profile' %}"> Go to Dashboard </a>
     </div>
-
     <main id="body-main">
-        <div class="mainbody_container">
-        <h1>Food Availability</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ food.as_p}}
-            <button class="button button1" type="submit">Post Availability</button>
-            <br>
-        </form>
+        <div class="screen">
+            <div class="login-container">
+              <div class="login-card mdl-card mdl-shadow--8dp">
+                <div class="login-card-title">
+                    <div class="mainbody_container">
+                    <h1>Food Availability</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ food.as_p}}
+                        <button class="button button1" type="submit">Post Availability</button>
+                        <br>
+                    </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="error-message">
             {% for message in messages %}
                 <p id="messages">{{message}}</p>
             {% endfor %}
+        </div>
     </main>
     {% endblock %}
     
