@@ -158,23 +158,31 @@ def check_food_availibility(request):
 
 def bookings(request):
     timeslots = TimeSlot.objects.all()
-    if request.method == "POST":
-        start_time = request.POST.get("start_time")
-        print("START TIME: ", start_time)
-    return render(request, "food_avail/bookings.html", {'time_slot': timeslots})
+    timeslots_avail = []
+    for t in timeslots:
+        if not Booking.objects.filter(bookings_owner=request.user, restaurant=t.time_slot_owner, start_time=t.start_time, end_time=t.end_time).exists():
+            timeslots_avail.append(t) 
+    # to_be_deleted = []
+    # for t in timeslots_copy:
+    #     if Booking.objects.filter(bookings_owner=request.user, restaurant=t.time_slot_owner, start_time=t.start_time, end_time=t.end_time).exists():
+    #         to_be_deleted.append(t.id)
+    # timeslots_copy.filter(id__in=to_be_deleted).delete()
+    # print(timeslots)
+    # print(timeslots_copy)
+    return render(request, "food_avail/bookings.html", {'time_slot': timeslots_avail})
 
 def create_booking(request):
     instance = Booking()
     data = request.POST.copy()
     print(data)
-    bookings_owner_name = data["bookings_owner"]
-    print(bookings_owner_name)
-    restaurant_name = data["restaurant"]
-    print(bookings_owner_name)
+    bookings_owner_id = data["bookings_owner"]
+    # print(bookings_owner_name)
+    restaurant_id = data["restaurant"]
+    # print(bookings_owner_name)
     print("DATAAAAAA", data)
     print("BOOKING OWNER", data["bookings_owner"])
-    bookings_owner = User.objects.get(pk=bookings_owner_name)
-    restaurant = User.objects.get(pk=restaurant_name)
+    bookings_owner = User.objects.get(pk=bookings_owner_id)
+    restaurant = User.objects.get(pk=restaurant_id)
     data["bookings_owner"] = bookings_owner
     data["restaurant"] = restaurant
     print(data)
@@ -199,3 +207,9 @@ def view_bookings(request):
 
     return render(request, "food_avail/view_bookings.html", {"booked": booked})
 
+def delete_booking(request, pk):
+    booking = get_object_or_404(Booking, pk=pk)
+    if request.method == "POST":
+        booking.delete()
+        # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
+    return HttpResponseRedirect(reverse("food_avail:view_bookings"))

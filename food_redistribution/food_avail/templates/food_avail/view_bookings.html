@@ -38,7 +38,7 @@
                         <td>{{x.start_time | time:"h:i:s"}} - {{x.end_time | time:"h:i:s"}}</td>
                         <td>{{x.meals_booked}}</td>
                         <td>
-                            <form action="{% url 'food_avail:delete_time_slot' x.id %}" method="POST">
+                            <form action="{% url 'food_avail:delete_booking' x.id %}" method="POST">
                                 {% csrf_token %}
                                   <input type="submit" class="button btn-warning" style="cursor:pointer;" value="Delete" onclick="return confirm('Are you sure you want to delete this?')">
                               </form>

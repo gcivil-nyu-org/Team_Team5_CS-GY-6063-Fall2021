@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bookings</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    
+        <!-- Material Design javascript --->
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    </head>
+    {%  include 'food_avail/base.html' %}
 <body>
     <h1>Bookings</h1>
 
@@ -36,8 +45,8 @@
                             <td>
                                 <form action="{% url 'food_avail:create_booking' %}" method="POST">
                                     {% csrf_token %}
-                                    <input type="hidden" name="bookings_owner" value="{{ request.user.username }}"/>
-                                    <input type="hidden" name="restaurant" value="{{ slot.time_slot_owner.username }}"/>
+                                    <input type="hidden" name="bookings_owner" value="{{ request.user.id }}"/>
+                                    <input type="hidden" name="restaurant" value="{{ slot.time_slot_owner.id }}"/>
                                     <input type="hidden" name="start_time" value="{{slot.start_time | time:'H:i:s'}}"/>
                                     <input type="hidden" name="end_time" value="{{ slot.end_time | time:'H:i:s'}}"/>
                                     <input type="submit" value="Book" class="button btn-success" style="cursor:pointer">
