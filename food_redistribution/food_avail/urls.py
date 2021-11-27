@@ -13,5 +13,6 @@ urlpatterns = [
     path("delete_time_slot/<int:pk>/", views.delete_time_slot, name="delete_time_slot"),
     path("bookings/", views.bookings, name="bookings"),
     path("create_bookings/", views.create_booking, name="create_booking"),
+    path("view_bookings/", views.view_bookings, name="view_bookings"),
     # path("food_avail_res/",  views.post_available_timeslots, name="create_timeslots"),
 ]

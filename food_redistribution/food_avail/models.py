@@ -39,3 +39,6 @@ class Booking(models.Model):
     bookings_owner = models.ForeignKey(User, on_delete=models.CASCADE)
     # time_slot = models.ForeignKey(TimeSlot, on_delete)
     meals_booked = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    restaurant = models.ForeignKey(User, on_delete=models.CASCADE, related_name="restaurant")

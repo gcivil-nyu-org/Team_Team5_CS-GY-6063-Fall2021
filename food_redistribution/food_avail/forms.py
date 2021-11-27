@@ -58,8 +58,11 @@ class BookingForm(ModelForm):
         model = Booking
         widgets = {
             "bookings_owner": forms.HiddenInput(),
+            "restaurant": forms.HiddenInput(),
+            "start_time": forms.HiddenInput(),
+            "end_time": forms.HiddenInput(),
             "meals_booked": forms.NumberInput(
                 attrs={"placeholder": "Food Available"}
             ),
         }
-        fields = ["meals_booked", "bookings_owner"]
+        fields = ["meals_booked", "bookings_owner", "restaurant", "start_time", "end_time"]

@@ -4,7 +4,7 @@ from .forms import FoodAvailForm, TimeSlotForm, BookingForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
+from accounts.models import Restaurant, FoodRedistributor
 # from django.views.generic import CreateView, UpdateView
 
 # from django.views.generic.base import View
@@ -53,17 +53,11 @@ def view_available_food(request):
     if request.method == "POST":
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
-
-        print("PRINT START TIME: ", start_time)
-        print("PRINT END TIME: ", end_time)
-
-        # if not check_existing_timeslot(request):
-        print("Time slot does not exist")
-        print("DATA")
         time_slot = TimeSlot()
         data = request.POST.copy()
-        print(time_slot)
+        print("-----DATA----", data)
         data["time_slot_owner"] = request.user
+        print("------DATA AFTER------", data)
         time_slot_owner = request.POST.get("time_slot_owner")
         print("PRINT CREATOR: ", time_slot_owner)
         print(
@@ -109,12 +103,10 @@ def view_available_food(request):
                     messages.info(request, "Time slots cannot overlap!")
                 else:
                     form.save()
-                    print("its working")
                     context["time_slot"] = form
             else:
                 messages.info(request, "Start time cannot be after end time!")
         else:
-            print("it already exists")
             messages.info(request, "Time Slot Already Exists")
 
     time_slots_all = TimeSlot.objects.filter(time_slot_owner=request.user)
@@ -129,7 +121,6 @@ def update_time_slot(request, pk):
         form.save()
         return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
     else:
-        print("not working")
         messages.info(request, "Start time cannot be after end time!")
     return render(request, "food_avail/update_time_slot.html", {"timeslot": form})
 
@@ -167,34 +158,44 @@ def check_food_availibility(request):
 
 def bookings(request):
     timeslots = TimeSlot.objects.all()
+    if request.method == "POST":
+        start_time = request.POST.get("start_time")
+        print("START TIME: ", start_time)
     return render(request, "food_avail/bookings.html", {'time_slot': timeslots})
 
 def create_booking(request):
     instance = Booking()
     data = request.POST.copy()
-    # print(data)
-    # print(instance)
-    data["bookings_owner"] = request.user
-    # data["time_slot"] = request.POST.get("time_slot")
+    print(data)
+    bookings_owner_name = data["bookings_owner"]
+    print(bookings_owner_name)
+    restaurant_name = data["restaurant"]
+    print(bookings_owner_name)
+    print("DATAAAAAA", data)
+    print("BOOKING OWNER", data["bookings_owner"])
+    bookings_owner = User.objects.get(pk=bookings_owner_name)
+    restaurant = User.objects.get(pk=restaurant_name)
+    data["bookings_owner"] = bookings_owner
+    data["restaurant"] = restaurant
+    print(data)
+    # data[]
     form = BookingForm(data or None, instance=instance)
-    print(data["time_slot"])
     if request.method == "POST" and form.is_valid():
         form.save()
-        # print(request.POST["time_slot"])
-        # timeslot = TimeSlot.objects.get(id=request.POST["time_slot"].id)
-        # print(timeslot)
-        # print(request.POST.get("meals_booked"))
-        # data["time_slot"] = request.POST.get("time_slot")
-        # print("TIME SLOT: ", request.POST.get("time_slot"))
-        # if len(Booking.objects.filter(time_slot=request.POST.get("time_slot"))) > 0:
-            # messages.info(request, "Time Slot Has Already Been Booked!")
-        # else:
-            # if form.is_valid():
-                # form.save()
-            # else:
-                # messages.info(request, "Cannot make booking at this time")
-    
+        return HttpResponseRedirect(reverse("food_avail:view_bookings"))    
     return render(request, "food_avail/create_booking.html", {"booking": form})
 
 def view_bookings(request):
-    
+    instance = Booking()
+    data = request.POST.copy()
+    print(data)
+    if request.method == "POST":
+        start_time = request.POST.get("start_time")
+        end_time = request.POST.get("end_time")
+        print(start_time)
+        print(end_time)
+    booked = Booking.objects.filter(bookings_owner=request.user)    
+    print(booked)
+
+    return render(request, "food_avail/view_bookings.html", {"booked": booked})
+
