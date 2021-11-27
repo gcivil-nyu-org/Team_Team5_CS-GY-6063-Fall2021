@@ -18,7 +18,7 @@
     {% if user.id == post.author.id %}
         <h1> Edit a post here...</h1>
 
-        <form method = "POST">
+        <form method = "POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p}}
             <button> Update!</button>
