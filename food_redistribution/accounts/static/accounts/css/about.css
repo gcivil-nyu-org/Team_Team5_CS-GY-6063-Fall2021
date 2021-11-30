@@ -81,6 +81,8 @@ body {
 
 .henry-card-title.mdl-card__title {
   background: url('../images/Henry_Tse_Pic.jpg') top 27% right 40%;
+  background-size: contain;
+  background-repeat: no-repeat;
   height: 60vh;
 }
 
