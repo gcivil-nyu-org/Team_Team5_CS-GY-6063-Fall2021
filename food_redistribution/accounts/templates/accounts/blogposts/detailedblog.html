@@ -6,6 +6,7 @@
   	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   	<link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}"/>
   	<link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/detailedblog.css' %}" />
   	<link rel="preconnect" href="https://fonts.googleapis.com">
   	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
   	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 {% if user.is_authenticated %}
-
+<div class="mainbody_container">
 <h1>{{ post.title }}</h1>
 <small> By:{{post.author}}
     {% if user.id == post.author.id %}
@@ -35,6 +36,7 @@
 
 <br/><br/>
 <a href="{% url 'accounts:posts' %}">Go Back</a>
+</div>
 {% else %}
 
     Please login to access this page!
