@@ -4,6 +4,7 @@ from django.shortcuts import render
 # from django.http import Http404
 from .forms import LocationForm
 
+import requests
 
 # from django.contrib.auth.decorators import login_required
 
