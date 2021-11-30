@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://media.istockphoto.com/photos/antique-glass-clocks-in-the-desert-picture-id1279083466?b=1&k=20&m=1279083466&s=170667a&w=0&h=v2VkLGAXg0yDjHnxCO99FQKTlZTZ3f6JkLAcAC8PeUs=");
+  background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max");
   background-size: cover;
 }
 
@@ -10,8 +10,12 @@ body {
   justify-content: center;
 }
 
-.main {
+.mainbody_container {
+  height: 4vh;
+  margin-left: 13%;
   color: white;
+  width: 75%;
+  justify-content: center;
 }
 
 .button {

@@ -10,6 +10,7 @@
     
     <link rel="stylesheet" href="{% static './accounts/css/material.min.css' %}"/>
     <link rel="stylesheet" href="{% static './accounts/css/newnav.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/blogposts.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
@@ -19,7 +20,7 @@
     
 </head>
 {% if user.is_authenticated %}
-
+<div class="mainbody_container">
 <h1>Blog Posts</h1>
 
 <ul>
@@ -37,6 +38,7 @@
     {% endfor %} 
 
 </ul>
+</div>
 {% else %}
 
     Please login to access this page!
