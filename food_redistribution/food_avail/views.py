@@ -4,14 +4,7 @@ from .forms import FoodAvailForm, TimeSlotForm, BookingForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-
-# from django.views.generic import CreateView, UpdateView
-
-# from django.views.generic.base import View
 from django.contrib import messages
-
-# Create your views here.
 
 
 def check_existing_post(request):
@@ -54,27 +47,16 @@ def view_available_food(request):
     bookings = Booking.objects.filter(restaurant=request.user)
     for b in bookings:
         meals_booked += b.meals_booked
-    print(meals_booked)
     instance.food_available -= meals_booked
     if instance.food_available < 0:
         instance.food_available = 0
     context["food"] = instance
-    print("FOOOOOD", context["food"])
     if request.method == "POST":
         start_time = request.POST.get("start_time")
         end_time = request.POST.get("end_time")
         time_slot = TimeSlot()
         data = request.POST.copy()
-        print("-----DATA----", data)
         data["time_slot_owner"] = request.user
-        print("------DATA AFTER------", data)
-        time_slot_owner = request.POST.get("time_slot_owner")
-        print("PRINT CREATOR: ", time_slot_owner)
-        print(
-            TimeSlot.objects.filter(
-                time_slot_owner=request.user, start_time=start_time, end_time=end_time
-            )
-        )
         if (
             len(
                 TimeSlot.objects.filter(
@@ -85,7 +67,6 @@ def view_available_food(request):
             )
             == 0
         ):
-
             form = TimeSlotForm(data or None, instance=time_slot)
             if form.is_valid():
                 # if time slot exists from 12-15, check if start time is between 12 and 15
@@ -139,9 +120,7 @@ def delete_time_slot(request, pk):
     timeslot = get_object_or_404(TimeSlot, pk=pk)
     if request.method == "POST":
         timeslot.delete()
-        # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
     return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
-    # return render(request, "food_avail/delete_time_slot.html", {"timeslot": timeslot})
 
 
 def check_food_availibility(request):
@@ -177,7 +156,6 @@ def bookings(request):
     timeslots_avail = []
 
     authors = [food.author for food in FoodAvail.objects.all()]
-    print(authors)
 
     leftover_dict = {}
     for a in authors:
@@ -185,10 +163,8 @@ def bookings(request):
         total_bookings = 0
         for b in Booking.objects.filter(restaurant=a):
             total_bookings += b.meals_booked
-        print(total_bookings)
         leftover = food_available - total_bookings
         leftover_dict[a] = leftover
-    print(leftover_dict)
 
     for t in timeslots:
         if (
@@ -208,45 +184,32 @@ def bookings(request):
 def create_booking(request):
     instance = Booking()
     data = request.POST.copy()
-    print(data)
     bookings_owner_id = data["bookings_owner"]
-    # print(bookings_owner_name)
     restaurant_id = data["restaurant"]
-    # print(bookings_owner_name)
-    print("DATAAAAAA", data)
-    print("BOOKING OWNER", data["bookings_owner"])
     bookings_owner = User.objects.get(pk=bookings_owner_id)
     restaurant = User.objects.get(pk=restaurant_id)
     data["bookings_owner"] = bookings_owner
     data["restaurant"] = restaurant
-    print(data)
-    # data[]
     form = BookingForm(data or None, instance=instance)
     if request.method == "POST" and form.is_valid():
         meals_booked = request.POST.get("meals_booked")
         meals_booked = int(meals_booked)
-        print(type(meals_booked))
-
         curr_meals = FoodAvail.objects.get(author=restaurant).food_available
         prev_bookings_count = 0
         prev_bookings = Booking.objects.filter(restaurant=restaurant)
         for b in prev_bookings:
             prev_bookings_count += b.meals_booked
-        print(type(curr_meals))
         if curr_meals - prev_bookings_count - meals_booked < 0:
             messages.info(request, "No more meals available for pickup!")
         else:
             FoodAvail.objects.get(author=restaurant).food_available -= meals_booked
-            print(FoodAvail.objects.get(author=restaurant).food_available)
             form.save()
             return HttpResponseRedirect(reverse("food_avail:view_bookings"))
     return render(request, "food_avail/create_booking.html", {"booking": form})
 
 
 def view_bookings(request):
-
     booked = Booking.objects.filter(bookings_owner=request.user)
-
     return render(request, "food_avail/view_bookings.html", {"booked": booked})
 
 
@@ -254,9 +217,4 @@ def delete_booking(request, pk):
     booking = get_object_or_404(Booking, pk=pk)
     if request.method == "POST":
         booking.delete()
-        # return HttpResponseRedirect(reverse("food_avail:view_food_avail_res"))
     return HttpResponseRedirect(reverse("food_avail:view_bookings"))
-
-
-def calculate_meals_left(request):
-    pass

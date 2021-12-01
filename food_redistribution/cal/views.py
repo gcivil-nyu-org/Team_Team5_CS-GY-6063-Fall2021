@@ -64,7 +64,6 @@ def event_create(request):
             form.save()  # pragma: no cover
             return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
         else:  # pragma: no cover
-            print("Fields", data["author"], data["title"], data["description"])
             # If the text fields are empty AND the time is invalid
             if (data["title"] == "" or data["description"] == "") and (
                 data["start_time"] > data["end_time"]

@@ -1,6 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from unittest.mock import Mock, patch
 from food_avail.models import User, FoodAvail, TimeSlot
+from django.urls import reverse
 
 
 class TestViews(TestCase):
@@ -18,6 +19,43 @@ class TestViews(TestCase):
             start_time="19:30",
             end_time="21:30",
         )
+
+    def test_view_food_avail_res(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get("/food_avail_res/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_post_food_avail(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get("/post_food_avail/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_bookings(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get("/bookings/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_bookings_view(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get("/view_bookings/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_url_accessible_by_name(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get(reverse("food_avail:view_food_avail_res"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        client = Client()
+        client.force_login(user=self.user)
+        response = client.get(reverse("food_avail:view_food_avail_res"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "food_avail/view_food.html")
 
     # def test_index(self):
     #     client = Client()
