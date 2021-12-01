@@ -1,5 +1,6 @@
 body {
   background-image: url("https://images.squarespace-cdn.com/content/v1/57879a6cbebafb879f256735/1579721909133-R2KSZ8VGDGBI90DYATBK/header4.jpg");
+  background-size: cover;
 }
 
 .heading_container {
@@ -12,7 +13,8 @@ body {
 .mainbody_container {
   width: 100%;
   height: 4vh;
-  color: white;
+  color: black;
+  width: 40%;
   justify-content: center;
 }
 
@@ -36,3 +38,86 @@ body {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
+.screen {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  /* position: relative; */
+  /* align-items: center; */
+  /* align-content: center; */
+  justify-content: center;
+}
+
+.login-container {
+  /*position: fixed;*/
+  /*right: 30vw;
+  top: 15vh;*/
+  display: flex;
+  justify-content: center;
+}
+
+.iama {
+  font-family: "Zen Kurenaido", sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+.horizontal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /*padding-left: 18%*/
+}
+
+.login-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 512px;
+  height: 80vh;
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+.login-card-title {
+  width: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  /*padding-left: 30%;*/
+}
+
+.create-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.user-pass-form.mdl-card__supporting-text {
+  display: flex;
+  justify-content: center;
+}
+
+/*
+.reset-pass {
+  padding-left: 1.7em;
+}
+
+.new-user {
+  padding-left: 4.6em;
+}*/
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+.create.mdl-button--raised {
+  display: flex;
+  justify-content: center;
+}
+
+/*
+.error-message {
+  padding-top: 2em;
+  padding-left: 3em;
+  color: red;
+}*/

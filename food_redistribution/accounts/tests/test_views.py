@@ -166,7 +166,7 @@ class ViewTests(BaseTest):
 
     def test_wrong_login_restaurant(self):
         response = self.client.post(
-            "/restuarantlogin/",
+            "/restaurantlogin/",
             data={
                 "username": "test1",
                 "password": "test1" + "test1",
@@ -277,7 +277,7 @@ class ViewTests(BaseTest):
         response = c.get(reverse("accounts:logout"))
         self.assertRedirects(
             response,
-            "/restuarantlogin/",
+            "/restaurantlogin/",
             status_code=302,
             target_status_code=200,
             fetch_redirect_response=True,

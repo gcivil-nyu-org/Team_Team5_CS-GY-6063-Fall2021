@@ -18,7 +18,8 @@ class Calendar(HTMLCalendar):
             d += f"<li> {event.get_html_url} </li>"  # pragma: no cover
 
         if day != 0:
-            return f"<td class='mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
+            # return f"<td class='calcell mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
+            return f"<td class='calcell mdl-data-table__cell--non-numeric'><span class='date'>{day}</span><ul> \
              {d} </ul></td>"
         return "<td></td>"
 
@@ -27,7 +28,7 @@ class Calendar(HTMLCalendar):
         week = ""
         for d, weekday in theweek:
             week += self.formatday(d, events)
-        return f"<tr> {week} </tr>"
+        return f"<tr class='row'> {week} </tr>"
 
     # formats a month as a table
     # filter events by year and month

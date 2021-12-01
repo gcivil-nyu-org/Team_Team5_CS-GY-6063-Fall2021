@@ -167,8 +167,13 @@ class AddPostView(CreateView):
 
 class UpdatePostView(UpdateView):
     model = Post
+    form_class = PostForm
     template_name = "accounts/blogposts/update_post.html"
-    fields = ["title", "body"]
+    # fields = "__all__"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class DeletePostView(DeleteView):
@@ -244,7 +249,6 @@ def profile_update(request):
             if user_update_form.is_valid() and entity_update_form.is_valid():
                 user_update_form.save()
                 entity_update_form.save()
-                messages.success(request, f"Your account has been updated!")
                 return redirect("accounts:home")
 
         else:
@@ -256,7 +260,6 @@ def profile_update(request):
             if user_update_form.is_valid() and entity_update_form.is_valid():
                 user_update_form.save()
                 entity_update_form.save()
-                messages.success(request, f"Your account has been updated!")
                 return redirect("accounts:home2")
 
     else:

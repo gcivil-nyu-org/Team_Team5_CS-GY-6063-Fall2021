@@ -1,0 +1,27 @@
+{% block title %}
+    <div class="heading_container">
+    Create Booking
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="clearfix">
+    <a class="btn btn-info left" href="{% url 'accounts:profile' %}"> Go to Dashboard </a>
+    </div>
+
+    <main id="body-main">
+        <div class="mainbody_container">
+        <h1>Booking</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ booking.as_p}}
+            <button class="button button1" type="submit">Create Booking</button>
+            <br>
+        </form>
+        </div>
+        <div class="error-message">
+            {% for message in messages %}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
+    </main>
+    {% endblock %}

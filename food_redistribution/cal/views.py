@@ -57,7 +57,6 @@ def next_month(d):
 def event_create(request):
     instance = Event()
     data = request.POST.copy()
-    print("The data:", data)
     data["author"] = request.user
     form = EventForm(data or None, instance=instance)
     if request.POST:
@@ -65,10 +64,35 @@ def event_create(request):
             form.save()  # pragma: no cover
             return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
         else:  # pragma: no cover
-            print("The start time is > than the end time")  # pragma: no cover
-            messages.info(
-                request, "Start time must be before end time"
-            )  # pragma: no cover
+            print("Fields", data["author"], data["title"], data["description"])
+            # If the text fields are empty AND the time is invalid
+            if (data["title"] == "" or data["description"] == "") and (
+                data["start_time"] > data["end_time"]
+            ):
+                messages.info(
+                    request,
+                    "Must have title, description, and start time before end time.",
+                )
+
+            # If the text fields are empty BUT the time is VALID
+            elif (data["title"] == "" or data["description"] == "") and (
+                data["start_time"] < data["end_time"]
+            ):
+                messages.info(request, "Must have title and description.")
+
+            # If the time is INVALID
+            elif data["start_time"] > data["end_time"]:
+                messages.info(
+                    request, "Start time must be before end time."
+                )  # pragma: no cover
+
+            # If TIME fields are EMPTY
+            elif data["start_time"] == "" or data["end_time"] == "":
+                if data["title"] == "" or data["description"] == "":
+                    messages.info(request, "All fields required.")
+                else:
+                    messages.info(request, "Must select both start and end time.")
+
     return render(request, "cal/create_event.html", {"event": form})  # pragma: no cover
 
 
