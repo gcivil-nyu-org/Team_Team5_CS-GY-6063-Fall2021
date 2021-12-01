@@ -59,24 +59,15 @@ def search_restaurants(request):
             ]  # pragma: no cover
             in_database.append(res.phone)
             if len(FoodAvail.objects.filter(author=res.user)) > 0:
-                print(
-                    "RES NAME: ",
-                    FoodAvail.objects.filter(author=res.user)[0].author.username,
-                )
                 meals_available = FoodAvail.objects.filter(author=res.user)[
                     0
                 ].food_available
                 context["data"][i]["meals_available"] = meals_available
-    print("MEALS: ", meals_available)
 
     context["in_database"] = in_database
     context["meals"] = meals_available
-    # print(in_database)
-    # print(context["data"][0]["phone"])
     for i in range(len(context["data"])):
         context["data"][i]["phone"] = context["data"][i]["phone"][2:]
-    # print("THE LOCATION WAS: ", context["location"])
-    # print(context["data"][9])
     return render(request, "yelp_search/search.html", context)
 
 
@@ -100,7 +91,6 @@ def search(api_key, term, location, num):
         "limit": num,
         "radius": 500,
     }
-    print(type(request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)))
     return request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
