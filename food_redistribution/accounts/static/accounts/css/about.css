@@ -106,6 +106,7 @@ body {
 }
 
 .sri-card-title.mdl-card__title {
-  background: url("../images/sri.jpg") top 27% right 40%;
+  background: url("../images/sri.jpg") top 60% right 40%;
+  background-repeat: no-repeat;
   height: 60vh;
 }
