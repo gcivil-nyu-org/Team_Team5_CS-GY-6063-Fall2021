@@ -212,6 +212,10 @@ def view_bookings(request):
     booked = Booking.objects.filter(bookings_owner=request.user)
     return render(request, "food_avail/view_bookings.html", {"booked": booked})
 
+def view_bookings_res(request):
+    booked = Booking.objects.filter(restaurant=request.user)
+    return render(request, "food_avail/view_bookings_res.html", {"booked": booked})
+
 
 def delete_booking(request, pk):
     booking = get_object_or_404(Booking, pk=pk)
