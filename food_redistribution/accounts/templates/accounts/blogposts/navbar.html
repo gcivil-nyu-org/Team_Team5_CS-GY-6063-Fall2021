@@ -20,7 +20,8 @@
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:add-post' %}">Add post</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
-              {% if user.rest %}
+            {% if user.rest %}
+                <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings_res' %}">View Bookings</a>
                 <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
               {% else %}
               <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings' %}">View Bookings</a>
