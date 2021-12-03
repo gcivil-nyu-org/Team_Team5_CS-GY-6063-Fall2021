@@ -8,28 +8,6 @@ Event
 {% block content %}
 <link rel="stylesheet" href="{% static 'cal/css/create-event.css' %}" />
 
-<!--
-<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
-</div>
-
-<main id="body-main">
-    <h1>Create New Event</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ event.as_p}}
-        {% if event.non_field_errors %}
-            <h1>YES</h1>
-  <div class="non-field-errors">
-    {% for err in form.non_field_errors %}
-      <p class="form-error">{{ err }}</p>
-    {% endfor %}
-  </div>
-{% endif %}
-        <button type="submit">Create Event</button>
-        <br>
-    </form>
-</main>-->
 <div class="screen">
   <div class="login-container">
     <div class="login-card mdl-card mdl-shadow--8dp">
