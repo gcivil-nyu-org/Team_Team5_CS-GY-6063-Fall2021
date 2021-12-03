@@ -1,0 +1,36 @@
+body {
+  background-image: url("https://media.istockphoto.com/photos/antique-glass-clocks-in-the-desert-picture-id1279083466?b=1&k=20&m=1279083466&s=170667a&w=0&h=v2VkLGAXg0yDjHnxCO99FQKTlZTZ3f6JkLAcAC8PeUs=");
+  background-size: cover;
+}
+
+.heading_container {
+  width: 100%;
+  height: 4vh;
+  color: white;
+  justify-content: center;
+}
+
+.main {
+  color: white;
+}
+
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 15px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.button1:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
