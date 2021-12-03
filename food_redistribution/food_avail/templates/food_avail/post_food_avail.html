@@ -1,35 +1,53 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Availability</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{% static 'food_avail/css/post_food_avail.css' %}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+	<!-- Material Design javascript --->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </head>
 <body>
     
 
     {% block title %}
-    Food Availability
     {% endblock %}
 
     {% block content %}
     <div class="clearfix">
     <a class="btn btn-info left" href="{% url 'accounts:profile' %}"> Go to Dashboard </a>
     </div>
-
     <main id="body-main">
-        <h1>Food Availability</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ food.as_p}}
-            <button type="submit">Post Availability</button>
-            <br>
-        </form>
-
+        <div class="screen">
+            <div class="login-container">
+              <div class="login-card mdl-card mdl-shadow--8dp">
+                <div class="login-card-title">
+                    <div class="mainbody_container">
+                    <h1>Food Availability</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ food.as_p}}
+                        <button class="button button1" type="submit">Post Availability</button>
+                        <br>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="error-message">
             {% for message in messages %}
                 <p id="messages">{{message}}</p>
             {% endfor %}
+        </div>
     </main>
     {% endblock %}
     

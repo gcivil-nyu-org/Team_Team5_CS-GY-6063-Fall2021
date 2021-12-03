@@ -1,0 +1,112 @@
+body {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("https://images.unsplash.com/photo-1616640674877-353706d6eb22?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+  background-size: cover;
+}
+
+.screen {
+  display: flex;
+  justify-content: center;
+  height: 90vh;
+  /*overflow-y: scroll;*/
+}
+
+.text-container {
+  display: flex;
+  justify-content: center;
+}
+
+.smash-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+
+.amber-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+.henry-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+.mithra-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+.satyen-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+.sri-card.mdl-card {
+  width: 50vw;
+  height: 90vh;
+}
+
+.amber-pan.mdl-tabs__panel {
+  height: 80vh;
+}
+
+.henry-pan.mdl-tabs__panel {
+  height: 80vh;
+}
+.mithra-pan.mdl-tabs__panel {
+  height: 80vh;
+}
+.satyen-pan.mdl-tabs__panel {
+  height: 80vh;
+}
+.sri-pan.mdl-tabs__panel {
+  height: 80vh;
+}
+
+.iama {
+  font-family: "Zen Kurenaido", sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+.login-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.smash-card-title.mdl-card__title {
+  background: url("https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+  height: 60vh;
+}
+
+.amber-card-title.mdl-card__title {
+  background: url("../images/Amber_Bowdoin_Pic.PNG") top 27% right 40%;
+  height: 60vh;
+}
+
+.henry-card-title.mdl-card__title {
+  background: url("../images/Henry_Tse_Pic.jpg") top 27% right 40%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60vh;
+}
+
+.mithra-card-title.mdl-card__title {
+  background: url("../images/mithra_edgecropped.jpg") top 27% right 40%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60vh;
+}
+
+.satyen-card-title.mdl-card__title {
+  background: url("../images/satyensingh.jpg") top 27% right 40%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 60vh;
+}
+
+.sri-card-title.mdl-card__title {
+  background: url("../images/sri.jpg") top 60% right 40%;
+  background-repeat: no-repeat;
+  height: 60vh;
+}

@@ -71,10 +71,15 @@
 				<div class="update-prof-btn mdl-card__actions mdl-card--border">
 					<a href="updateprofile/"
 						class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Edit profile</a>
-					<a href="{% url 'food_avail:food_avail' %}"
-						class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Post Food
-						Availability</a>
+					{% if profile.res %}
+							<a href="{% url 'food_avail:post_food_avail' %}"
+								class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Post Food
+								Availability</a>
+					{% else %}
+					<a href="{% url 'food_avail:bookings' %}"
+								class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Book Pick-up Times</a>
 				</div>
+					{% endif %}
 				{% endif %}
 
 			</div>

@@ -37,7 +37,6 @@ class RestuarantUserForm(UserCreationForm):
         email = self.cleaned_data["email"].lower()
         holder = User.objects.filter(email=email)
         if holder.count():
-            print(email, "going into if")  # pragma: no cover
             raise ValidationError("Email already exists")
         return email
 
@@ -104,14 +103,12 @@ class FoodRedistributorUserForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ["title", "body", "pic"]
-
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             # "author": forms.TextInput(attrs={"class": "form-control"}),
-            "author": forms.Select(attrs={"class": "form-control"}),
             "body": forms.Textarea(attrs={"class": "form-control"}),
         }
+        fields = ["title", "body", "pic"]
 
 
 class UserUpdateForm(forms.ModelForm):

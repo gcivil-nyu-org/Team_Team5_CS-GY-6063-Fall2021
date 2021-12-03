@@ -1,0 +1,22 @@
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+}
+.demo-card-square.mdl-card__title {
+  color: #fff;
+}
+
+.searchresults {
+  display: flex;
+  justify-content: center;
+  float: left;
+  width: 33.33%;
+  padding-bottom: 3%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+

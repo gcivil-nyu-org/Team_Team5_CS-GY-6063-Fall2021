@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Availability</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+	<!-- Material Design javascript --->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+{%  include 'food_avail/base.html' %}
+<h3>Bookings for {{request.user.username}}</h2>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-hover ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Food Redistributor Name</th>
+                    <th>Time Slot</th>
+                    <th>Meals Booked</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for x in booked %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{x.bookings_owner.username}}</td>
+                        <td>{{x.start_time | time:"h:i:s"}} - {{x.end_time | time:"h:i:s"}}</td>
+                        <td>{{x.meals_booked}}</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+

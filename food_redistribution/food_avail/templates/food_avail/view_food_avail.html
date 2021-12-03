@@ -1,11 +1,70 @@
+{% load static %}
 {%  include 'food_avail/base.html' %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit Time Slot</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'food_avail/css/food_avail.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
 
-{% for f in food %}
-    <h2>{{f.author.username}}</h2>
-        <p>{{f.food_available}} meals</p>
-        <p>{{f.description}}</p>
-        <p>Food available till: {{f.available_till}}</p>
-    <br>
+    <!-- Material Design javascript --->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
 
-    {% endfor %}
-</ul>
+<div>
+    <div>
+        <div>
+            <div class="heading_container">
+                {% for u in user_info %}
+                <h4>
+                    {{ u.author }}<br>
+                </h4>
+            </div>
+            <div class="main">
+                Food Available: {{ u.food_available }}<br>
+                Description: {{ u.description }}<br>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-lg-6">
+                <div class="card">
+                    {% if u.timeslot %}
+                    <div class="card-title">
+                        <h4> List Of Time Slots </h4>
+                    </div>
+                    {% for t in u.timeslot %}
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                    <tr>
+                                        <td>{{t.start_time | time:'H:i:s'}}</td>
+                                        <td>{{t.end_time | time:'H:i:s'}}</td>
+                    
+                                    </tr>
+                
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p>{{u.author }} has not posted any timeslots yet.</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>

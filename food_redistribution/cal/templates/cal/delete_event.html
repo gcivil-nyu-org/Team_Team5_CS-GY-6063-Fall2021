@@ -8,13 +8,18 @@ Event
 <body>
     <h1>Delete Event...</h1>
 
-        <h3>Delete: {{event.title}}</h3>
+        <h3>Delete: {{event.title.value}}</h3>
 
         <br/>
         <form method = "POST">
             {% csrf_token %}
-            <strong>Are you sure you want to remove this event?</strong><br/><br/>
-            <button> Delete Event!</button>
+            {% if user.id == event.author.value %}
+                <strong>Are you sure you want to remove this event?</strong><br/><br/>
+                <button> Delete Event!</button>
+            {% else %}
+            <strong>Only the author can delete this event!</strong><br/><br/>
+            {% endif %}
+            <a  href="javascript:history.back()" style="font-family:Optima;">Cancel</a>
         </form>
         
 </body>

@@ -25,15 +25,16 @@ Event
         </div>
     {% endfor %}
 {% endif %}
-{% if user.is_authenticated %}
+
 <div class="screen">
   <div class="login-container">
     <div class="login-card mdl-card mdl-shadow--8dp">
+      {% if user.is_authenticated %}
       <div class="mdl-card__title">
         <h4>
           {{ event.title.value }}<br>
         </h4>
-        </div>
+      </div>
         <div class="user-pass-form mdl-card__supporting-text mdl-card--expand">
           Description: {{ event.description.value }}<br>
           Start: {{ event.start_time.value }}<br>
@@ -48,6 +49,18 @@ Event
         {% else %}
             Only the author may edit this event.
         {% endif %}
+      {% else %}
+      <div class="mdl-card__title">
+        <h4>
+          {{ event.title.value }}<br>
+        </h4>
+      </div>
+        <div class="user-pass-form mdl-card__supporting-text mdl-card--expand">
+          Description: {{ event.description.value }}<br>
+          Start: {{ event.start_time.value }}<br>
+          End: {{ event.end_time.value }}
+        </div>
+      {% endif %}
     </div>
 
 <!--
@@ -84,9 +97,7 @@ Event
     </div>
   </div>
 </div>-->
-{% else %}
-    <h2>Please login to access this page!</h2>
-{% endif %}
+
 
 <!--
         <form>
