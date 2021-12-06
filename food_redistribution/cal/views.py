@@ -65,6 +65,7 @@ def event_create(request):
             return HttpResponseRedirect(reverse("cal:calendar"))  # pragma: no cover
         else:  # pragma: no cover
             # If the text fields are empty AND the time is invalid
+            date_time_obj = datetime.strptime(data["start_time"], '%Y-%m-%dT%H:%M')
             if (data["title"] == "" or data["description"] == "") and (
                 data["start_time"] > data["end_time"]
             ):
@@ -84,7 +85,10 @@ def event_create(request):
                 messages.info(
                     request, "Start time must be before end time."
                 )  # pragma: no cover
-
+            elif date_time_obj<datetime.now():
+                 messages.info(
+                    request, "Events cannot be created in the past."
+                )
             # If TIME fields are EMPTY
             elif data["start_time"] == "" or data["end_time"] == "":
                 if data["title"] == "" or data["description"] == "":
