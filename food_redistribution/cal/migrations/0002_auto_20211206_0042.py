@@ -6,20 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cal', '0001_initial'),
+        ("cal", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.AddField(
-            model_name='event',
-            name='category',
-            field=models.CharField(default='event', max_length=200),
+            model_name="event",
+            name="category",
+            field=models.CharField(default="event", max_length=200),
         ),
     ]
