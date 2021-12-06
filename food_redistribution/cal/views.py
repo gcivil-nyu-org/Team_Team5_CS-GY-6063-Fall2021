@@ -5,8 +5,6 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib import messages
-from datetime import datetime
-
 
 import calendar
 
