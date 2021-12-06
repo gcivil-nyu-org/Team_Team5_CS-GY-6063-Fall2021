@@ -14,4 +14,5 @@ class TestEvent(TestCase):
             start_time="2021-10-29T19:30",
             end_time="2021-10-29T21:30",
             author=user,
+            category="event",
         )
