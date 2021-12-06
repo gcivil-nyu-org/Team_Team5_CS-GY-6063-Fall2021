@@ -3,9 +3,9 @@ from django.forms import DateInput, ModelForm, TextInput
 from datetime import datetime
 
 
-from cal.models import Event
+from cal.models import Event, Category
 
-
+choices = [('event', 'event'),('donation', 'donation'),('volunteer', 'volunteer'),('discount', 'discount'),('free', 'free')]
 class EventForm(ModelForm):
     class Meta:
         model = Event
@@ -20,8 +20,9 @@ class EventForm(ModelForm):
             "title": TextInput(attrs={"placeholder": "Title"}),
             "description": TextInput(attrs={"placeholder": "Description"}),
             "author": forms.HiddenInput(),
+            "category": forms.Select(choices=choices, attrs={'class': 'form-control'}),
         }
-        fields = ["title", "description", "start_time", "end_time", "author"]
+        fields = ["title", "description", "start_time", "end_time", "author", "category"]
 
     def clean(self):
 
