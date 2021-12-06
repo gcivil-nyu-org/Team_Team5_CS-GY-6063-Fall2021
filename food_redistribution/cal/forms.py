@@ -1,5 +1,7 @@
 from django import forms
 from django.forms import DateInput, ModelForm, TextInput
+from datetime import datetime
+
 
 from cal.models import Event
 
@@ -32,6 +34,14 @@ class EventForm(ModelForm):
                 self.add_error(  # pragma: no cover
                     "start_time", "start time cannot be greater than end time!"
                 )
+            try:
+                start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+                if start_time<datetime.now().strftime("%Y-%m-%d %H:%M:%S"):
+                    self.add_error(  # pragma: no cover
+                        "start_time", "start time cannot be in the past!"
+                    )
+            except Exception as e: print(e)
+
         return self.cleaned_data
 
         def __init__(self, *args, **kwargs):

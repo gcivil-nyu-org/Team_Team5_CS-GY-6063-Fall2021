@@ -16,6 +16,40 @@
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
    </head>
    {%  include 'food_avail/base.html' %}
+
+   <div class="screen">
+     <div class="login-container">
+       <div class="login-card mdl-card mdl-shadow--8dp">
+         {% if user.is_authenticated %}
+         <div class="login-card-title">
+           <h4>Edit Time Slot</h4>
+         </div>
+         <div class="horizontal">
+           <div class="user-pass-form mdl-card__supporting-text">
+             <form method="post" action="">
+               {% csrf_token %}
+                 {{ timeslot.as_p}}
+                 <div class="error-message">
+       						{% for message in messages %}
+       							<p id="messages" style="color: red;">{{message}}</p>
+       						{% endfor %}
+       					 </div>
+                 <div class="create-btn">
+                   <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit"
+                     value="Submit">
+                 </div>
+                 <!--<button class="button button 1" type="submit" style="cursor:pointer">Submit</button>-->
+             </form>
+           </div>
+         </div>
+         {% else %}
+           <div class="login-card-title">
+             <h4>Please log in to access this page.</h4>
+           </div>
+         {% endif %}
+       </div>
+
+   <!--
     <div>
         {% if form.errors %}
     {% for field in form %}
@@ -56,4 +90,4 @@
         {% for message in messages %}
             <p id="messages" style="color:white;">{{message}}</p>
         {% endfor %}
-    </div>
+    </div>-->

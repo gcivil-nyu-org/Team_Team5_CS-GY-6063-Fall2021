@@ -16,22 +16,8 @@
 </head>
 {%  include 'accounts/newnavbar.html' %}
 
-
-<form method = "POST" enctype="multipart/form-data">
-    {% csrf_token %}
-          {{user.username}}'s Profile Info<br>
-          <table border="1">
-            {{ u_form }}<br>
-            {{ r_form }} <br>
-          </table>
-
-    <button> Update Profile!</button>
-
-
-</form>
-
+<!-- ORIGINAL FORM (with some styling) the form below doesn't work -->
 <!--
-
 <div class="screen">
   <div class="login-container">
     <div class="login-card mdl-card mdl-shadow--8dp">
@@ -39,36 +25,15 @@
         <h4>Edit Profile</h4>
       </div>
       <div class="horizontal">
-        <!--<div class="spacer1"></div>
         <div class="user-pass-form mdl-card__supporting-text">
-          <form method="POST" enctype="multipart/form-data">
+          <form method = "POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="id_username" name="username">{{form.username}}</input>
-              <label class="mdl-textfield__label" for="id_username" placeholder="USERNAME">USERNAME: {{user.username}}</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="id_name_of_restaurant" name="name_of_restaurant">{{form.name_of_restaurant}}</input>
-              <label class="mdl-textfield__label" for="id_name_of_restaurant">NAME: {{user.rest.name_of_restaurant}}</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="id_phone" name="phone">{{form.phone}}</input>
-              <label class="mdl-textfield__label" for="id_phone">PHONE: {{user.phone}}</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="id_address" name="address">{{form.address}}</input>
-              <label class="mdl-textfield__label" for="id_address">ADDRESS: {{user.rest.address}}</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" rows= "3" id="id_about" name="about">{{form.about}}</input>
-              <label class="mdl-textfield__label" for="id_about">ABOUT</label>
-            </div>
-            <div class="">
-              <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic"></input>
-              <label class="mdl-textfield__label" for="id_profile_pic"></label>
-            </div>
+            <table class="mdl-data-table mdl-js-data-table" border="1">
+              {{ u_form }}<br>
+              {{ r_form }} <br>
+            </table>
             <div class="create-btn">
-              <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Update Profile">
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"> Update Profile</button>
             </div>
           </form>
         </div>
@@ -76,4 +41,105 @@
     </div>
   </div>
 </div>-->
+
+<!-- THIS FORM DOES NOT SUBMIT ANYTHING IDK WHY-->
+<div class="screen">
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      <div class="login-card-title">
+        <h4>Edit Profile</h4>
+      </div>
+      <div class="horizontal">
+        <div class="user-pass-form mdl-card__supporting-text">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+              <table class="mdl-data-table mdl-js-data-table" border="1" data-upgraded=",MaterialDataTable">
+                <tbody>
+                  <tr>
+                    <th>
+                      <label for="id_username">Username:</label>
+                    </th>
+                    <td>
+                      <input class="mdl-textfield__input" type="text" name="username" value="{{user.username}}" maxlength="150" required="" id="id_username">
+                      <br>
+                      <span class="helptext">Required. 150 characters or fewer. Letters, digits, and @ . + - _ only.</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    {% if profile.res %}
+                      <th>
+                        <label for="id_name_of_restaurant">Name:</label>
+                      </th>
+                      <td>
+                        <input class="mdl-textfield__input" type="text" name="name_of_restaurant" value="{{profile.user.name_of_restaurant}}" maxlength="200" required="" id="id_name_of_restaurant">
+                      </td>
+                    {% else %}
+                      <th>
+                        <label for="id_name_of_food_redis">Name:</label>
+                      </th>
+                      <td>
+                        <input class="mdl-textfield__input" type="text" name="name_of_food_redis" value="{{profile.user.name_of_food_redis}}" maxlength="200" required="" id="id_name_of_food_redis">
+                      </td>
+                    {% endif %}
+
+                  </tr>
+                  <tr>
+                    <th>
+                      <label for="id_phone">Phone:</label>
+                    </th>
+                    <td>
+                      {% if profile.res %}
+                        <input class="mdl-textfield__input" type="text" name="phone" value="{{profile.rest.phone}}" maxlength="10" required="" id="id_phone">
+                      {% else %}
+                        <input class="mdl-textfield__input" type="text" name="phone" value="{{profile.user.phone}}" maxlength="10" required="" id="id_phone">
+                      {% endif %}
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label for="id_address">Address:</label>
+                    </th>
+                    <td>
+                      <input class="mdl-textfield__input" type="text" name="address" value="{{profile.user.address}}" maxlength="200" required="" id="id_address">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label for="id_about">About:</label>
+                    </th>
+                    <td>
+                      <textarea name="about" class="mdl-textfield__input" type="text" rows= "2" maxlength="500" required="" id="id_about" value="{{profile.user.about}}"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label for="id_profile_pic">Profile pic:</label>
+                    </th>
+                      <td>Currently:
+                        {% if user.rest.profile_pic %}
+                          <a href="{{ user.rest.profile_pic.url }}">{{ user.rest.profile_pic.url }}</a>
+                        {% endif %}
+                        {% if user.foodredis.profile_pic %}
+                          <a href="{{ user.foodredis.profile_pic.url }}">{{ user.foodredis.profile_pic.url }}</a>
+                        {% endif %}
+
+                        <input type="checkbox" name="profile_pic-clear" id="profile_pic-clear_id">
+                        <label for="profile_pic-clear_id">Clear</label><br>
+                        Change:
+                        <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="create-btn">
+                <button class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Update Profile</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
