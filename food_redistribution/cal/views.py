@@ -68,7 +68,6 @@ def event_create(request):
         else:  # pragma: no cover
             # If the text fields are empty AND the time is invalid
             date_time_obj = datetime.strptime(data["start_time"], '%Y-%m-%dT%H:%M')
-            print(data["start_time"],type(data["start_time"]))
             if (data["title"] == "" or data["description"] == "") and (
                 data["start_time"] > data["end_time"]
             ):
