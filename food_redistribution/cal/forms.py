@@ -5,6 +5,14 @@ from datetime import datetime
 
 from cal.models import Event
 
+choices = [
+    ("event", "event"),
+    ("donation", "donation"),
+    ("volunteer", "volunteer"),
+    ("discount", "discount"),
+    ("free", "free"),
+]
+
 
 class EventForm(ModelForm):
     class Meta:
@@ -20,8 +28,16 @@ class EventForm(ModelForm):
             "title": TextInput(attrs={"placeholder": "Title"}),
             "description": TextInput(attrs={"placeholder": "Description"}),
             "author": forms.HiddenInput(),
+            "category": forms.Select(choices=choices, attrs={"class": "form-control"}),
         }
-        fields = ["title", "description", "start_time", "end_time", "author"]
+        fields = [
+            "title",
+            "description",
+            "start_time",
+            "end_time",
+            "author",
+            "category",
+        ]
 
     def clean(self):
 
@@ -36,11 +52,12 @@ class EventForm(ModelForm):
                 )
             try:
                 start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
-                if start_time<datetime.now().strftime("%Y-%m-%d %H:%M:%S"):
+                if start_time < datetime.now().strftime("%Y-%m-%d %H:%M:%S"):
                     self.add_error(  # pragma: no cover
                         "start_time", "start time cannot be in the past!"
                     )
-            except Exception as e: print(e)
+            except Exception as e:
+                print(e)
 
         return self.cleaned_data
 

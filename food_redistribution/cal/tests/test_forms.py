@@ -15,6 +15,7 @@ class TestForms(TestCase):
                 "title": "Testing a new event!",
                 "description": "I wanna check if this thing really works",
                 "author": user,
+                "category": "event",
             }
         )
         self.assertTrue(form.is_valid())
