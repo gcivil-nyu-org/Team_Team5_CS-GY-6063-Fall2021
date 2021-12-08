@@ -1,0 +1,123 @@
+{% extends 'cal/base.html' %}
+{% load static %}
+{% block title %}
+Event
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'cal/css/view-event.css' %}">
+
+
+<!--<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
+</div>-->
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="screen">
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      {% if user.is_authenticated %}
+      <div class="mdl-card__title">
+        <h4>
+          {{ event.title.value }}<br>
+        </h4>
+      </div>
+        <div class="user-pass-form mdl-card__supporting-text mdl-card--expand">
+          Description: {{ event.description.value }}<br>
+          Tag: {{event.category.value }}<br>
+          Start: {{ event.start_time.value }}<br>
+          End: {{ event.end_time.value }}
+        </div>
+        {% if user.id == event.author.value %}
+          <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href = "{% url 'cal:event_edit' event.instance.id %}">
+              Edit Event
+            </a>
+          </div>
+        {% else %}
+            Only the author may edit this event.
+        {% endif %}
+      {% else %}
+      <div class="mdl-card__title">
+        <h4>
+          {{ event.title.value }}<br>
+        </h4>
+      </div>
+        <div class="user-pass-form mdl-card__supporting-text mdl-card--expand">
+          Description: {{ event.description.value }}<br>
+          Start: {{ event.start_time.value }}<br>
+          End: {{ event.end_time.value }}
+        </div>
+      {% endif %}
+    </div>
+
+<!--
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      <div class="login-card-title">
+        <h4>View Event</h4>
+      </div>
+      <div class="horizontal">
+        <!--<div class="spacer1"></div>
+        <div class="user-pass-form mdl-card__supporting-text">
+          <div>
+            {{ event.title.value }}
+          </div>
+          <div>
+            {{ event.description.value }}
+          </div>
+          <div>
+            From {{ event.start_time.value }}
+          </div>
+          <div>
+            To {{ event.end_time.value }}
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            {% if user.id == event.author.value %}
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href = "{% url 'cal:event_edit' event.instance.id %}">
+              Edit Event
+            </a>
+            {% else %}
+                Only the author may edit this event.
+            {% endif %}
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+
+<!--
+        <form>
+            <h5>Title</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.title.value }} </h5> <br>
+            <h5>Description</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.description.value }} </h5> <br>
+            <h5>Starts at</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.start_time.value }} </h5> <br>
+            <h5>Ends at</h5>
+            <h5>&nbsp; &nbsp; &nbsp; &nbsp; {{ event.end_time.value }} </h5> <br>
+      </form>
+      {% if user.is_authenticated %}
+        {% if user.id == event.author.value %}
+        <a href = "{% url 'cal:event_edit' event.instance.id %}">Edit</a>
+            {% else %}
+                Only the author can delete this post!
+            {% endif %}
+    {% else %}
+        Please login to access this page!
+    {% endif %}-->
+{% endblock %}

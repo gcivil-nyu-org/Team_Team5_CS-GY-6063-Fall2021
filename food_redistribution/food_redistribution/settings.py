@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cal",
     "accounts",
+    "yelp_search",
+    "food_avail",
 ]
 
 MIDDLEWARE = [
@@ -94,16 +96,22 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/New_York"
 
 USE_I18N = True
 
@@ -119,7 +127,15 @@ STATIC_URL = "/static/"
 
 MEDIA_URL = "/images/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+WHITENOISE_MANIFEST_STRICT = False
+
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -131,4 +147,6 @@ EMAIL_HOST_USER = "foodredis.5@gmail.com"
 EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_CREDS"))
 EMAIL_PORT = 587
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), test_runner=False)
+
+# django_heroku.settings(locals())

@@ -1,4 +1,6 @@
+
 {% load static %}
+
 
 
 <style>
@@ -17,24 +19,34 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+        <a class="nav-link" href="{% url 'accounts:home' %}">Dashboard</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'posts' %}">View posts</a>
+        <a class="nav-link" href="{% url 'accounts:posts' %}">View posts</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'cal:calendar' %}">View Calendar</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'add-post' %}">Add a post</a>
+        <a class="nav-link" href="{% url 'accounts:add-post' %}">Add a post</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
+      </li>
+      <li class="nav-item active">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'yelp_search:search_restaurants' %}">
+        	{% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Location" name = "searched" required="required">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </li>
     </ul>
   </div>
 
   <span class="hello-msg">Welcome, {{request.user}}</span>
-  <span ><a  class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+  <span ><a  class="hello-msg" href="{% url 'accounts:logout' %}">Logout</a></span>
 
 </nav>

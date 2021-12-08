@@ -4,65 +4,62 @@
 
 <head>
 	<title>Redistributor Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'accounts/css/all_pages.css' %}" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="{% static 'accounts/css/food-red-login.css' %}"/>
+  <link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+  <!-- Material Design javascript --->
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 </head>
 <body>
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
+	{%  include 'accounts/newnavbar.html' %}
 
-
-					<h3 style="font-family:Optima;font-size:35px;"><id="form-title">Redistributor Log In</h3>
+	<div class="screen">
+		<div class="login-container">
+			<div class="login-card mdl-card mdl-shadow--8dp">
+				<div class="login-card-title">
+					<h4> Redistributor Login</h4>
 				</div>
-				<div class="d-flex justify-content-center form_container">
-					<form method="POST" action="">
-						{% csrf_token %}
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+				<div class="horizontal">
+					<!--<div class="spacer1"></div>-->
+					<div class="user-pass-form mdl-card__supporting-text">
+						<form method="POST" action="">
+							{% csrf_token %}
+						  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						    <input class="mdl-textfield__input" type="text" id="user" name="username">
+						    <label class="mdl-textfield__label" for="sample3">USERNAME</label>
 							</div>
-
-							<input type="text" name="username" placeholder="Username..." class="form-control">
-						</div>
-
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<input class="mdl-textfield__input" type="password" id="pass" name="password">
+						    <label class="mdl-textfield__label" for="sample3">PASSWORD</label>
+						  </div>
+							<div class="login-btn">
+								<input class="login mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Log In">
 							</div>
-
-								<input type="password" name="password" placeholder="Password..." class="form-control" >
-						</div>
-
-							<div class="d-flex justify-content-center mt-3 login_container">
-				 				<input class="btn login_btn" type="submit" value="Sign In">
-				   			</div>
-					</form>
-
-				</div>
-
-				{% for message in messages %}
-					<p id="messages">{{message}}</p>
-				{% endfor %}
-
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
-						New user? <a href="{% url 'register2' %}" class="ml-2">Register</a>
+						</form>
+					</div> <!-- user-pass-form -->
+					<div class="error-message">
+						{% for message in messages %}
+							<p id="messages">{{message}}</p>
+						{% endfor %}
 					</div>
-				</div>
-
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
-						Forgot your password? <a href="{% url 'reset_password' %}" class="ml-2">Reset password</a>
+					<div class="reset-pass">
+						<p>Forgot your password? <a href="{% url 'accounts:reset_password' %}">Reset your password.</a></p>
+					</div>
+					<div class="new-user">
+						<p>New user? <a href="{% url 'accounts:register2' %}">Create an account.</a></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 </body>
 
 </html>

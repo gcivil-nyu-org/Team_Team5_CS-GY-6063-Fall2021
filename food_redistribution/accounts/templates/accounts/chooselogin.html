@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Material Design stylesheets -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="{% static 'accounts/css/chooselogin.css' %}">
+  <link rel="stylesheet" href="{% static 'accounts/css/material.min.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+  <!-- Material Design javascript --->
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  {% if user.is_authenticated %}	
+		<meta http-equiv="refresh" content="0; URL=http://127.0.0.1:8000/profile/" />
+	{% endif %}
+</head>
+
+<body>
+  {%  include 'accounts/newnavbar.html' %}
+
+  <div class="screen">
+    <div class="text-container">
+      <h1 class="iama"> I AM A...</h1>
+    </div>
+    <div class="login-card-container">
+      <div class="left-card-square mdl-card mdl-shadow--8dp">
+        <div class="mdl-card__title mdl-card--expand ">
+          <h2 class="mdl-card__title-text">Redistributor</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Our organization takes donations, hosts events, and provides free meals.
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'accounts:login2' %}">
+            Login
+          </a>
+        </div>
+      </div>
+      <span class="spacer"></span>
+      <div class="right-card-square mdl-card mdl-shadow--8dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <h2 class="mdl-card__title-text">Restaurant</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Our organization has excess food to donate that would otherwise go to waste.
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{% url 'accounts:login' %}">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

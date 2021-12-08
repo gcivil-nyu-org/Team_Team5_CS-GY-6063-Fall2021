@@ -1,0 +1,58 @@
+{% extends 'cal/base.html' %}
+
+{% block title %}
+Event
+{% endblock %}
+
+{% block content %}
+
+
+<!--<div class="clearfix">
+  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
+</div>-->
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<div class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center">
+      </div>
+      <div class="d-flex justify-content-center form_container">
+        <form method="POST">
+          {% csrf_token %}
+          {{ event.as_p}}
+          {% if user.is_authenticated %}
+        {% if user.id == event.author.value %}
+          <button type="submit">Update Event</button>
+          <br>
+      </form>
+          </div>
+          <div class="d-flex justify-content-center mt-3 login_container">
+            <a href = "{% url 'cal:event_delete' event.instance.id %}">Delete</a>
+            <span class="spacer"></span>
+          </div>
+      </div>
+      {% else %}
+                Only the author can edit/delete this post!
+            {% endif %}
+            {% else %}
+        Please login to access this page!
+    {% endif %}
+    <a  href="javascript:history.back()" style="font-family:Optima;">Cancel</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Availability</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{% static 'food_avail/css/view_food.css' %}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+	<!-- Material Design javascript --->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+{%  include 'food_avail/base.html' %}
+{% if form.errors %}
+  {% for field in form %}
+    {% for error in field.errors %}
+      <div class="alert alert-danger">
+          {{ field.label }} <strong>{{ error|escape }}</strong>
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        {{ field.label }} <strong>{{ error|escape }}</strong>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<div class="screen">
+<!-- the lefthand side -->
+  <div class="login-container">
+    <div class="add-slot-card mdl-card mdl-shadow--8dp">
+      {% if user.is_authenticated %}
+      <div class="login-card-title">
+        <h4>Add Time Slot</h4>
+      </div>
+      <div class="vertical-stack">
+        <div class="add-time-slot-div mdl-card__supporting-text">
+          Meals Available: {{ food.food_available }}<br>
+          Description: {{ food.description }}<br>
+        </div>
+        <div class="add-time-slot-div mdl-card__supporting-text">
+          <div class="basic-form">
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ next }}">
+              <div class="form-group">
+                <label>Start Time</label>
+                <input type="time" name="start_time" class="form-control" value="12:00" required>
+              </div>
+              <div class="form-group">
+                <label>End Time</label>
+                <input type="time" name="end_time" class="form-control" value="15:00" required>
+              </div>
+              <div class="error-message">
+                {% for message in messages %}
+                  <p id="messages" style="color: red;">{{message}}</p>
+                {% endfor %}
+              </div>
+              <div class="create-btn">
+                <button type="submit" class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="cursor:pointer">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% else %}
+        <div class="login-card-title">
+          <h4>Please log in to access this page.</h4>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+<!-- the righthand side -->
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      {% if user.is_authenticated %}
+      <div class="login-card-title">
+        <h4>List Of Time Slots</h4>
+      </div>
+      <div class="horizontal">
+        <div class="user-pass-form mdl-card__supporting-text">
+          {% if time_slots_all %}
+            <table class="time-table mdl-data-table mdl-js-data-table">
+                  <thead>
+                    <tr>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for x in time_slots_all %}
+                      <tr>
+                        <td>{{x.start_time | time:'H:i:s'}}</td>
+                        <td>{{x.end_time | time:'H:i:s'}}</td>
+                        <td>
+                          <span>
+                            <button class="mdl-button mdl-js-button mdl-button--icon">
+                              <a href="{% url 'food_avail:update_time_slot' x.id %}"><i class="edit-icon material-icons">edit</i></a>
+                            </button>
+                          </span>
+                        </td>
+                        <td>
+                          <form action="{% url 'food_avail:delete_time_slot' x.id %}" method="POST">
+                            {% csrf_token %}
+                              <button type="submit" class="mdl-button mdl-js-button mdl-button--icon" onclick="return confirm('Are you sure you want to delete this?')">
+                                <i class="delete-icon material-icons">delete</i>
+                              </button>
+                            <!--<input type="submit" class="button btn-warning" style="cursor:pointer;" value="Delete" onclick="return confirm('Are you sure you want to delete this?')">-->
+                          </form>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+          {% else %}
+            <br>
+            <p>No time slots available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <div class="login-card-title">
+      <h4>Please log in to access this page.</h4>
+    </div>
+  {% endif %}
+</div>
+
+
+<!--
+{% if user.is_authenticated %}
+<div>
+    <div>
+        <div>
+            <div class="mainbody_container">
+                <h4>
+                    {{ food.author.username }}<br>
+                </h4>
+            </div>
+            <div class="mainbody_container">
+                Food Available: {{ food.food_available }}<br>
+                Description: {{ food.description }}<br>
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="row mt-2">
+            <div class="col-lg-6">
+                <div class="card" style="margin-left:3%">
+                    <div class="card-title">
+                        <h4>Add Time Slot</h4>
+                        <br><br>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ next }}">
+                                <div class="form-group">
+                                    <label>Start Time</label>
+                                    <input type="time" name="start_time" class="form-control" value="12:00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>End Time</label>
+                                    <input type="time" name="end_time" class="form-control" value="15:00" required>
+                                </div>
+                                <button type="submit" class="button button1 btn-success" style="cursor:pointer">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-title">
+                        <h4> List Of Time Slots </h4>
+                    </div>
+                    <div class="card-body">
+                        {% if time_slots_all %}
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for x in time_slots_all %}
+                                    <tr>
+                                        <td>{{x.start_time | time:'H:i:s'}}</td>
+                                        <td>{{x.end_time | time:'H:i:s'}}</td>
+                                        <td>
+                                            <span>
+                                                <a href="{% url 'food_avail:update_time_slot' x.id %}"
+                                                    class="button button-primary">Edit</a>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'food_avail:delete_time_slot' x.id %}" method="POST">
+                                                {% csrf_token %}
+                                                  <input type="submit" class="button btn-warning" style="cursor:pointer;" value="Delete" onclick="return confirm('Are you sure you want to delete this?')">
+                                              </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% else %}
+                    <br>
+                    <p>No Time Slot Available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="error-message">
+    <div class="msg_container">
+        {% for message in messages %}
+        <p id="messages" style="color:white;">{{message}}</p>
+        {% endfor %}
+    </div>
+</div>
+-->

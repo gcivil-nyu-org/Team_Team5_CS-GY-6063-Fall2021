@@ -1,14 +1,36 @@
+{% load static %}
+{%  include './navbar.html' %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <link rel="stylesheet" href="{% static './accounts/css/material.min.css' %}"/>
+    <link rel="stylesheet" href="{% static './accounts/css/newnav.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/blogposts.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+        <!-- Material Design javascript --->
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
+</head>
 {% if user.is_authenticated %}
+<div class="mainbody_container">
 <h1>Blog Posts</h1>
 
 <ul>
     {% for post in object_list %}
 
-    <li> <a href="{% url 'blog-details' post.pk %}"> {{post.title}}</a> 
+    <li> <a href="{% url 'accounts:blog-details' post.pk %}"> {{post.title}}</a> 
     - {{post.author}} 
         {% if user.id == post.author.id %}
-            - <small>   <a href = "{% url 'update_post' post.pk %}">(Edit)</a>
-                        <a href = "{% url 'delete_post' post.pk %}">(Delete)</a>
+            - <small>   <a href = "{% url 'accounts:update_post' post.pk %}">(Edit)</a>
+                        <a href = "{% url 'accounts:delete_post' post.pk %}">(Delete)</a>
             </small> <br/> 
         {% endif %}
 
@@ -16,6 +38,7 @@
     {% endfor %} 
 
 </ul>
+</div>
 {% else %}
 
     Please login to access this page!
