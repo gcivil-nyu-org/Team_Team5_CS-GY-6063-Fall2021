@@ -1,0 +1,64 @@
+body {
+  background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+  background-size: cover;
+}
+
+.screen {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+}
+
+.iama {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+.horizontal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 70vw;
+  height: 90vh;
+  background-color: rgba(255,255,255,0.92);
+}
+
+.login-card-title {
+  width: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  /*padding-left: 30%;*/
+}
+
+.create-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.user-pass-form.mdl-card__supporting-text {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+.create.mdl-button--raised {
+  display: flex;
+  justify-content: center;
+}

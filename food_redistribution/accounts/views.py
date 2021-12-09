@@ -109,6 +109,7 @@ def register_foodredistributor(request):
         form = FoodRedistributorUserForm(request.POST)
         if request.method == "POST":
             if form.is_valid():
+                # TEST FROM HERE
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
@@ -135,6 +136,7 @@ def register_foodredistributor(request):
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
+                # TO HERE
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
                 )

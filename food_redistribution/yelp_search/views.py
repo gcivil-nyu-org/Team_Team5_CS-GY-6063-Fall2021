@@ -94,12 +94,6 @@ def search(api_key, term, location, num):
     return request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
-# # Helper function: fetch one single business using the business id
-# def get_business(api_key, business_id):
-#     business_path = BUSINESS_PATH + business_id
-#     return request(API_HOST, business_path, api_key)
-
-
 # Helper function: get distance from the searched location
 def getDistance(restaurant_dic):
     return restaurant_dic["distance"]

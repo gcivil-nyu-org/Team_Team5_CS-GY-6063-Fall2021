@@ -1,27 +1,37 @@
 {% extends 'cal/base.html' %}
+{% load static %}
 
 {% block title %}
 Event
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'cal/css/update-event.css' %}" />
 <body>
-    <h1>Delete Event...</h1>
+  <div class="screen">
+    <div class="login-container">
+      <div class="login-card mdl-card mdl-shadow--8dp">
+        <div class="login-card-title">
+          <h4>Delete "{{event.title.value}}"?</h4>
+        </div>
+        <div class="horizontal">
+          <div class="user-pass-form mdl-card__supporting-text">
+            <form method = "POST">
+                {% csrf_token %}
+                {% if user.id == event.author.value %}
+                    <strong>Are you sure you want to remove this event?</strong><br/><br/>
+                    <button> Delete Event!</button>
+                {% else %}
+                <strong>Only the author can delete this event!</strong><br/><br/>
+                {% endif %}
+                <a  href="javascript:history.back()" style="font-family:Optima;">Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <h3>Delete: {{event.title.value}}</h3>
-
-        <br/>
-        <form method = "POST">
-            {% csrf_token %}
-            {% if user.id == event.author.value %}
-                <strong>Are you sure you want to remove this event?</strong><br/><br/>
-                <button> Delete Event!</button>
-            {% else %}
-            <strong>Only the author can delete this event!</strong><br/><br/>
-            {% endif %}
-            <a  href="javascript:history.back()" style="font-family:Optima;">Cancel</a>
-        </form>
-        
 </body>
 {% endblock %}
 </html>
