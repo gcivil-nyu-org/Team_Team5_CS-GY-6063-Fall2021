@@ -45,9 +45,8 @@ def register_restaurant(request):
         return redirect("accounts:home")
     else:
         form = RestuarantUserForm(request.POST)
-        if request.method == "POST":
+        if request.method == "POST": # pragma: no cover
             if form.is_valid():
-                # WRITE TEST FROM HERE
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
@@ -78,7 +77,6 @@ def register_restaurant(request):
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
                 )
-                # TO HERE
 
         context = {"form": form}
         return render(request, "accounts/restuarant_register.html", context)
@@ -108,7 +106,7 @@ def register_foodredistributor(request):
     else:
         form = FoodRedistributorUserForm(request.POST)
         if request.method == "POST":
-            if form.is_valid():
+            if form.is_valid(): # pragma: no cover
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
@@ -135,6 +133,7 @@ def register_foodredistributor(request):
                 user_profile.save()
                 email = EmailMessage(mail_subject, message, to=[user_profile.email])
                 email.send()
+                # TO HERE
                 return HttpResponse(
                     "Please confirm your email address to complete the registration"
                 )
@@ -195,9 +194,8 @@ def login_restuarant(request):
     if request.user.is_authenticated:
         return redirect("accounts:home")
     else:
-        if request.method == "POST":
+        if request.method == "POST": # pragma: no cover
             username = request.POST.get("username")
-            # TEST FROM HERE
             password = request.POST.get("password")
             user = authenticate(request, username=username, password=password)
 
@@ -208,15 +206,13 @@ def login_restuarant(request):
                 messages.info(request, "Username or password is incorrect")
 
         context = {}
-        # TO HERE
         return render(request, "accounts/restuarantlogin.html", context)
 
 
 def login_foodredistributor(request):
     if request.user.is_authenticated:
         return redirect("accounts:home2")
-    else:
-        # TEST FROM HERE
+    else: # pragma: no cover
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
@@ -228,7 +224,6 @@ def login_foodredistributor(request):
                 return redirect("accounts:home2")
             else:
                 messages.info(request, "Username or password is incorrect")
-                # TO HERE
         context = {}
         return render(request, "accounts/foodredislogin.html", context)
 
@@ -239,7 +234,7 @@ def profile_update(request):
     user_update_form = None
     entity_update_form = None
     user_profile = None
-    if request.method == "POST":
+    if request.method == "POST": # pragma: no cover
         if res_check(request.user):
             user_profile = Restaurant.objects.get(user=request.user)
             user_update_form = UserUpdateForm(request.POST, instance=request.user)

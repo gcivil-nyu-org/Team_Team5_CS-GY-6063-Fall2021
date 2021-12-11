@@ -1,15 +1,13 @@
 {% extends 'cal/base.html' %}
+{% load static %}
 
 {% block title %}
-Event
+Update Event
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'cal/css/update-event.css' %}" />
 
-
-<!--<div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'cal:calendar' %}"> Calendar </a>
-</div>-->
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -24,35 +22,53 @@ Event
         </div>
     {% endfor %}
 {% endif %}
-<div class="container h-100">
-  <div class="d-flex justify-content-center h-100">
-    <div class="user_card">
-      <div class="d-flex justify-content-center">
-      </div>
-      <div class="d-flex justify-content-center form_container">
-        <form method="POST">
-          {% csrf_token %}
-          {{ event.as_p}}
-          {% if user.is_authenticated %}
-        {% if user.id == event.author.value %}
-          <button type="submit">Update Event</button>
-          <br>
-      </form>
-          </div>
-          <div class="d-flex justify-content-center mt-3 login_container">
-            <a href = "{% url 'cal:event_delete' event.instance.id %}">Delete</a>
-            <span class="spacer"></span>
-          </div>
-      </div>
-      {% else %}
+<div class="screen">
+  <div class="login-container">
+    <div class="login-card mdl-card mdl-shadow--8dp">
+      {% if user.is_authenticated %}
+        <div class="login-card-title">
+          <h4>Update your event</h4>
+        </div>
+        <div class="horizontal">
+          <div class="spacer1"></div>
+          <div class="user-pass-form mdl-card__supporting-text">
+            <form method="POST">
+              {% csrf_token %}
+                {{ event.as_p}}
+              {% if user.is_authenticated %}
+                {% if user.id == event.author.value %}
+                  <!--<button type="submit">Update Event</button>-->
+                  <div class="create-btn">
+                    <input class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit"
+                      value="Update">
+                    <div class="spacer2"></div>
+                    <a class="delete mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href = "{% url 'cal:event_delete' event.instance.id %}" value="Delete">Delete</a>
+
+                  </div>
+                  <!--<div class="create-btn">
+                    <button class="mdl-button mdl-js-button mdl-button--icon" onclick="return confirm('Are you sure you want to delete this?')">
+                      <a href = "{% url 'cal:event_delete' event.instance.id %}"><i class="delete-icon material-icons">delete</i></a>
+                    </button>
+                  </div>-->
+                  </form>
+                </div>
+                <!--<div class="d-flex justify-content-center mt-3 login_container">
+                  <a href = "{% url 'cal:event_delete' event.instance.id %}">Delete</a>
+                  <span class="spacer"></span>
+                </div>-->
+              </div>
+            </div>
+            {% else %}
                 Only the author can edit/delete this post!
             {% endif %}
-            {% else %}
-        Please login to access this page!
-    {% endif %}
+          {% endif %}
+      {% else %}
+        <div class="login-card-title">
+          <h4>Please log in to access this page.</h4>
+        </div>
+      {% endif %}
     <a  href="javascript:history.back()" style="font-family:Optima;">Cancel</a>
     </div>
   </div>
-</div>
 
 {% endblock %}

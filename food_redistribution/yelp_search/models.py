@@ -16,6 +16,3 @@ class Restaurant(models.Model):
     )
     Description = models.TextField(blank=False, null=False)
     Last_Modified = models.DateTimeField(auto_now_add=True)
-    # Accessible = models.BooleanField(default=False)
-    # FamilyFriendly = models.BooleanField(default=False)
-    # TransactionRequired = models.BooleanField(default=True)

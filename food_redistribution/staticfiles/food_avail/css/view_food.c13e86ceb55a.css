@@ -1,0 +1,113 @@
+body {
+  background-image: url("https://media.istockphoto.com/photos/man-smiles-while-picking-up-curbside-order-picture-id1318003130?b=1&k=20&m=1318003130&s=170667a&w=0&h=-FmEqD46sbBYRSG9I6vPYWdEB95JSqXEQT0hcuLkmsc=");
+  background-size: cover;
+}
+
+.screen {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.iama {
+  font-family: 'Zen Kurenaido', sans-serif;
+  font-size: 90px;
+  color: white;
+}
+
+.horizontal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /*padding-left: 18%*/
+}
+
+.vertical-stack {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  float: left;
+}
+
+.add-slot-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 40vw;
+  height: 80vh;
+  background-color: rgba(255,255,255,0.92);
+}
+
+i.edit-icon {
+  color: navy;
+}
+
+i.delete-icon {
+  color: crimson;
+}
+
+.time-table.mdl-data-table {
+  width: 40vw;
+}
+
+.login-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 512px;
+  height: 80vh;
+  background-color: rgba(255,255,255,0.92);
+}
+
+.login-card-title {
+  width: 100%;
+  color: black;
+  display: flex;
+  justify-content: center;
+  /*padding-left: 30%;*/
+}
+
+.body-text.mdl-textfield {
+  width: 32vw;
+}
+
+.title-text.mdl-textfield {
+  width: 32vw;
+}
+
+.create-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.user-pass-form.mdl-card__supporting-text {
+  display: flex;
+  justify-content: center;
+}
+
+.add-time-slot-div.mdl-card__supporting-text {
+  display: flex;
+  justify-content: center;
+  width: 40vw;
+}
+
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+.create.mdl-button--raised {
+  display: flex;
+  justify-content: center;
+}

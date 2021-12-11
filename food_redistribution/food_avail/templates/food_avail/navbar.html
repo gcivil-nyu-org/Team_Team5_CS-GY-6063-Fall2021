@@ -1,66 +1,67 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'accounts/css/newnav.css' %}">
+<div class="">
+  <div class="gradient-navbar">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      {% if user.is_authenticated %}
+        <span class="mdl-typography--text-uppercase"><a href="{% url 'accounts:profile' %}" style="text-decoration: none; color: white;">Welcome, {{user.username}}</a></span>
+      {% endif %}
 
-<!-- New Navbar -->
-<!--<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
-    <div class="android-header mdl-layout__header mdl-layout__header--waterfall gradient-navbar">
-      <div class="mdl-layout__header-row">
-      -->
-      <div class="">
-        <div class="gradient-navbar">
-          <div class="mdl-layout__header-row">
-            <!-- Title -->
-            {% if user.is_authenticated %}
-              <span class="mdl-typography--text-uppercase">Welcome, {{user.username}}</span>
-            {% endif %}
-        <!--<span class="android-title mdl-layout-title">
-          <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">Smash</a>
-        </span>-->
-        <!-- Add spacer, to align navigation to the right in desktop -->
-        <div class="android-header-spacer mdl-layout-spacer"></div>
-        <!-- Navigation -->
-        <div class="android-navigation-container">
-          <nav class="android-navigation mdl-navigation">
-            {% if user.is_authenticated %}
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:profile' %}">Profile</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:posts' %}">Posts</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:add-post' %}">Add post</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
-            {% else %}
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:about' %}">About</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">FAQ</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:chooselogin' %}">Login</a>
-            {% endif %}
-          </nav>
-        </div>
-        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'yelp_search:search_restaurants' %}">
-        	{% csrf_token %}
-        <!--<input class="form-control mr-sm-2" type="search" placeholder="Search Location" name = "searched" required="required">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-          <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search-field" name="searched">
-            </div>
-        </form>
-        </div>
-
-
-        <!-- If we want a vertical menu
-        <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-          <i class="material-icons">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-          <li class="mdl-menu__item">About</li>
-          <li class="mdl-menu__item">FAQ</li>
-          <li class="mdl-menu__item">Login</li>
-          <li class="mdl-menu__item">Contact Us</li>
-        </ul> -->
+  <!-- Add spacer, to align navigation to the right in desktop -->
+  <div class="android-header-spacer mdl-layout-spacer"></div>
+  <!-- Navigation -->
+  <div class="android-navigation-container">
+    <nav class="android-navigation mdl-navigation">
+      {% if user.is_authenticated %}
+      <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:profile' %}">Profile</a>-->
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:posts' %}">Posts</a>
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+        <i class="material-icons" style="color: white;">arrow_drop_down</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+        <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'accounts:add-post' %}">ADD POST</a></li>
+      </ul>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_food_avail' %}">Food</a>
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button2">
+        <i class="material-icons" style="color: white;">arrow_drop_down</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button2">
+        {% if user.rest %}
+          <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'food_avail:view_bookings_res' %}">BOOKINGS</a></li>
+        {% else %}
+          <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'food_avail:view_bookings' %}">BOOKINGS</a></li>
+        {% endif %}
+      </ul>
+        {% if user.rest %}
+        <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings_res' %}">View Bookings</a>-->
+          <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
+        {% else %}
+        <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings' %}">View Bookings</a>-->
+          <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout2' %}">Log out</a>
+        {% endif %}
+      {% else %}
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:about' %}">About</a>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="">FAQ</a>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
+      <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:chooselogin' %}">Login</a>
+      {% endif %}
+    </nav>
+  </div>
+  <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'yelp_search:search_restaurants' %}">
+    {% csrf_token %}
+  <!--<input class="form-control mr-sm-2" type="search" placeholder="Search Location" name = "searched" required="required">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    <div class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+        <i class="material-icons">search</i>
+      </label>
+      <div class="mdl-textfield__expandable-holder">
+        <input class="mdl-textfield__input" type="text" id="search-field" name="searched" placeholder="SEARCH">
       </div>
-    </div>
+  </form>
+  </div>
+</div>
+</div>

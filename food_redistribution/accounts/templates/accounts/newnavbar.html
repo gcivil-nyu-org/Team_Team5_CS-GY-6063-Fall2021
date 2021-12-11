@@ -6,7 +6,7 @@
           <div class="mdl-layout__header-row">
             <!-- Title -->
             {% if user.is_authenticated %}
-              <span class="mdl-typography--text-uppercase">Welcome, {{user.username}}</span>
+              <span class="mdl-typography--text-uppercase"><a href="{% url 'accounts:profile' %}" style="text-decoration: none; color: white;">Welcome, {{user.username}}</a></span>
             {% endif %}
 
         <!-- Add spacer, to align navigation to the right in desktop -->
@@ -15,17 +15,32 @@
         <div class="android-navigation-container">
           <nav class="android-navigation mdl-navigation">
             {% if user.is_authenticated %}
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:profile' %}">Profile</a>
+            <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:profile' %}">Profile</a>-->
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:posts' %}">Posts</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:add-post' %}">Add post</a>
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+              <i class="material-icons" style="color: white;">arrow_drop_down</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+              <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'accounts:add-post' %}">ADD POST</a></li>
+            </ul>
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'cal:calendar' %}">Calendar</a>
-            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_food_avail' %}">Food Availability</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_food_avail' %}">Food</a>
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button2">
+              <i class="material-icons" style="color: white;">arrow_drop_down</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button2">
               {% if user.rest %}
-              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings_res' %}">View Bookings</a>
+                <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'food_avail:view_bookings_res' %}">BOOKINGS</a></li>
+              {% else %}
+                <li class="mdl-menu__item"><a style="text-decoration: none; color: black;" href="{% url 'food_avail:view_bookings' %}">BOOKINGS</a></li>
+              {% endif %}
+            </ul>
+              {% if user.rest %}
+              <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings_res' %}">View Bookings</a>-->
                 <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout' %}">Log out</a>
               {% else %}
-              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings' %}">View Bookings</a>
-              <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout2' %}">Log out</a>
+              <!--<a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'food_avail:view_bookings' %}">View Bookings</a>-->
+                <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:logout2' %}">Log out</a>
               {% endif %}
             {% else %}
             <a class="mdl-navigation__link mdl-typography--text-uppercase mdl-js-ripple-effect" href="{% url 'accounts:about' %}">About</a>
@@ -48,17 +63,5 @@
             </div>
         </form>
         </div>
-
-
-        <!-- If we want a vertical menu
-        <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-          <i class="material-icons">more_vert</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-          <li class="mdl-menu__item">About</li>
-          <li class="mdl-menu__item">FAQ</li>
-          <li class="mdl-menu__item">Login</li>
-          <li class="mdl-menu__item">Contact Us</li>
-        </ul> -->
       </div>
     </div>
