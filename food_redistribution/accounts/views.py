@@ -45,7 +45,7 @@ def register_restaurant(request):
         return redirect("accounts:home")
     else:
         form = RestuarantUserForm(request.POST)
-        if request.method == "POST": # pragma: no cover
+        if request.method == "POST":  # pragma: no cover
             if form.is_valid():
                 user = form.save(commit=False)
                 user.is_active = False
@@ -106,7 +106,7 @@ def register_foodredistributor(request):
     else:
         form = FoodRedistributorUserForm(request.POST)
         if request.method == "POST":
-            if form.is_valid(): # pragma: no cover
+            if form.is_valid():  # pragma: no cover
                 user = form.save(commit=False)
                 user.is_active = False
                 user.save()
@@ -194,7 +194,7 @@ def login_restuarant(request):
     if request.user.is_authenticated:
         return redirect("accounts:home")
     else:
-        if request.method == "POST": # pragma: no cover
+        if request.method == "POST":  # pragma: no cover
             username = request.POST.get("username")
             password = request.POST.get("password")
             user = authenticate(request, username=username, password=password)
@@ -212,7 +212,7 @@ def login_restuarant(request):
 def login_foodredistributor(request):
     if request.user.is_authenticated:
         return redirect("accounts:home2")
-    else: # pragma: no cover
+    else:  # pragma: no cover
         if request.method == "POST":
             username = request.POST.get("username")
             password = request.POST.get("password")
@@ -234,7 +234,7 @@ def profile_update(request):
     user_update_form = None
     entity_update_form = None
     user_profile = None
-    if request.method == "POST": # pragma: no cover
+    if request.method == "POST":  # pragma: no cover
         if res_check(request.user):
             user_profile = Restaurant.objects.get(user=request.user)
             user_update_form = UserUpdateForm(request.POST, instance=request.user)
