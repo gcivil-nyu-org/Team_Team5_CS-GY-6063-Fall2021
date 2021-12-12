@@ -1,7 +1,6 @@
 body {
-  background-image: url("https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWVhbHxlbnwwfHwwfHw%3D&w=1000&q=80");
+  background-image: url("https://media.istockphoto.com/photos/high-angle-view-asian-chinese-womans-hand-on-mobile-app-for-online-picture-id1300476665?b=1&k=20&m=1300476665&s=170667a&w=0&h=6yLWL7XmKiiMRheXK4E1cdcPOqp54y3Au-mxdbuodyQ=");
   background-size: cover;
-  display: flex;
 }
 .screen {
   width: 100vw;
@@ -16,7 +15,7 @@ body {
 }
 
 .iama {
-  font-family: "Zen Kurenaido", sans-serif;
+  font-family: 'Zen Kurenaido', sans-serif;
   font-size: 90px;
   color: white;
 }
@@ -46,7 +45,7 @@ body {
   justify-content: center;
   width: 40vw;
   height: 80vh;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255,255,255,0.92);
 }
 
 i.edit-icon {
@@ -59,7 +58,6 @@ i.delete-icon {
 
 .time-table.mdl-data-table {
   width: 50%;
-  margin-left: 8%;
 }
 
 .login-card.mdl-card {
@@ -67,7 +65,7 @@ i.delete-icon {
   justify-content: center;
   width: 512px;
   height: 80vh;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255,255,255,0.92);
 }
 
 .login-card-title {
@@ -110,7 +108,9 @@ i.delete-icon {
 }
 
 .table-responsive {
+
 }
+
 
 a {
   text-decoration: none;

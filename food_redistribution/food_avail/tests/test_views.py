@@ -57,48 +57,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "food_avail/view_food.html")
 
-    # def test_index(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:index"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_get_date(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:calendar"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_prev_month(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:calendar"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_next_month(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:calendar"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_post_available_food(self):
-    #     client = Client()
-    #     client.force_login(user=self.user)
-    #     response = client.get(reverse("food_avail:post_food_avail"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_view_available_food(self):
-    #     client = Client()
-    #     client.force_login(user=self.user)
-    #     response = client.get(reverse("food_avail:view_food_avail_res"))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_event_update(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:event_edit", args=(self.event.pk,)))
-    #     self.assertEquals(response.status_code, 200)
-
-    # def test_event_delete(self):
-    #     client = Client()
-    #     response = client.get(reverse("cal:event_delete", args=(self.event.pk,)))
-    #     self.assertEquals(response.status_code, 200)
-
     @patch("food_avail.views.delete_time_slot")
     def test_delete_time_slot(self, delete_time_slot):
         mock = Mock()

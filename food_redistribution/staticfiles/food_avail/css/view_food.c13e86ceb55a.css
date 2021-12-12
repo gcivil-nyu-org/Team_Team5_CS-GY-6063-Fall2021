@@ -1,22 +1,22 @@
 body {
-  background-image: url("https://images.unsplash.com/photo-1494859802809-d069c3b71a8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bWVhbHxlbnwwfHwwfHw%3D&w=1000&q=80");
+  background-image: url("https://media.istockphoto.com/photos/man-smiles-while-picking-up-curbside-order-picture-id1318003130?b=1&k=20&m=1318003130&s=170667a&w=0&h=-FmEqD46sbBYRSG9I6vPYWdEB95JSqXEQT0hcuLkmsc=");
   background-size: cover;
-  display: flex;
 }
+
 .screen {
   width: 100vw;
   height: 80vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .login-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .iama {
-  font-family: "Zen Kurenaido", sans-serif;
+  font-family: 'Zen Kurenaido', sans-serif;
   font-size: 90px;
   color: white;
 }
@@ -46,7 +46,7 @@ body {
   justify-content: center;
   width: 40vw;
   height: 80vh;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255,255,255,0.92);
 }
 
 i.edit-icon {
@@ -58,8 +58,7 @@ i.delete-icon {
 }
 
 .time-table.mdl-data-table {
-  width: 50%;
-  margin-left: 8%;
+  width: 40vw;
 }
 
 .login-card.mdl-card {
@@ -67,7 +66,7 @@ i.delete-icon {
   justify-content: center;
   width: 512px;
   height: 80vh;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255,255,255,0.92);
 }
 
 .login-card-title {
@@ -91,26 +90,17 @@ i.delete-icon {
   justify-content: center;
 }
 
-.table-area.mdl-card__supporting-text {
+.user-pass-form.mdl-card__supporting-text {
   display: flex;
   justify-content: center;
-  padding-left: 30%;
-}
-
-.description.mdl-card__supporting-text {
-  display: flex;
-  justify-content: center;
-  width: 40vw;
 }
 
 .add-time-slot-div.mdl-card__supporting-text {
   display: flex;
   justify-content: center;
-  width: auto;
+  width: 40vw;
 }
 
-.table-responsive {
-}
 
 a {
   text-decoration: none;
