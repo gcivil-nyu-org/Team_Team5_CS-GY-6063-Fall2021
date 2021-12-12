@@ -10,14 +10,10 @@ class TestViews(TestCase):
             username="john", email="jlennon@beatles.com", password="glass onion"
         )
         self.foodavail1 = FoodAvail.objects.create(
-            food_available=10,
-            description="We have food",
-            author=self.user,
+            food_available=10, description="We have food", author=self.user,
         )
         self.timeslot1 = TimeSlot.objects.create(
-            time_slot_owner=self.user,
-            start_time="19:30",
-            end_time="21:30",
+            time_slot_owner=self.user, start_time="19:30", end_time="21:30",
         )
 
     def test_view_food_avail_res(self):
