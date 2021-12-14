@@ -36,6 +36,14 @@ body {
   background-color: rgba(255,255,255,0.92);
 }
 
+.edit-post-card.mdl-card {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+  height: 90vh;
+  background-color: rgba(255,255,255,0.92);
+}
+
 .login-card-title {
   width: 100%;
   color: black;

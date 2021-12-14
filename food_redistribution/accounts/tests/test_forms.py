@@ -53,6 +53,10 @@ class TestBlogPostForms(TestCase):
 
     def test_form_valid(self):
         form = PostForm(
-            data={"title": "Test title", "author": self.user, "body": "Test body",}
+            data={
+                "title": "Test title",
+                "author": self.user,
+                "body": "Test body",
+            }
         )
         self.assertTrue(form.is_valid())
