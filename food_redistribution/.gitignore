@@ -132,4 +132,3 @@ cython_debug/
 travis.sh
 
 devenv
-djenv
